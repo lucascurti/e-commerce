@@ -4,7 +4,7 @@ var Review = require('./users');
 var Order = require('./orders');
 
 var User = db.define('user', {
-  name: {
+  firstName: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
@@ -29,6 +29,10 @@ var User = db.define('user', {
     type: Sequelize.STRING,
     defaultValue: 'user',
   },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  }
 });
 
 module.exports = User;
