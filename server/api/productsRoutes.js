@@ -10,7 +10,7 @@ router.get('/products', (req, res) => {
 });
 router.get('/products/:id', (req, res) => {
   const id = req.params.id;
-  db.owners.findById(id).then(products => {
+  db.products.findById(id).then(products => {
     res.json(products);
   });
 });
