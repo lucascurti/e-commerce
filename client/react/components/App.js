@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
+import RouteHook from 'react-route-hook';
+import CartContainer from '../containers/CartContainer';
+import { Switch } from 'react-router-dom';
+import { fetchCart } from '../action-creator/cart'
+import store from '../store';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+const onCartEnter = function () {
+  store.dispatch(fetchCart())
 }
 
-export default App;
+export default () => (
+  <div>
+    <Switch>
+      <RouteHook exact path="/cart" component={CartContainer} onEnter={onCartEnter} />
+    </ Switch>
+  </div>
+)
+
