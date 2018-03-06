@@ -2,7 +2,7 @@ const User = require('./users');
 const Review = require('./reviews');
 const Product = require('./products');
 const Order = require('./orders');
-const Category = require('./category');
+const Category = require('./categories');
 
 User.hasMany(Review, { as: 'review' });
 User.hasMany(Order, { as: 'orders' });
