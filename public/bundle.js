@@ -39342,6 +39342,10 @@ var _HeaderContainer = __webpack_require__(126);
 
 var _HeaderContainer2 = _interopRequireDefault(_HeaderContainer);
 
+var _ProductsContainer = __webpack_require__(128);
+
+var _ProductsContainer2 = _interopRequireDefault(_ProductsContainer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -39368,23 +39372,12 @@ var App = function (_Component) {
         _react2.default.createElement(_HeaderContainer2.default, null),
         _react2.default.createElement(
           'main',
-          { role: 'main', className: 'container' },
+          { role: 'main', className: 'container-fluid mt-3' },
           _react2.default.createElement(
-            'div',
-            { className: 'starter-template' },
-            _react2.default.createElement(
-              'h1',
-              null,
-              'Bootstrap starter template'
-            ),
-            _react2.default.createElement(
-              'p',
-              { className: 'lead' },
-              'Use this document as a way to quickly start any new project.',
-              _react2.default.createElement('br', null),
-              ' ',
-              'All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document. All you get is this text and a mostly barebones HTML document.'
-            )
+            _reactRouterDom.Switch,
+            null,
+            _react2.default.createElement(_reactRouteHook2.default, { exact: true, path: '/products', component: _ProductsContainer2.default }),
+            _react2.default.createElement(_reactRouterDom.Redirect, { from: '/', to: '/products' })
           )
         )
       );
@@ -39436,7 +39429,7 @@ exports = module.exports = __webpack_require__(122)(undefined);
 
 
 // module
-exports.push([module.i, ".App {\n  text-align: center;\n}\n\n.App-logo {\n  animation: App-logo-spin infinite 20s linear;\n  height: 80px;\n}\n\n.App-header {\n  background-color: #222;\n  height: 150px;\n  padding: 20px;\n  color: white;\n}\n\n.App-title {\n  font-size: 1.5em;\n}\n\n.App-intro {\n  font-size: large;\n}\n\n@keyframes App-logo-spin {\n  from { transform: rotate(0deg); }\n  to { transform: rotate(360deg); }\n}\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -46234,6 +46227,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(16);
 
+__webpack_require__(136);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (props) {
@@ -46297,7 +46292,6 @@ exports.default = function (props) {
           placeholder: 'Search',
           'aria-label': 'Search'
         }),
-        '>',
         _react2.default.createElement(
           'button',
           {
@@ -46306,10 +46300,437 @@ exports.default = function (props) {
           },
           'Search'
         )
+      ),
+      _react2.default.createElement(
+        'a',
+        { className: '', href: '#' },
+        _react2.default.createElement('span', { className: 'oi oi-cart mx-3', title: 'cart', 'aria-hidden': 'true' })
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'mx-3' },
+        _react2.default.createElement(
+          'ul',
+          { className: 'navbar-nav mr-auto' },
+          _react2.default.createElement(
+            'li',
+            { className: 'nav-item' },
+            _react2.default.createElement(
+              'a',
+              { className: 'nav-link', href: '#' },
+              'Login'
+            )
+          )
+        )
       )
     )
   );
 };
+
+/***/ }),
+/* 128 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _store = __webpack_require__(40);
+
+var _store2 = _interopRequireDefault(_store);
+
+var _Products = __webpack_require__(129);
+
+var _Products2 = _interopRequireDefault(_Products);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ProductsContainer = function (_React$Component) {
+  _inherits(ProductsContainer, _React$Component);
+
+  function ProductsContainer() {
+    _classCallCheck(this, ProductsContainer);
+
+    var _this = _possibleConstructorReturn(this, (ProductsContainer.__proto__ || Object.getPrototypeOf(ProductsContainer)).call(this));
+
+    _this.state = {};
+    return _this;
+  }
+
+  _createClass(ProductsContainer, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {}
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {}
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_Products2.default, null);
+    }
+  }]);
+
+  return ProductsContainer;
+}(_react2.default.Component);
+
+exports.default = ProductsContainer;
+
+/***/ }),
+/* 129 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(16);
+
+var _SingleProduct = __webpack_require__(132);
+
+var _SingleProduct2 = _interopRequireDefault(_SingleProduct);
+
+var _Categories = __webpack_require__(135);
+
+var _Categories2 = _interopRequireDefault(_Categories);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var products = [{
+  id: 0,
+  name: 'Zapatillas de Running Floatride Run',
+  description: 'Zapatillas para correr por la vida como si fueses una persona deportista cuando en realidad no lo sos y solo lo haces por obligación',
+  price: 1200,
+  rating: 4,
+  stock: 200,
+  image: 'https://www.reebok.com.ar/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw3fa628dd/zoom/BS8120_01.jpg?sw=230&sfrm=jpg'
+}, {
+  id: 1,
+  name: 'Zapatillas de Crossfit',
+  description: 'Zapatillas para correr por la vida como si fueses una persona deportista cuando en realidad no lo sos y solo lo haces por obligación',
+  price: 1500,
+  rating: 4,
+  stock: 200,
+  image: 'https://www.reebok.com.ar/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dwfc263f3f/zoom/BS8405_01.jpg?sw=230&sfrm=jpg'
+}, {
+  id: 2,
+  name: 'Zapatillas de Paseo',
+  description: 'Zapatillas para correr por la vida como si fueses una persona deportista cuando en realidad no lo sos y solo lo haces por obligación',
+  price: 2200,
+  rating: 4,
+  stock: 200,
+  image: 'https://www.reebok.com.ar/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw5433b2ee/zoom/BS8589_01.jpg?sw=230&sfrm=jpg'
+}, {
+  id: 3,
+  name: 'Zapatillas de Gimnasia',
+  description: 'Zapatillas para correr por la vida como si fueses una persona deportista cuando en realidad no lo sos y solo lo haces por obligación',
+  price: 1450,
+  rating: 4,
+  stock: 200,
+  image: 'https://www.reebok.com.ar/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dwddcdbdf4/zoom/BS8459_01.jpg?sw=230&sfrm=jpg'
+}, {
+  id: 4,
+  name: 'Zapatillas de Running Mountain',
+  description: 'Zapatillas para correr por la vida como si fueses una persona deportista cuando en realidad no lo sos y solo lo haces por obligación',
+  price: 1200,
+  rating: 4,
+  stock: 200,
+  image: 'https://www.reebok.com.ar/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dwd8d93a39/zoom/BS5553_01.jpg?sw=230&sfrm=jpg'
+}, {
+  id: 5,
+  name: 'Zapatillas de Trecking',
+  description: 'Zapatillas para correr por la vida como si fueses una persona deportista cuando en realidad no lo sos y solo lo haces por obligación',
+  price: 1200,
+  rating: 4,
+  stock: 200,
+  image: 'https://www.reebok.com.ar/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw9e66d83c/zoom/BS8451_01.jpg?sw=230&sfrm=jpg'
+}, {
+  id: 6,
+  name: 'Zapatillas de caminata lunar',
+  description: 'Zapatillas para correr por la vida como si fueses una persona deportista cuando en realidad no lo sos y solo lo haces por obligación',
+  price: 1700,
+  rating: 4,
+  stock: 200,
+  image: 'https://www.reebok.com.ar/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dwd37dbc7f/zoom/BS6978_01.jpg?sw=230&sfrm=jpg'
+}, {
+  id: 7,
+  name: 'Zapatillas de entrecasa',
+  description: 'Zapatillas para correr por la vida como si fueses una persona deportista cuando en realidad no lo sos y solo lo haces por obligación',
+  price: 1200,
+  rating: 4,
+  stock: 200,
+  image: 'https://www.reebok.com.ar/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dwadc22a6c/zoom/CM8787_01.jpg?sw=230&sfrm=jpg'
+}];
+
+var categories = [{
+  id: 0,
+  name: 'Zapatillas'
+}, {
+  id: 1,
+  name: 'Remeras'
+}, {
+  id: 2,
+  name: 'Shorts'
+}, {
+  id: 3,
+  name: 'Camperas'
+}, {
+  id: 4,
+  name: 'Accesorios'
+}];
+
+exports.default = function (props) {
+  return _react2.default.createElement(
+    'div',
+    { className: 'row' },
+    _react2.default.createElement(_Categories2.default, { categories: categories }),
+    _react2.default.createElement(
+      'main',
+      { className: 'col-md-9 col-lg-10 pt-3 px-4 mx-auto justify-content-center' },
+      _react2.default.createElement(
+        'div',
+        { className: 'card-group align-self-center' },
+        products.map(function (product) {
+          return _react2.default.createElement(_SingleProduct2.default, { key: product.id, product: product });
+        })
+      )
+    )
+  );
+};
+
+/***/ }),
+/* 130 */,
+/* 131 */,
+/* 132 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(16);
+
+__webpack_require__(133);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (_ref) {
+  var product = _ref.product;
+  return _react2.default.createElement(
+    'div',
+    {
+      key: product.id,
+      className: 'card mb-4',
+      style: { minWidth: '18rem', maxWidth: '18rem' }
+    },
+    _react2.default.createElement('img', {
+      className: 'card-img-top responsive',
+      src: product.image,
+      alt: 'Card image cap'
+    }),
+    _react2.default.createElement(
+      'div',
+      { className: 'card-body' },
+      _react2.default.createElement(
+        'h5',
+        { className: 'card-title' },
+        product.name
+      ),
+      _react2.default.createElement(
+        'p',
+        { className: 'card-text' },
+        product.description
+      ),
+      _react2.default.createElement(
+        'p',
+        { className: 'card-text' },
+        _react2.default.createElement(
+          'span',
+          { className: 'float-left' },
+          _react2.default.createElement(
+            'strong',
+            null,
+            'Price: $ ',
+            product.price
+          )
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: 'float-right' },
+          'Rating: ',
+          product.rating
+        )
+      )
+    )
+  );
+};
+
+/***/ }),
+/* 133 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(134);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(123)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!./SingleProduct.css", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!./SingleProduct.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 134 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(122)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, ".card img {\n  padding: 0 25px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 135 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (_ref) {
+  var categories = _ref.categories;
+  return _react2.default.createElement(
+    "nav",
+    { className: "col-md-2 d-none d-md-block bg-light sidebar" },
+    _react2.default.createElement(
+      "div",
+      { className: "sidebar-sticky text-left" },
+      _react2.default.createElement(
+        "h5",
+        null,
+        "Categorias"
+      ),
+      _react2.default.createElement(
+        "ul",
+        { className: "nav flex-column" },
+        categories.map(function (category) {
+          return _react2.default.createElement(
+            "li",
+            { className: "nav-item", key: category.id },
+            _react2.default.createElement(
+              "a",
+              { className: "nav-link active", href: "#" },
+              category.name
+            )
+          );
+        })
+      )
+    )
+  );
+};
+
+/***/ }),
+/* 136 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(137);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(123)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!./Header.css", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!./Header.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 137 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(122)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, ".navbar .oi {\n  color: white;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

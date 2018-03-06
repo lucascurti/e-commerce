@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Header.css';
 
 export default props => (
   <nav className="navbar navbar-expand-md navbar-dark bg-dark">
@@ -37,7 +38,7 @@ export default props => (
           type="text"
           placeholder="Search"
           aria-label="Search"
-        />>
+        />
         <button
           className="btn btn-outline-secondary my-2 my-sm-0"
           type="submit"
@@ -45,6 +46,18 @@ export default props => (
           Search
         </button>
       </form>
+      <a className="" href="#">
+        <span className="oi oi-cart mx-3" title="cart" aria-hidden="true" />
+      </a>
+      <div className="mx-3">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <a className="nav-link" href="#">
+              Login
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 );
