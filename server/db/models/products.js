@@ -26,7 +26,7 @@ var Product = db.define('product', {
       notEmpty: true,
     },
   },
-  img: {
+  image: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
