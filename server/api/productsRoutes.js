@@ -2,24 +2,22 @@ const express = require('express');
 const router = express.Router();
 const Products = require('../db/models/products');
 
-module.exports = router;
-
-router.get('/products', (req, res) => {
+router.get('/', (req, res) => {
   Products.findAll().then(products => {
-    res.json(products);
+    res.send(products);
   });
 });
-router.get('/products/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   const id = req.params.id;
-  Products.findById(id).then(products => {
-    res.json(products);
+  Products.findById(id).then(product => {
+    res.send(product);
   });
 });
-router.post('/products/:id', (req, res) => {
-  const name = req.params.name;
-  const description = req.params.description;
-  const price = req.params.price;
-  const stock = req.params.stock;
+router.post('/', (req, res) => {
+  const name = req.body.name;
+  const description = req.body.description;
+  const price = req.body.price;
+  const stock = req.body.stock;
   const image = req.body.image;
   Products.create({
     name: name,
@@ -28,10 +26,10 @@ router.post('/products/:id', (req, res) => {
     stock: stock,
     image: image,
   }).then(newProduct => {
-    res.json(newProduct);
+    res.send(newProduct);
   });
 });
-router.put('/products/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   const id = req.params.id;
   const update = req.body.update;
   Products.findById(id)
@@ -42,11 +40,15 @@ router.put('/products/:id', (req, res) => {
       res.json(updatedProduct);
     });
 });
-router.delete('/products/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   const id = req.params.id;
   Products.destroy({
     where: { id: id },
-  }).then(deletedProduct => {
-    res.json(deletedProduct);
-  });
+  })
+    .then(deletedProduct => {
+      res.json(deletedProduct);
+    })
+    .catch(res.send);
 });
+
+module.exports = router;
