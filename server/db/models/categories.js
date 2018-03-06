@@ -1,7 +1,7 @@
 var Sequelize = require('sequelize');
 var db = require('../database');
 
-var Categorie = db.define('categorie', {
+var Category = db.define('category', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -11,6 +11,4 @@ var Categorie = db.define('categorie', {
   },
 });
 
-//Categorie.hasMany(Product, { as: 'product' });
-
-module.exports = Categorie;
+module.exports = Category;
