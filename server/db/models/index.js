@@ -9,8 +9,12 @@ User.hasMany(Order, { as: 'orders' });
 Review.belongsTo(Product, { as: 'product' });
 Review.belongsTo(User, { as: 'user' });
 Product.belongsToMany(Order, { as: 'orders', through: 'order_product' });
-Product.belongsTo(Category, { through: 'products_categories' });
+
+Product.belongsToMany(Category, {
+  through: 'products_categories',
+});
 Category.belongsToMany(Product, { through: 'products_categories' });
+
 Product.hasMany(Review, { as: 'reviews' });
 Order.belongsToMany(Product, { as: 'product', through: 'order_product' });
 Order.belongsTo(User, { as: 'user' });

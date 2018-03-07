@@ -26,7 +26,7 @@ export default class App extends Component {
               component={CartContainer}
               onEnter={onCartEnter}
             />
-            <RooteHook exact path="/product" Component={Product} />
+            <RouteHook exact path="/product" Component={Product} />
             <Redirect from="/" to="/products" />
           </Switch>
         </main>
