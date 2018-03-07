@@ -1,33 +1,29 @@
 const express = require('express');
 const router = express.Router();
+const Users = require('../db/models/users');
 
-module.exports = router;
-
-router.get('/users/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   const id = req.params.id;
-  db.users.findById(id).then(user => res.json(user));
+  Users.findById(id).then(user => res.json(user));
 });
-router.post('/users/:id', (req, res) => {
-  const email = req.params.email;
-  const password = req.params.password;
-  const name = req.params.name;
-  const rol = req.params.rol;
-  db.users
-    .create({
-      email: email,
-      password: password,
-      name: name,
-      rol: rol,
-    })
-    .then(newUser => {
-      res.json(newUser);
-    });
+router.post('/:id', (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  const name = req.body.name;
+  const rol = req.body.rol;
+  Users.create({
+    email: email,
+    password: password,
+    name: name,
+    rol: rol,
+  }).then(newUser => {
+    res.json(newUser);
+  });
 });
-router.put('/users/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   const id = req.params.id;
   const update = req.body.update;
-  db.users
-    .findById(id)
+  Users.findById(id)
     .then(user => {
       return user.updateAttributes(update);
     })
@@ -35,16 +31,17 @@ router.put('/users/:id', (req, res) => {
       res.json(updatedUser);
     });
 });
-router.delete('/users/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   const id = req.params.id;
-  db.users.destroy({ where: { id: id } }).then(deletedUser => {
+  Users.destroy({ where: { id: id } }).then(deletedUser => {
     res.json(deletedUser);
   });
 });
-router.get('/users/:id/orders', (req, res) => {
+router.get('/:id/orders', (req, res) => {
   const id = req.params.id;
-  db.users
-    .findById(id)
+  Users.findById(id)
     .then(user => user.getOrders())
     .then(orders => res.json(orders));
 });
+
+module.exports = router;
