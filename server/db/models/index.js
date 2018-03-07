@@ -15,7 +15,7 @@ Product.hasMany(Review, { as: 'reviews' });
 Order.belongsToMany(Product, { as: 'product', through: 'order_product' });
 Order.belongsTo(User, { as: 'user' });
 
-module.export = {
+module.exports = {
   User,
   Review,
   Product,
