@@ -25548,6 +25548,10 @@ var _react2 = _interopRequireDefault(_react);
 
 __webpack_require__(117);
 
+var _Product = __webpack_require__(122);
+
+var _Product2 = _interopRequireDefault(_Product);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25590,7 +25594,8 @@ var App = function (_Component) {
             'src/App.js'
           ),
           ' and save to reload.'
-        )
+        ),
+        _react2.default.createElement(_Product2.default, null)
       );
     }
   }]);
@@ -26192,6 +26197,131 @@ module.exports = function (css) {
 	// send back the fixed css
 	return fixedCss;
 };
+
+
+/***/ }),
+/* 122 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(123);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+  return _react2.default.createElement(
+    'div',
+    { className: 'container' },
+    _react2.default.createElement(
+      'div',
+      { className: 'row' },
+      _react2.default.createElement(
+        'div',
+        { className: 'col-md-5 col-xs-11 product-margin' },
+        _react2.default.createElement('img', {
+          src: 'http://1.bp.blogspot.com/-leY-8Np6voM/VgL6u-m2c6I/AAAAAAAAEtw/Gvb0Hg18Clw/s1600/topo.png',
+          alt: ''
+        })
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'col-md-5 col-xs-11 product-margin' },
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Rate: 5 estrellas'
+        ),
+        _react2.default.createElement(
+          'h3',
+          null,
+          'Topos, runs at a very slow speed but is expert in day gardens'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          ' Pirce and free tax : 1000$'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'in Stock '
+        )
+      )
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'card text-center product-foodText' },
+      _react2.default.createElement(
+        'div',
+        { className: 'card-header' },
+        'Topo delux'
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'card-block' },
+        _react2.default.createElement(
+          'p',
+          { className: 'card-text' },
+          'this Topo comes in different colors, and sizes, is resistant to water and sun and does not consume much food'
+        )
+      )
+    )
+  );
+};
+
+/***/ }),
+/* 123 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(124);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(120)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!./Product.css", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!./Product.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 124 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(119)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, ".product-foodText {\n  margin-top: 160px;\n}\n\n.product-margin {\n  width: 40%;\n}\n", ""]);
+
+// exports
 
 
 /***/ })
