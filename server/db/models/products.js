@@ -1,38 +1,38 @@
 var Sequelize = require('sequelize');
 var db = require('../database');
-var Review = require('./users');
-var Order = require('./orders');
 
-var User = db.define('user', {
-  firstName: {
+var Product = db.define('product', {
+  name: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
     },
   },
-  lastName: {
+  description: {
+    type: Sequelize.TEXT,
+  },
+  price: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
+  stock: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
+  image: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
     },
   },
-  email: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
-  },
-  rol: {
-    type: Sequelize.STRING,
-    defaultValue: 'user',
-  },
-  password: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  }
 });
 
-module.exports = User;
+module.exports = Product;
