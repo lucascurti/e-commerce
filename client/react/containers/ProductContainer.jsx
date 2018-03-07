@@ -2,20 +2,14 @@ import React from 'react';
 import Product from '../components/Product';
 import { connect } from 'react-redux';
 
-export default class ProductContainers {
+class ProductContainers extends React.Component {
   render() {
     return <Product />;
   }
 }
 
 const mapStateToProps = state => ({
-  value: state,
+  product: state.product.select,
 });
-const mapDispatchToProps = dispatch => ({
-  addProduct: () => dispatch(addProduct()),
-  deletProduct: () => dispatch(deletProduct()),
-  setProduct: () => dispatch(setProduct()),
-});
-const ProductContainers = connect(mapStateToProps, mapDispatchToProps)(
-  ProductContainers,
-);
+
+export default connect(mapStateToProps)(ProductContainers);
