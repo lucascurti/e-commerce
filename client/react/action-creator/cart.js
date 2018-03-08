@@ -13,7 +13,7 @@ export const changeAmount = (value, index) => ({
     index,
 })
 
-// trae la orden de la base de datos 
+// trae la orden de la base de da
 export const fetchCart = () => dispatch =>
     axios.get('/api/orders/Uncreated')
         .then(res => res.data)
