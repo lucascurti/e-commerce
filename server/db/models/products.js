@@ -26,6 +26,9 @@ var Product = db.define('product', {
       notEmpty: true,
     },
   },
+  rating: {
+    type: Sequelize.INTEGER,
+  },
   image: {
     type: Sequelize.STRING,
     allowNull: false,
