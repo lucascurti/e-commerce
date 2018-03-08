@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { GET_CART, CHANGE_AMOUNT } from '../constants';
 import store from '../store';
 
@@ -12,4 +13,8 @@ export const changeAmount = (value, index) => ({
     index,
 })
 
-export const fetchCart = () => dispatch => dispatch(getCart({ products: [{ id: 1, name: 'ayudin', price: 20, amount: 1 }, { id: 2, name: 'ala', price: 30, amount: 1 }] }));
+// trae la orden de la base de da
+export const fetchCart = () => dispatch =>
+    axios.get('/api/orders/Uncreated')
+        .then(res => res.data)
+        .then(orderUncreated => dispatch(getCart(orderUncreated)));

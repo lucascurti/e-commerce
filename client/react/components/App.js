@@ -9,7 +9,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import HeaderContainer from '../containers/HeaderContainer';
 import ProductsContainer from '../containers/ProductsContainer';
 
-const onCartEnter = function() {
+const onCartEnter = function () {
   store.dispatch(fetchCart());
 };
 export default class App extends Component {

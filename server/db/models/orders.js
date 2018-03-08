@@ -14,8 +14,8 @@ var Order = db.define('order', {
     type: Sequelize.INTEGER,
   },
   status: {
-    type: Sequelize.STRING,
-    defaultValue: 'Created',
+    type: Sequelize.ENUM,
+    values: ['Uncreated', 'Created', 'Inprocess', 'Canceled', 'Completed']
   },
   address: {
     type: Sequelize.STRING,
