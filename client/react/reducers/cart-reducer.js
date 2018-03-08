@@ -1,7 +1,7 @@
 import { GET_CART, CHANGE_AMOUNT } from '../constants';
 
 const initialState = {
-    products: [],
+    product: [],
 }
 
 export default (state = initialState, action) => {
@@ -9,9 +9,9 @@ export default (state = initialState, action) => {
         case GET_CART:
             return action.cart;
         case CHANGE_AMOUNT:
-            const prod = state.products.slice()
-            const st = Object.assign({}, state, { products: prod })
-            st.products[action.index].amount = action.value
+            const prod = state.product.slice()
+            const st = Object.assign({}, state, { product: prod })
+            st.product[action.index].amount = action.value
             return st
         default:
             return state;
