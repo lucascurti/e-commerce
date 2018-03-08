@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import RouteHook from 'react-route-hook';
 import CartContainer from '../containers/CartContainer';
 import { fetchCart } from '../action-creator/cart';
+import { fetchProduct } from '../action-creator/product';
 import store from '../store';
 import './App.css';
 import Product from './Product';
@@ -12,6 +13,9 @@ import ProductContainer from '../containers/ProductContainer';
 
 const onCartEnter = function() {
   store.dispatch(fetchCart());
+};
+const onProductEnter = function(props) {
+  store.dispatch(fetchProduct(props.match.params.id));
 };
 export default class App extends Component {
   render() {
@@ -27,7 +31,12 @@ export default class App extends Component {
               component={CartContainer}
               onEnter={onCartEnter}
             />
-            <RouteHook exact path="/product" component={ProductContainer} />
+            <RouteHook
+              exact
+              path="/products/:id"
+              component={ProductContainer}
+              onEnter={onProductEnter}
+            />
             <Redirect from="/" to="/products" />
           </Switch>
         </main>

@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const id = req.params.id;
   Products.findById(id).then(product => {
-    res.send(product);
+    res.json(product);
   });
 });
 router.post('/', (req, res) => {

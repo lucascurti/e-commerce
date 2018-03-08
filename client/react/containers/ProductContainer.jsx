@@ -9,7 +9,7 @@ class ProductContainers extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  product: state.product.select,
+  product: state.product.selectedProduct,
 });
 
-export default connect(mapStateToProps)(ProductContainers);
+export default connect(mapStateToProps)(Product);
