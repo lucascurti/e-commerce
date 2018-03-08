@@ -9,7 +9,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import HeaderContainer from '../containers/HeaderContainer';
 import ProductsContainer from '../containers/ProductsContainer';
 
-const onCartEnter = function() {
+const onCartEnter = function () {
   store.dispatch(fetchCart());
 };
 export default class App extends Component {
@@ -26,7 +26,7 @@ export default class App extends Component {
               component={CartContainer}
               onEnter={onCartEnter}
             />
-            <RooteHook exact path="/product" Component={Product} />
+            <RouteHook exact path="/product" Component={Product} />
             <Redirect from="/" to="/products" />
           </Switch>
         </main>
