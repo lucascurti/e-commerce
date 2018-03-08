@@ -1,25 +1,29 @@
 const express = require('express');
 const router = express.Router();
 const Users = require('../db/models/users');
+const passport = require('passport');
 
 router.get('/:id', (req, res) => {
   const id = req.params.id;
   Users.findById(id).then(user => res.json(user));
 });
-router.post('/:id', (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  const name = req.body.name;
-  const rol = req.body.rol;
-  Users.create({
-    email: email,
-    password: password,
-    name: name,
-    rol: rol,
-  }).then(newUser => {
-    res.json(newUser);
-  });
+
+router.post('/', (req, res) => {
+  Users.create(req.body)
+    .then(newUser => {
+      res.json(newUser);
+    })
+    .catch(error => res.json(error));
 });
+
+router.post(
+  '/login',
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+  }),
+);
+
 router.put('/:id', (req, res) => {
   const id = req.params.id;
   const update = req.body.update;
