@@ -21,13 +21,8 @@ app.get('*', (req, res) => {
 
 db
   .sync({ force: false })
-<<<<<<< HEAD
   .then(function() {
     app.listen(4000, function() {
-=======
-  .then(function () {
-    app.listen(4000, function () {
->>>>>>> 31577b6ccac3d0e3195cb75c290429c6b997f612
       console.log('Server is listening on port 4000!');
     });
   })
