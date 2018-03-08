@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Products = require('../db/models/products');
 const Categories = require('../db/models/categories');
-const db = require('../db/database');
 
 router.get('/', (req, res) => {
   Products.findAll().then(products => {
