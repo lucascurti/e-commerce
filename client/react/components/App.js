@@ -11,7 +11,7 @@ import HeaderContainer from '../containers/HeaderContainer';
 import ProductsContainer from '../containers/ProductsContainer';
 import ProductContainer from '../containers/ProductContainer';
 
-const onCartEnter = function () {
+const onCartEnter = function() {
   store.dispatch(fetchCart());
 };
 const onProductEnter = function(props) {
@@ -31,16 +31,12 @@ export default class App extends Component {
               component={CartContainer}
               onEnter={onCartEnter}
             />
-<<<<<<< HEAD
             <RouteHook
               exact
               path="/products/:id"
               component={ProductContainer}
               onEnter={onProductEnter}
             />
-=======
-            <RouteHook exact path="/product" Component={Product} />
->>>>>>> fb000a5d3229075dd0601322cadb8aaac40a5898
             <Redirect from="/" to="/products" />
           </Switch>
         </main>

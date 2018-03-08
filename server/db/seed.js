@@ -13,10 +13,7 @@ Categories.bulkCreate([
   .then(categories => {
     console.log(categories);
   });
-<<<<<<< HEAD
-=======
 
->>>>>>> fb000a5d3229075dd0601322cadb8aaac40a5898
 Products.bulkCreate([
   {
     name: 'musculosa italiana',
@@ -24,10 +21,7 @@ Products.bulkCreate([
     price: 200,
     stock: 5,
     image: 'asdasdsads',
-<<<<<<< HEAD
-=======
     rating: 2,
->>>>>>> fb000a5d3229075dd0601322cadb8aaac40a5898
   },
   {
     name: 'zapatilla reebok',
@@ -35,10 +29,7 @@ Products.bulkCreate([
     price: 1500,
     stock: 1,
     image: 'asdasdsads',
-<<<<<<< HEAD
-=======
     rating: 1,
->>>>>>> fb000a5d3229075dd0601322cadb8aaac40a5898
   },
   {
     name: 'pulsera',
@@ -46,10 +37,7 @@ Products.bulkCreate([
     price: 4000,
     stock: 5,
     image: 'asdasdsads',
-<<<<<<< HEAD
-=======
     rating: 4,
->>>>>>> fb000a5d3229075dd0601322cadb8aaac40a5898
   },
 ])
   .then(() => {
@@ -58,8 +46,7 @@ Products.bulkCreate([
   .then(categories => {
     console.log(categories);
   });
-<<<<<<< HEAD
-=======
+
 Products.bulkCreate([
   {
     name: 'musculosa italiana',
@@ -89,4 +76,3 @@ Products.bulkCreate([
   .then(categories => {
     console.log(categories);
   });
->>>>>>> fb000a5d3229075dd0601322cadb8aaac40a5898
