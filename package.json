@@ -4,16 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack -w & nodemon --watch server -e js,html ./server/server.js",
+    "start":
+      "webpack -w & nodemon --watch server -e js,html ./server/server.js",
     "build": "webpack -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db-init": "pg-init commerce",
+    "postinstall": "npm run db-init",
+    "seed": "node server/db/seed.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "jquery": "^3.3.1",
+    "fs-misc": "^2.0.0",
     "path": "^0.12.7",
+    "pg": "^7.4.1",
+    "jquery": "^3.3.1",
     "popper.js": "^1.12.9",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -23,7 +29,8 @@
     "react-scripts": "1.1.1",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "sequelize": "^4.35.2"
   },
   "devDependencies": {
     "chai": "^4.1.2",

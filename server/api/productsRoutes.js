@@ -1,56 +1,90 @@
 const express = require('express');
 const router = express.Router();
+const Products = require('../db/models/products');
+const Categories = require('../db/models/categories');
 
-module.exports = router;
-
-router.get('/products', (req, res) => {
-  db.products.findAll().then(products => {
-    res.json(products);
+router.get('/', (req, res) => {
+  Products.findAll().then(products => {
+    res.send(products);
   });
 });
-router.get('/products/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   const id = req.params.id;
-  db.products.findById(id).then(products => {
-    res.json(products);
+  Products.findById(id).then(product => {
+    res.send(product);
   });
 });
-router.post('/products/:id', (req, res) => {
-  const name = req.params.name;
-  const description = req.params.description;
-  const price = req.params.price;
-  const stock = req.params.stock;
+router.post('/', (req, res) => {
+  const name = req.body.name;
+  const description = req.body.description;
+  const price = req.body.price;
+  const stock = req.body.stock;
   const image = req.body.image;
-  db.products
-    .create({
-      name: name,
-      description: description,
-      price: price,
-      stock: stock,
-      image: image,
+  const rating = req.body.rating;
+  const categories = req.body.categories;
+  Products.create({
+    name: name,
+    description: description,
+    price: price,
+    stock: stock,
+    image: image,
+    rating: rating,
+  })
+    .then(newProduct => {
+      return categories.map(category => {
+        return newProduct.addCategory(category);
+      });
+    })
+    .then(categories => {
+      return Promise.all(categories).then(values => res.send(values));
+    })
+    .catch(err => res.send(err.message));
+});
+router.put('/:id', (req, res) => {
+  const id = req.params.id;
+  const name = req.body.name;
+  const description = req.body.description;
+  const price = req.body.price;
+  const stock = req.body.stock;
+  const image = req.body.image;
+  const rating = req.body.rating;
+  const categories = req.body.categories;
+  Products.findById(id)
+    .then(product => {
+      return product.updateAttributes({
+        name: name,
+        description: description,
+        price: price,
+        stock: stock,
+        image: image,
+        rating: rating,
+      });
     })
     .then(newProduct => {
-      res.json(newProduct);
-    });
-});
-router.put('/products/:id', (req, res) => {
-  const id = req.params.id;
-  const update = req.body.update;
-  db.products
-    .findById(id)
-    .then(products => {
-      return products.updateAttributes(update);
+      //FALTA CAMBIAR LA TABLA CATEGORIAS Y PRODUCTOS PARA PISAR LOS DATOS
+      console.log('acaaaaaaaa', newProduct.id);
+      //return categories.map(category => {
+      //return newProduct.addCategory(category);
+      //});
     })
-    .then(updatedProduct => {
-      res.json(updatedProduct);
-    });
-});
-router.delete('/products/:id', (req, res) => {
-  const id = req.params.id;
-  db.products
-    .destroy({
-      where: { id: id },
+    .then(categories => {
+      console.log('CATEGORIES', categories);
+      return Promise.all(categories).then(values => {
+        console.log('VALUES', values);
+        res.send(values);
+      });
     })
+    .catch(err => res.send(err.message));
+});
+router.delete('/:id', (req, res) => {
+  const id = req.params.id;
+  Products.destroy({
+    where: { id: id },
+  })
     .then(deletedProduct => {
       res.json(deletedProduct);
-    });
+    })
+    .catch(res.send);
 });
+
+module.exports = router;
