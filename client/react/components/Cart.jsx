@@ -4,7 +4,6 @@ import './Cart.css';
 export default ({ cart, changeAmount, amount }) => {
     console.log(cart)
     if (cart.product.length) {
-        var total = 0;
         return (
             <div className="container">
                 <table id="cart" className="table table-hover table-condensed">
@@ -18,9 +17,8 @@ export default ({ cart, changeAmount, amount }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {cart.product.map((product, index) => {
-                            valor += product.amount;
-                            return (
+                        {cart.product.map((product, index) =>
+                            (
                                 <tr key={product.id}>
                                     <td data-th="Product">
                                         <div className="row">
@@ -41,13 +39,13 @@ export default ({ cart, changeAmount, amount }) => {
                                     </td>
                                 </tr>
                             )
-                        })}
+                        )}
                     </tbody>
                     <tfoot>
                         <tr>
                             <td><a href="#" className="btn btn-warning"><i className="fa fa-angle-left"></i> Continue Shopping</a></td>
                             <td colSpan="2" className="hidden-xs"></td>
-                            <td className="hidden-xs text-center"><strong>Total: {valor}</strong></td>
+                            <td className="hidden-xs text-center"><strong>Total: 19</strong></td>
                             <td><a href="#" className="btn btn-success btn-block">Checkout <i className="fa fa-angle-right"></i></a></td>
                         </tr>
                     </tfoot>
