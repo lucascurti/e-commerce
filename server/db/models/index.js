@@ -16,8 +16,8 @@ Category.belongsToMany(Product, { through: 'products_categories' });
 
 Product.hasMany(Review, { as: 'reviews' });
 Order.belongsTo(User, { as: 'user' });
-Product.belongsToMany(Order, { through: OrderDetail })
-Order.belongsToMany(Product, { through: OrderDetail })
+Product.belongsToMany(Order, { through: OrderDetail });
+Order.belongsToMany(Product, { through: OrderDetail });
 
 module.exports = {
   User,
@@ -25,5 +25,5 @@ module.exports = {
   Product,
   Order,
   Category,
-  OrderDetail
+  OrderDetail,
 };
