@@ -11,8 +11,13 @@ import Product from './Product';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import HeaderContainer from '../containers/HeaderContainer';
 import ProductsContainer from '../containers/ProductsContainer';
+
+import UserProfile from '../containers/UserProfileContainer';
+import { fetchUser } from '../action-creator/userProfile';
+
 import RegisterContainer from '../containers/RegisterContainer';
 import LoginContainer from '../containers/LoginContainer';
+
 import ProductContainer from '../containers/ProductContainer';
 import AddProduct from './AddProduct';
 import AddProductContainer from '../containers/AddProductContainer';
@@ -20,6 +25,10 @@ import AddProductContainer from '../containers/AddProductContainer';
 const onCartEnter = function() {
   store.dispatch(fetchCart());
 };
+
+
+const onUserProfileEnter = function() {
+  store.dispatch(fetchUser());
 const onProductsEnter = function() {
   store.dispatch(fetchProducts());
 };
@@ -37,6 +46,13 @@ export default class App extends Component {
             <RouteHook exact path="/register" component={RegisterContainer} />
             <RouteHook exact path="/login" component={LoginContainer} />
             <RouteHook
+
+              path="/users"
+              component={UserProfile}
+              onEnter={onUserProfileEnter}
+            />
+            <RouteHook exact path="/products" component={ProductsContainer} />
+
               exact
               path="/products"
               component={ProductsContainer}
