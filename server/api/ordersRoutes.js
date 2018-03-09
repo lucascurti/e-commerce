@@ -4,6 +4,7 @@ const db = require('../db/models/');
 const User = db.User;
 const Order = db.Order;
 const Product = db.Product;
+const OrderDetail = db.OrderDetail;
 
 
 router.get('/Uncreated', (req, res) => {
@@ -12,7 +13,7 @@ router.get('/Uncreated', (req, res) => {
         {
             include: [{
                 model: Product,
-                as: 'product'
+                attributes: ['name', 'id', 'image']
             }],
             where: {
                 status: 'Uncreated',
