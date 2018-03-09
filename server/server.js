@@ -5,6 +5,7 @@ const app = express();
 const productsRoutes = require('./api/productsRoutes');
 const usersRoutes = require('./api/usersRoutes');
 const ordersRoutes = require('./api/ordersRoutes');
+const categoriesRoutes = require('./api/categoriesRoutes');
 const db = require('./db/database');
 
 app.use(express.static(path.join(__dirname, '/../public')));
@@ -14,13 +15,15 @@ app.use(bodyParser.json());
 app.use('/api/products', productsRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/orders', ordersRoutes);
+app.use('/api/categories', categoriesRoutes);
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../public/index.html'));
 });
 
 db
-  .sync({ force: false })
+
+  .sync({ force: true })
   .then(function() {
     app.listen(4000, function() {
       console.log('Server is listening on port 4000!');

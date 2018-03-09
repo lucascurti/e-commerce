@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SingleProduct from './SingleProduct';
-import Categories from './Categories';
+import Categories from './SidebarCategories';
 
 const products = [
   {
@@ -117,7 +117,7 @@ const categories = [
   },
 ];
 
-export default props => (
+export default ({ products }) => (
   <div className="row">
     <Categories categories={categories} />
     <main className="col-md-9 col-lg-10 pt-3 px-4 mx-auto justify-content-center">
