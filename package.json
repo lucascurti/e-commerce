@@ -8,7 +8,8 @@
     "build": "webpack -w",
     "test": "echo \"Error: no test specified\" && exit 1",
     "db-init": "pg-init commerce",
-    "postinstall": "npm run db-init"
+    "postinstall": "npm run db-init",
+    "seed": "node server/db/seed.js"
   },
   "dependencies": {
     "axios": "^0.18.0",

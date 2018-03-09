@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Products = require('../db/models/products');
+const Categories = require('../db/models/categories');
 
 router.get('/', (req, res) => {
   Products.findAll().then(products => {
@@ -10,7 +11,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const id = req.params.id;
   Products.findById(id).then(product => {
-    res.send(product);
+    res.json(product);
   });
 });
 router.post('/', (req, res) => {
@@ -19,26 +20,45 @@ router.post('/', (req, res) => {
   const price = req.body.price;
   const stock = req.body.stock;
   const image = req.body.image;
+  const rating = req.body.rating;
+  const categories = req.body.categories;
   Products.create({
     name: name,
     description: description,
     price: price,
     stock: stock,
     image: image,
-  }).then(newProduct => {
-    res.send(newProduct);
-  });
+    rating: rating,
+  })
+    .then(newProduct => {
+      return categories.map(category => {
+        return newProduct.addCategory(category);
+      });
+    })
+    .then(categories => {
+      return Promise.all(categories).then(values => res.send(values));
+    })
+    .catch(err => res.status(500).send(err));
 });
 router.put('/:id', (req, res) => {
   const id = req.params.id;
-  const update = req.body.update;
-  Products.findById(id)
-    .then(products => {
-      return products.updateAttributes(update);
+  const categories = req.body.categories;
+  const updatedProduct = req.body;
+  delete updatedProduct.categories;
+
+  Products.update(updatedProduct, {
+    where: {
+      id: id,
+    },
+    returning: true,
+  })
+    .then(response => {
+      const product = response[1][0];
+      return product;
     })
-    .then(updatedProduct => {
-      res.json(updatedProduct);
-    });
+    .then(product => product.setCategories(categories))
+    .then(response => res.sendStatus(200))
+    .catch(err => res.send(err.message));
 });
 router.delete('/:id', (req, res) => {
   const id = req.params.id;

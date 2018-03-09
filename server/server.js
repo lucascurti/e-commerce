@@ -8,6 +8,7 @@ const productsRoutes = require('./api/productsRoutes');
 const session = require('express-session');
 const usersRoutes = require('./api/usersRoutes');
 const ordersRoutes = require('./api/ordersRoutes');
+const categoriesRoutes = require('./api/categoriesRoutes');
 const db = require('./db/database');
 const User = require('./db/models/users');
 
@@ -63,8 +64,9 @@ app.use(passport.session());
 app.use('/api/products', productsRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/orders', ordersRoutes);
+app.use('/api/categories', categoriesRoutes);
 
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../public/index.html'));
 });
 

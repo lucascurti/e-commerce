@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
         case CHANGE_AMOUNT:
             const prod = state.products.slice()
             const st = Object.assign({}, state, { products: prod })
-            st.products[action.index].amount = action.value
+            st.products[action.index].orderDetail.amount = action.value
             return st
         default:
             return state;
