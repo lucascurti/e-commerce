@@ -46,6 +46,11 @@ export default class App extends Component {
               component={ProductContainer}
               onEnter={onProductEnter}
             />
+            <RouteHook
+              exact
+              path="/category/:id"
+              component={ProductsContainer}
+            />
             <Redirect from="/" to="/products" />
           </Switch>
         </main>

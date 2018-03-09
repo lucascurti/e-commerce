@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SingleProduct from './SingleProduct';
-import Categories from './SidebarCategories';
+import SidebarCategories from './SidebarCategories';
 
 const products = [
   {
@@ -119,7 +119,7 @@ const categories = [
 
 export default props => (
   <div className="row">
-    <Categories categories={categories} />
+    <SidebarCategories categories={categories} />
     <main className="col-md-9 col-lg-10 pt-3 px-4 mx-auto justify-content-center">
       <div className="card-group align-self-center">
         {products.map(product => (
