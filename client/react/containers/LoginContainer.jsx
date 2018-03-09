@@ -8,7 +8,6 @@ class LoginContainer extends Component {
     this.state = {
       email: '',
       password: '',
-      passwordConfirm: '',
       validForm: false,
     };
     this.onChange = this.onChange.bind(this);
@@ -18,15 +17,6 @@ class LoginContainer extends Component {
   onChange(event) {
     const element = event.target;
     const form = element.parentElement;
-
-    if (element.name === 'passwordConfirm') {
-      const password = element.previousSibling.previousSibling.value;
-      if (password !== element.value) {
-        element.setCustomValidity('Passwords do not match');
-      } else {
-        element.setCustomValidity('');
-      }
-    }
 
     this.setState({
       [element.name]: element.value,
@@ -44,15 +34,21 @@ class LoginContainer extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const data = Object.assign({}, this.state);
-    delete data.validForm;
-    delete data.passwordConfirm;
+    delete this.state.error;
+    this.setState(this.state);
+
     axios
-      .post('/api/users', data)
+      .post('/api/users/login', {
+        email: this.state.email,
+        password: this.state.password,
+      })
       .then(response => response.data)
-      .then(user => {
-        console.log(user);
-        this.props.history.push('/login');
+      .then(data => {
+        console.log(data);
+        if (!data.success) {
+          this.setState({ error: data.info.message });
+        }
+        // this.props.history.push('/products');
       });
   }
 

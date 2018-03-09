@@ -30,6 +30,7 @@ export default ({ onChange, state, onSubmit }) => {
           required
           onChange={onChange}
         />
+        <p className="text-danger mt-3">{state.error}</p>
         <button
           className="btn btn-lg btn-primary btn-block"
           type="submit"
