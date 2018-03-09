@@ -1,56 +1,74 @@
 const express = require('express');
 const router = express.Router();
+const Products = require('../db/models/products');
+const Categories = require('../db/models/categories');
 
-module.exports = router;
-
-router.get('/products', (req, res) => {
-  db.products.findAll().then(products => {
-    res.json(products);
+router.get('/', (req, res) => {
+  Products.findAll().then(products => {
+    res.send(products);
   });
 });
-router.get('/products/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   const id = req.params.id;
-  db.products.findById(id).then(products => {
-    res.json(products);
+  Products.findById(id).then(product => {
+    res.json(product);
   });
 });
-router.post('/products/:id', (req, res) => {
-  const name = req.params.name;
-  const description = req.params.description;
-  const price = req.params.price;
-  const stock = req.params.stock;
+router.post('/', (req, res) => {
+  const name = req.body.name;
+  const description = req.body.description;
+  const price = req.body.price;
+  const stock = req.body.stock;
   const image = req.body.image;
-  db.products
-    .create({
-      name: name,
-      description: description,
-      price: price,
-      stock: stock,
-      image: image,
-    })
+  const rating = req.body.rating;
+  const categories = req.body.categories;
+  Products.create({
+    name: name,
+    description: description,
+    price: price,
+    stock: stock,
+    image: image,
+    rating: rating,
+  })
     .then(newProduct => {
-      res.json(newProduct);
-    });
-});
-router.put('/products/:id', (req, res) => {
-  const id = req.params.id;
-  const update = req.body.update;
-  db.products
-    .findById(id)
-    .then(products => {
-      return products.updateAttributes(update);
+      return categories.map(category => {
+        return newProduct.addCategory(category);
+      });
     })
-    .then(updatedProduct => {
-      res.json(updatedProduct);
-    });
-});
-router.delete('/products/:id', (req, res) => {
-  const id = req.params.id;
-  db.products
-    .destroy({
-      where: { id: id },
+    .then(categories => {
+      return Promise.all(categories).then(values => res.send(values));
     })
+    .catch(err => res.status(500).send(err));
+});
+router.put('/:id', (req, res) => {
+  const id = req.params.id;
+  const categories = req.body.categories;
+  const updatedProduct = req.body;
+  delete updatedProduct.categories;
+
+  Products.update(updatedProduct, {
+    where: {
+      id: id,
+    },
+    returning: true,
+  })
+    .then(response => {
+      const product = response[1][0];
+      return product;
+    })
+    .then(product => product.setCategories(categories))
+    .then(response => res.sendStatus(200))
+    .catch(err => res.send(err.message));
+});
+router.delete('/:id', (req, res) => {
+  const id = req.params.id;
+  Products.destroy({
+    where: { id: id },
+  })
     .then(deletedProduct => {
       res.json(deletedProduct);
-    });
+    })
+    .catch(res.send);
 });
+
+module.exports = router;
