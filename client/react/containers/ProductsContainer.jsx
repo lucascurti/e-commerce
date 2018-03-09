@@ -4,7 +4,7 @@ import Products from '../components/Products';
 import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
-  return { products: state.products };
+  return { products: state.products, categories: state.categories };
 }
 function mapDispatchToProps(dispatch) {
   return {};
