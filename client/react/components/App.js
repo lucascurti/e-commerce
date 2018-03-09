@@ -13,6 +13,9 @@ import ProductsContainer from '../containers/ProductsContainer';
 import ProductContainer from '../containers/ProductContainer';
 import AddProduct from './AddProduct';
 import AddProductContainer from '../containers/AddProductContainer';
+import EditProduct from './EditProduct';
+import EditProductContainer from '../containers/EditProductContainer';
+import ProductsTableContainer from '../containers/ProductsTableContainer';
 
 const onCartEnter = function() {
   store.dispatch(fetchCart());
@@ -33,6 +36,16 @@ export default class App extends Component {
               exact
               path="/products/add"
               component={AddProductContainer}
+            />
+            <RouteHook
+              exact
+              path="/product/edit/:id"
+              component={EditProductContainer}
+              onEnter={onCartEnter}
+            />
+            <RouteHook
+              path="/products/list"
+              component={ProductsTableContainer}
             />
             <RouteHook
               exact
