@@ -4,6 +4,10 @@ import CartContainer from '../containers/CartContainer';
 import { fetchCart } from '../action-creator/cart';
 import { fetchProducts } from '../action-creator/products';
 import { fetchProduct } from '../action-creator/product';
+import {
+  fetchProductsCategory,
+  fetchCategories,
+} from '../action-creator/categories';
 import { fetchAddProduct } from '../action-creator/addProduct';
 import store from '../store';
 import './App.css';
@@ -20,6 +24,7 @@ const onCartEnter = function() {
 };
 const onProductsEnter = function() {
   store.dispatch(fetchProducts());
+  store.dispatch(fetchCategories());
 };
 const onProductEnter = function(props) {
   store.dispatch(fetchProduct(props.match.params.id));

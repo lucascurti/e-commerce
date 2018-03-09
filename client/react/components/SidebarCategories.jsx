@@ -8,9 +8,9 @@ export default ({ categories }) => (
       <ul className="nav flex-column">
         {categories.map(category => (
           <li className="nav-item" key={category.id}>
-            <a className="nav-link active" href="#">
-              <Link to={`/category/${category.id}`}>{category.name}</Link>
-            </a>
+            <Link className="nav-link active" to={`/category/${category.id}`}>
+              {category.name}
+            </Link>
           </li>
         ))}
       </ul>
