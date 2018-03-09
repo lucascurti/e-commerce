@@ -42,22 +42,22 @@ router.post('/', (req, res) => {
 });
 router.put('/:id', (req, res) => {
   const id = req.params.id;
-  const name = req.body.name;
-  const description = req.body.description;
-  const price = req.body.price;
-  const stock = req.body.stock;
-  const image = req.body.image;
-  const rating = req.body.rating;
   const categories = req.body.categories;
+  const updatedProduct = req.body;
+  delete updatedProduct.categories;
 
-  Products.findOne({
+  Products.update(updatedProduct, {
     where: {
       id: id,
     },
-    include: [{ model: Categories }],
+    returning: true,
   })
+    .then(response => {
+      const product = response[1][0];
+      return product;
+    })
     .then(product => product.setCategories(categories))
-    .then(product => res.json(product))
+    .then(response => res.sendStatus(200))
     .catch(err => res.send(err.message));
 });
 router.delete('/:id', (req, res) => {
