@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Login from '../components/Login';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { loginUser } from '../action-creator/user';
 
 class LoginContainer extends Component {
   constructor(props) {
@@ -36,20 +37,14 @@ class LoginContainer extends Component {
     e.preventDefault();
     delete this.state.error;
     this.setState(this.state);
-
-    axios
-      .post('/api/users/login', {
-        email: this.state.email,
-        password: this.state.password,
-      })
-      .then(response => response.data)
-      .then(data => {
-        console.log(data);
-        if (!data.success) {
-          this.setState({ error: data.info.message });
-        }
-        // this.props.history.push('/products');
-      });
+    console.log(this.props.loginUser);
+    this.props.loginUser(this.state.email, this.state.password).then(data => {
+      if (!data.success) {
+        this.setState({ error: data.info.message });
+      } else {
+        this.props.history.push('/products');
+      }
+    });
   }
 
   render() {
@@ -63,4 +58,12 @@ class LoginContainer extends Component {
   }
 }
 
-export default LoginContainer;
+const mapDispatchToProps = dispatch => {
+  return {
+    loginUser: (email, password) => {
+      return dispatch(loginUser(email, password));
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(LoginContainer);
