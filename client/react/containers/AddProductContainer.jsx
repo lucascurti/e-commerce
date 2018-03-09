@@ -17,6 +17,13 @@ class AddProductContainer extends React.Component {
   submitProduct = e => {
     e.preventDefault();
     this.props.addProduct(this.state);
+    this.setState({
+      name: '',
+      description: '',
+      stock: 0,
+      price: 0,
+      image: '//www.google.com',
+    });
   };
 
   handleChange = e => {

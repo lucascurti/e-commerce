@@ -20,9 +20,6 @@ const onCartEnter = function() {
 const onProductEnter = function(props) {
   store.dispatch(fetchProduct(props.match.params.id));
 };
-const onAddProductEnter = function() {
-  store.dispatch(fetchAddProduct());
-};
 
 export default class App extends Component {
   render() {
@@ -36,7 +33,6 @@ export default class App extends Component {
               exact
               path="/products/add"
               component={AddProductContainer}
-              onEnter={onAddProductEnter}
             />
             <RouteHook
               exact
