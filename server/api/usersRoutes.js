@@ -3,6 +3,28 @@ const router = express.Router();
 const Users = require('../db/models/users');
 const passport = require('passport');
 
+isAuthenticated = (req, res, next) => {
+  if (req.user) return next();
+  else
+    return res.json({
+      loggedin: false,
+      message: 'User not authenticated',
+    });
+};
+
+router.get('/checkauth', isAuthenticated, function(req, res) {
+  res.status(200).json({
+    loggedin: true,
+    message: 'User is authenticated',
+    user: req.user,
+  });
+});
+
+router.get('/logout', function(req, res) {
+  req.logout();
+  res.json({ message: 'Logged out!' });
+});
+
 router.get('/:id', (req, res) => {
   const id = req.params.id;
   Users.findById(id).then(user => res.json(user));
@@ -17,7 +39,6 @@ router.post('/', (req, res) => {
 });
 
 router.post('/login', (req, res, next) => {
-  console.log(req.body);
   passport.authenticate('local', (err, user, info) => {
     if (err) {
       return json({
@@ -45,35 +66,6 @@ router.post('/login', (req, res, next) => {
     });
   })(req, res, next);
 });
-
-/* router.post('/login', function(req, res, next) {
-  return passport.authenticate('local', (err, token, userData) => {
-    console.log(err);
-    console.log(token);
-    console.log(userData);
-    if (err) {
-      if (err.name === 'IncorrectCredentialsError') {
-        return res.status(400).json({
-          success: false,
-          message: err.message,
-        });
-      }
-
-      return res.status(400).json({
-        success: false,
-        message: 'Could not process the form.',
-        error: err,
-      });
-    }
-
-    return res.json({
-      success: true,
-      message: 'You have successfully logged in!',
-      token,
-      user: userData,
-    });
-  })(req, res, next);
-}); */
 
 router.put('/:id', (req, res) => {
   const id = req.params.id;

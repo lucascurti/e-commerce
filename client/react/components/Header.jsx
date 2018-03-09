@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 
-export default props => (
+export default ({ user, logoutUser }) => (
   <nav className="navbar navbar-expand-md navbar-dark bg-dark">
     <a className="navbar-brand" href="#">
       E-Commerce
@@ -49,20 +49,45 @@ export default props => (
       <a className="" href="#">
         <span className="oi oi-cart mx-3" title="cart" aria-hidden="true" />
       </a>
-      <div className="mx-3">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to="/register" className="nav-link">
-              Register
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/login" className="nav-link">
-              Login
-            </Link>
-          </li>
-        </ul>
-      </div>
+      {user.id ? (
+        <div className="mx-3">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <span className="navbar-text mr-3">
+                ¡Bienvenido {user.firstName}!
+              </span>
+            </li>
+            <li className="nav-item">
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm"
+                onClick={() => logoutUser()}
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      ) : (
+        <div className="mx-3">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link to="/register" className="nav-link">
+                <button type="button" className="btn btn-secondary btn-sm">
+                  Register
+                </button>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/login" className="nav-link">
+                <button type="button" className="btn btn-secondary btn-sm">
+                  Login
+                </button>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      )}
     </div>
   </nav>
 );
