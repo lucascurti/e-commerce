@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const id = req.params.id;
   Products.findById(id).then(product => {
-    res.send(product);
+    res.json(product);
   });
 });
 router.post('/', (req, res) => {
@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
     .then(categories => {
       return Promise.all(categories).then(values => res.send(values));
     })
-    .catch(err => res.send(err.message));
+    .catch(err => res.status(500).send(err));
 });
 router.put('/:id', (req, res) => {
   const id = req.params.id;

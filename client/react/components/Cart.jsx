@@ -3,7 +3,7 @@ import './Cart.css';
 
 export default ({ cart, changeAmount, amount }) => {
   console.log(cart);
-  if (cart.products.length) {
+  if (cart.product.length) {
     return (
       <div className="container">
         <table id="cart" className="table table-hover table-condensed">
