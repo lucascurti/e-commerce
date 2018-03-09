@@ -117,7 +117,7 @@ const categories = [
   },
 ];
 
-export default props => (
+export default ({ products }) => (
   <div className="row">
     <SidebarCategories categories={categories} />
     <main className="col-md-9 col-lg-10 pt-3 px-4 mx-auto justify-content-center">

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import RouteHook from 'react-route-hook';
 import CartContainer from '../containers/CartContainer';
 import { fetchCart } from '../action-creator/cart';
+import { fetchProducts } from '../action-creator/products';
 import { fetchProduct } from '../action-creator/product';
 import { fetchAddProduct } from '../action-creator/addProduct';
 import store from '../store';
@@ -17,6 +18,9 @@ import AddProductContainer from '../containers/AddProductContainer';
 const onCartEnter = function() {
   store.dispatch(fetchCart());
 };
+const onProductsEnter = function() {
+  store.dispatch(fetchProducts());
+};
 const onProductEnter = function(props) {
   store.dispatch(fetchProduct(props.match.params.id));
 };
@@ -28,7 +32,12 @@ export default class App extends Component {
         <HeaderContainer />
         <main role="main" className="container-fluid mt-3">
           <Switch>
-            <RouteHook exact path="/products" component={ProductsContainer} />
+            <RouteHook
+              exact
+              path="/products"
+              component={ProductsContainer}
+              onEnter={onProductsEnter}
+            />
             <RouteHook
               exact
               path="/products/add"
