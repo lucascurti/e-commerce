@@ -52,9 +52,14 @@ export default props => (
       <div className="mx-3">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <Link to="/register" className="nav-link">
+              Register
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/login" className="nav-link">
               Login
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

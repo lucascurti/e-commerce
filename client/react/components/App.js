@@ -9,6 +9,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import HeaderContainer from '../containers/HeaderContainer';
 import ProductsContainer from '../containers/ProductsContainer';
 import RegisterContainer from '../containers/RegisterContainer';
+import LoginContainer from '../containers/LoginContainer';
 
 const onCartEnter = function() {
   store.dispatch(fetchCart());
@@ -21,6 +22,7 @@ export default class App extends Component {
         <main role="main" className="container-fluid mt-3">
           <Switch>
             <RouteHook exact path="/register" component={RegisterContainer} />
+            <RouteHook exact path="/login" component={LoginContainer} />
             <RouteHook exact path="/products" component={ProductsContainer} />
             <RouteHook
               exact

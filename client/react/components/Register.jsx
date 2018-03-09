@@ -1,5 +1,5 @@
 import React from 'react';
-import './Register.css';
+import './UserForms.css';
 
 export default ({ onChange, state, onSubmit }) => {
   return (
