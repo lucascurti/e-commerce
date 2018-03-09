@@ -8,19 +8,19 @@ export default props => (
     <ul>
       <li className="list-group-item justify-content-between">
         <strong>Name</strong>
-        <span>Name</span>
+        <span>{props.user.name}</span>
       </li>
       <li className="list-group-item justify-content-between">
-        <strong> Last Name</strong> <span>Last Name</span>
+        <strong> Last Name</strong> <span>{props.user.lastname}</span>
       </li>
       <li className="list-group-item justify-content-between">
-        <strong>Email</strong> <span>Email</span>
+        <strong>Email</strong> <span>{props.user.email}</span>
       </li>
       <li className="list-group-item justify-content-between">
-        <strong> User Name</strong> <span>User Name</span>
+        <strong> User Name</strong> <span>{props.user.username}</span>
       </li>
       <li className="list-group-item justify-content-between">
-        <strong> Password </strong> <span>Password</span>
+        <strong> Password </strong> <span>{props.user.password}</span>
       </li>
     </ul>
   </div>

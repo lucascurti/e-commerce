@@ -9,10 +9,16 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import HeaderContainer from '../containers/HeaderContainer';
 import ProductsContainer from '../containers/ProductsContainer';
 import UserProfile from '../containers/UserProfileContainer';
+import { fetchUser } from '../action-creator/userProfile';
 
 const onCartEnter = function() {
   store.dispatch(fetchCart());
 };
+
+const onUserProfileEnter = function() {
+  store.dispatch(fetchUser());
+};
+
 export default class App extends Component {
   render() {
     return (
@@ -20,6 +26,11 @@ export default class App extends Component {
         <HeaderContainer />
         <main role="main" className="container-fluid mt-3">
           <Switch>
+            <RouteHook
+              path="/users"
+              component={UserProfile}
+              onEnter={onUserProfileEnter}
+            />
             <RouteHook exact path="/products" component={ProductsContainer} />
             <RouteHook
               exact

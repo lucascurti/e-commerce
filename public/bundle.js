@@ -3861,6 +3861,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var GET_CART = exports.GET_CART = 'GET_CART';
 var CHANGE_AMOUNT = exports.CHANGE_AMOUNT = 'CHANGE_AMOUNT';
+var GET_USER = exports.GET_USER = 'GET_USER';
 
 /***/ }),
 /* 50 */
@@ -38967,7 +38968,8 @@ var _cartReducer2 = _interopRequireDefault(_cartReducer);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
-  cart: _cartReducer2.default
+  cart: _cartReducer2.default,
+  user: userProfilereducer
 });
 
 /***/ }),
@@ -40606,6 +40608,8 @@ var _UserProfileContainer = __webpack_require__(172);
 
 var _UserProfileContainer2 = _interopRequireDefault(_UserProfileContainer);
 
+var _userProfile = __webpack_require__(176);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -40616,6 +40620,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var onCartEnter = function onCartEnter() {
   _store2.default.dispatch((0, _cart.fetchCart)());
+};
+
+var onUserProfileEnter = function onUserProfileEnter() {
+  _store2.default.dispatch((0, _userProfile.fetchUser)());
 };
 
 var App = function (_Component) {
@@ -40640,6 +40648,11 @@ var App = function (_Component) {
           _react2.default.createElement(
             _reactRouterDom.Switch,
             null,
+            _react2.default.createElement(_reactRouteHook2.default, {
+              path: '/users',
+              component: _UserProfileContainer2.default,
+              onEnter: onUserProfileEnter
+            }),
             _react2.default.createElement(_reactRouteHook2.default, { exact: true, path: '/products', component: _ProductsContainer2.default }),
             _react2.default.createElement(_reactRouteHook2.default, {
               exact: true,
@@ -48836,8 +48849,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
@@ -48846,45 +48857,21 @@ var _store = __webpack_require__(7);
 
 var _store2 = _interopRequireDefault(_store);
 
+var _reactRedux = __webpack_require__(50);
+
 var _UserProfile = __webpack_require__(173);
 
 var _UserProfile2 = _interopRequireDefault(_UserProfile);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function mapStateToProps(state, ownProps) {
+  return {
+    user: state.userProfile
+  };
+}
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var UserProfileContainer = function (_React$Component) {
-  _inherits(UserProfileContainer, _React$Component);
-
-  function UserProfileContainer() {
-    _classCallCheck(this, UserProfileContainer);
-
-    var _this = _possibleConstructorReturn(this, (UserProfileContainer.__proto__ || Object.getPrototypeOf(UserProfileContainer)).call(this));
-
-    _this.state = {};
-    return _this;
-  }
-
-  _createClass(UserProfileContainer, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {}
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {}
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(_UserProfile2.default, null);
-    }
-  }]);
-
-  return UserProfileContainer;
-}(_react2.default.Component);
+var UserProfileContainer = (0, _reactRedux.connect)(mapStateToProps)(_UserProfile2.default);
 
 exports.default = UserProfileContainer;
 
@@ -48932,7 +48919,7 @@ exports.default = function (props) {
         _react2.default.createElement(
           'span',
           null,
-          'Name'
+          props.user.name
         )
       ),
       _react2.default.createElement(
@@ -48947,7 +48934,7 @@ exports.default = function (props) {
         _react2.default.createElement(
           'span',
           null,
-          'Last Name'
+          props.user.lastname
         )
       ),
       _react2.default.createElement(
@@ -48962,7 +48949,7 @@ exports.default = function (props) {
         _react2.default.createElement(
           'span',
           null,
-          'Email'
+          props.user.email
         )
       ),
       _react2.default.createElement(
@@ -48977,7 +48964,7 @@ exports.default = function (props) {
         _react2.default.createElement(
           'span',
           null,
-          'User Name'
+          props.user.username
         )
       ),
       _react2.default.createElement(
@@ -48992,7 +48979,7 @@ exports.default = function (props) {
         _react2.default.createElement(
           'span',
           null,
-          'Password'
+          props.user.password
         )
       )
     )
@@ -49043,6 +49030,45 @@ exports.push([module.i, "h3 {\n  text-align: center;\n  padding: 30px;\n}\n\n#pr
 
 // exports
 
+
+/***/ }),
+/* 176 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchUser = exports.getUser = undefined;
+
+var _axios = __webpack_require__(134);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _constants = __webpack_require__(49);
+
+var _store = __webpack_require__(7);
+
+var _store2 = _interopRequireDefault(_store);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var getUser = exports.getUser = function getUser(user) {
+  return { type: _constants.GET_USER, user: user };
+};
+
+// trae la orden de la base de da
+var fetchUser = exports.fetchUser = function fetchUser() {
+  return function (dispatch) {
+    return _axios2.default.get('/api/me').then(function (res) {
+      return res.data;
+    }).then(function (user) {
+      return dispatch(getUser(user));
+    });
+  };
+};
 
 /***/ })
 /******/ ]);
