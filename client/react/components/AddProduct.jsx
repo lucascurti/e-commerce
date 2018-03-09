@@ -32,8 +32,8 @@ export default props => {
         <div className="form-group">
           <label htmlFor="formGroupExampleInput2">Quantify</label>
           <input
-            name="quantify"
-            value={props.quantify}
+            name="stock"
+            value={props.stock}
             type="number"
             onChange={props.handleChange}
             className="form-control"

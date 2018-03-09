@@ -8,10 +8,12 @@ export const addProduct = product => {
   };
 };
 
-export const fetchAddProduct = product => dispatch =>
+export const fetchAddProduct = product => dispatch => {
+  console.log('entraaaaa');
   axios
     .post(`/api/products`, product)
     .then(res => res.data)
     .then(newProduct => {
       dispatch(addProduct(newProduct));
     });
+};

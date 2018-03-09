@@ -9,9 +9,9 @@ class AddProductContainer extends React.Component {
     this.state = {
       name: '',
       description: '',
-      quantify: 0,
+      stock: 0,
       price: 0,
-      image: '',
+      image: '//www.google.com',
     };
   }
   submitProduct = e => {
@@ -31,7 +31,7 @@ class AddProductContainer extends React.Component {
         submitForm={this.submitProduct}
         name={this.state.name}
         description={this.state.description}
-        quantify={this.state.quantify}
+        stock={this.state.stock}
         price={this.state.price}
         image={this.state.image}
         handleChange={this.handleChange}
