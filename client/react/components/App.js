@@ -4,6 +4,10 @@ import CartContainer from '../containers/CartContainer';
 import { fetchCart } from '../action-creator/cart';
 import { fetchProducts } from '../action-creator/products';
 import { fetchProduct } from '../action-creator/product';
+import {
+  fetchProductsCategory,
+  fetchCategories,
+} from '../action-creator/categories';
 import { fetchAddProduct } from '../action-creator/addProduct';
 import store from '../store';
 import './App.css';
@@ -31,6 +35,7 @@ const onUserProfileEnter = function() {
   store.dispatch(fetchUser());
 const onProductsEnter = function() {
   store.dispatch(fetchProducts());
+  store.dispatch(fetchCategories());
 };
 const onProductEnter = function(props) {
   store.dispatch(fetchProduct(props.match.params.id));
@@ -74,6 +79,11 @@ export default class App extends Component {
               path="/products/:id"
               component={ProductContainer}
               onEnter={onProductEnter}
+            />
+            <RouteHook
+              exact
+              path="/category/:id"
+              component={ProductsContainer}
             />
             <Redirect from="/" to="/products" />
           </Switch>
