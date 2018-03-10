@@ -16,19 +16,18 @@ export const getCategories = categories => {
   };
 };
 
-export const fetchProductsCategory = id => dispatch =>
-  axios
-    .get(`/api/categories/${id}`)
-    .then(res => res.data)
-    .then(products => {
-      dispatch(getProductsCategory(products));
-    });
+// export const fetchProductsCategory = id => dispatch =>
+//   axios
+//     .get(`/api/categories/${id}`)
+//     .then(res => res.data)
+//     .then(products => {
+//       dispatch(getProductsCategory(products));
+//     });
 
 export const fetchCategories = () => dispatch =>
   axios
     .get('/api/categories')
     .then(res => res.data)
     .then(categories => {
-      console.log(categories);
       dispatch(getCategories(categories));
     });

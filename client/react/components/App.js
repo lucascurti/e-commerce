@@ -30,14 +30,18 @@ const onCartEnter = function() {
   store.dispatch(fetchCart());
 };
 
-
 const onUserProfileEnter = function() {
   store.dispatch(fetchUser());
+};
+
 const onProductsEnter = function() {
   store.dispatch(fetchProducts());
   store.dispatch(fetchCategories());
 };
+
 const onProductEnter = function(props) {
+  store.dispatch(fetchProducts());
+  store.dispatch(fetchCategories());
   store.dispatch(fetchProduct(props.match.params.id));
 };
 
@@ -51,13 +55,11 @@ export default class App extends Component {
             <RouteHook exact path="/register" component={RegisterContainer} />
             <RouteHook exact path="/login" component={LoginContainer} />
             <RouteHook
-
               path="/users"
               component={UserProfile}
               onEnter={onUserProfileEnter}
             />
-            <RouteHook exact path="/products" component={ProductsContainer} />
-
+            <RouteHook
               exact
               path="/products"
               component={ProductsContainer}

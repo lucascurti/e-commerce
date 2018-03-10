@@ -31,7 +31,6 @@ export const logoutUser = () => dispatch => {
 
 export const checkUserSession = () => dispatch => {
   axios.get('/api/users/checkauth').then(res => {
-    console.log(res);
     if (res.data.user) {
       dispatch(loginUserAction(res.data.user));
     }
