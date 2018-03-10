@@ -30,6 +30,11 @@ const onProductEnter = function(props) {
   store.dispatch(fetchProduct(props.match.params.id));
 };
 
+const onCategoryEnter = function(props) {
+  store.dispatch(fetchProductsCategory(props.match.params.id));
+  store.dispatch(fetchCategories());
+};
+
 export default class App extends Component {
   render() {
     return (
@@ -64,6 +69,7 @@ export default class App extends Component {
               exact
               path="/category/:id"
               component={ProductsContainer}
+              onEnter={onCategoryEnter}
             />
             <Redirect from="/" to="/products" />
           </Switch>
