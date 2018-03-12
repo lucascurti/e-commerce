@@ -31,6 +31,7 @@ export default ({ onChange, state, onSubmit }) => {
           onChange={onChange}
         />
         <p className="text-danger mt-3">{state.error}</p>
+        <a href="/auth/facebook">Login with Facebook</a>
         <button
           className="btn btn-lg btn-primary btn-block"
           type="submit"
