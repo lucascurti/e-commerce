@@ -3,7 +3,7 @@ import './Cart.css';
 
 export default ({ cart, changeAmount, amount }) => {
   console.log(cart);
-  if (cart.product.length) {
+  if (cart.products.length) {
     return (
       <div className="container">
         <table id="cart" className="table table-hover table-condensed">
@@ -19,15 +19,16 @@ export default ({ cart, changeAmount, amount }) => {
             </tr>
           </thead>
           <tbody>
-            {cart.product.map((product, index) => (
+            {cart.products.map((product, index) => (
               <tr key={product.id}>
                 <td data-th="Product">
                   <div className="row">
                     <div className="col-sm-2 hidden-xs">
                       <img
-                        src="http://placehold.it/100x100"
+                        src={product.image}
                         alt="..."
                         className="img-responsive"
+                        style={{ width: '100px' }}
                       />
                     </div>
                     <div className="col-sm-10">
@@ -35,18 +36,18 @@ export default ({ cart, changeAmount, amount }) => {
                     </div>
                   </div>
                 </td>
-                <td data-th="Price">{product.price}</td>
+                <td data-th="Price">{product.orderDetail.price}</td>
                 <td data-th="Quantity">
                   <input
                     type="number"
                     className="form-control text-center"
-                    value={product.amount}
+                    value={product.orderDetail.amount}
                     onChange={e => changeAmount(Number(e.target.value), index)}
                     id="amount"
                   />
                 </td>
                 <td data-th="Subtotal" className="text-center">
-                  {product.price * product.amount}
+                  {product.orderDetail.price * product.orderDetail.amount}
                 </td>
                 <td className="actions" data-th="">
                   <button className="btn btn-info btn-sm">
