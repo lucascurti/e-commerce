@@ -1,9 +1,9 @@
 import React from 'react';
 import AddCategory from '../components/AddCategory';
 import { connect } from 'react-redux';
-import { fetchAddCategory } from '../action-creator/categories';
+import { updateCategory } from '../action-creator/categories';
 
-class AddCategoryContainer extends React.Component {
+class EditCategoryContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,7 +12,9 @@ class AddCategoryContainer extends React.Component {
   }
   submitCategory = e => {
     e.preventDefault();
-    this.props.addCategory(this.state);
+    console.log('MATCH', this.props.match);
+    console.log('STATE', this.state);
+    this.props.editCategory(this.props.match.params.id, this.state);
     this.setState({
       name: '',
     });
@@ -29,7 +31,7 @@ class AddCategoryContainer extends React.Component {
         submitForm={this.submitCategory}
         name={this.state.name}
         handleChange={this.handleChange}
-        type="Add"
+        type="Edit"
       />
     );
   }
@@ -38,9 +40,11 @@ class AddCategoryContainer extends React.Component {
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({
-  addCategory: category => dispatch(fetchAddCategory(category)),
+  editCategory: (id, category) => {
+    dispatch(updateCategory(id, category));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  AddCategoryContainer,
+  EditCategoryContainer,
 );

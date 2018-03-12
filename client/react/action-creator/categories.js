@@ -1,7 +1,11 @@
 import axios from 'axios';
 import { GET_PRODUCTS_CATEGORY } from '../constants';
-import { GET_CATEGORIES } from '../constants';
-import { ADD_CATEGORY } from '../constants';
+import {
+  GET_CATEGORIES,
+  ADD_CATEGORY,
+  EDIT_CATEGORY,
+  GET_CATEGORY,
+} from '../constants';
 
 export const addCategory = category => {
   return {
@@ -24,6 +28,20 @@ export const getCategories = categories => {
   };
 };
 
+export const getCategory = category => {
+  return {
+    type: GET_CATEGORY,
+    category,
+  };
+};
+
+export const editCategory = category => {
+  return {
+    type: EDIT_CATEGORY,
+    category,
+  };
+};
+
 export const fetchProductsCategory = id => dispatch =>
   axios
     .get(`/api/categories/${id}`)
@@ -37,7 +55,6 @@ export const fetchCategories = () => dispatch =>
     .get('/api/categories')
     .then(res => res.data)
     .then(categories => {
-      console.log(categories);
       dispatch(getCategories(categories));
     });
 
@@ -47,5 +64,25 @@ export const fetchAddCategory = category => dispatch => {
     .then(res => res.data)
     .then(newCategory => {
       dispatch(addCategory([newCategory.name]));
+    });
+};
+
+export const updateCategory = (id, category) => dispatch => {
+  console.log('CATEGORY', category);
+  axios
+    .put(`/api/categories/${id}`, category)
+    .then(res => res.data)
+    .then(category => {
+      dispatch(editCategory(category));
+    })
+    .catch(err => console.log(err));
+};
+
+export const fetchCategory = id => dispatch => {
+  axios
+    .get(`/api/categories/${id}`)
+    .then(res => res.data)
+    .then(category => {
+      dispatch(getCategory(category));
     });
 };

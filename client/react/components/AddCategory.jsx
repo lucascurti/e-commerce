@@ -6,7 +6,7 @@ export default props => {
     <div className="container addProduct-margin">
       <form onSubmit={props.submitForm}>
         <div className="form-group">
-          <label htmlFor="formGroupExampleInput">Add Category</label>
+          <label htmlFor="formGroupExampleInput">{props.type} Category</label>
           <input
             name="name"
             value={props.name}

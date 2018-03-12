@@ -1,5 +1,6 @@
 import { GET_CATEGORIES } from '../constants';
 import { ADD_CATEGORY } from '../constants';
+import { EDIT_CATEGORY } from '../constants';
 
 const initialState = [];
 
@@ -8,6 +9,8 @@ export default (state = initialState, action) => {
     case GET_CATEGORIES:
       return action.categories;
     case ADD_CATEGORY:
+      return state.slice().concat(action.category);
+    case EDIT_CATEGORY:
       return state.slice().concat(action.category);
     default:
       return state;

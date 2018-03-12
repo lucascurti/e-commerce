@@ -8,6 +8,7 @@ import {
   fetchProductsCategory,
   fetchCategories,
   fetchAddCategory,
+  fetchCategory,
 } from '../action-creator/categories';
 import { fetchAddProduct } from '../action-creator/addProduct';
 import store from '../store';
@@ -20,6 +21,7 @@ import ProductContainer from '../containers/ProductContainer';
 import AddProduct from './AddProduct';
 import AddProductContainer from '../containers/AddProductContainer';
 import AddCategoryContainer from '../containers/AddCategoryContainer';
+import EditCategoryContainer from '../containers/EditCategoryContainer';
 
 const onCartEnter = function() {
   store.dispatch(fetchCart());
@@ -37,10 +39,9 @@ const onCategoryEnter = function(props) {
   store.dispatch(fetchCategories());
 };
 
-// const onAddCategoryEnter = function(props) {
-//   store.dispatch(fetchCategories());
-//   store.dispatch(fetchAddCategory());
-// };
+const onEditCategoryEnter = function(props) {
+  store.dispatch(fetchCategory(props.match.params.id));
+};
 
 export default class App extends Component {
   render() {
@@ -74,9 +75,14 @@ export default class App extends Component {
             />
             <RouteHook
               exact
-              path="/category/add"
+              path="/admin/categories/add"
               component={AddCategoryContainer}
-              //onEnter={onAddCategoryEnter}
+            />
+            <RouteHook
+              exact
+              path="/admin/categories/edit/:id"
+              component={EditCategoryContainer}
+              onEnter={onEditCategoryEnter}
             />
             <RouteHook
               exact
