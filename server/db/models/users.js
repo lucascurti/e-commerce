@@ -33,9 +33,6 @@ var User = db.define('user', {
     values: ['user', 'admin'],
     defaultValue: 'user',
   },
-  facebookId: {
-    type: Sequelize.STRING,
-  },
   password: {
     type: Sequelize.STRING,
     allowNull: true,
