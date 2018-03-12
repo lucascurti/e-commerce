@@ -1,19 +1,6 @@
 const Categories = require('./models').Category;
 const Products = require('./models').Product;
 
-// Categories.bulkCreate([
-//   { name: 'ropa' },
-//   { name: 'accesorios' },
-//   { name: 'zapatillas' },
-//   { name: 'electrodomesticos' },
-// ])
-//   .then(() => {
-//     return Categories.findAll();
-//   })
-//   .then(categories => {
-//     console.log(categories);
-//   });
-
 Categories.bulkCreate([
   { name: 'ropa' },
   { name: 'zapatillas' },

@@ -8,7 +8,7 @@ class ProductContainers extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   product: state.product.selectedProduct,
 });
 
