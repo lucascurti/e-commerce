@@ -1,6 +1,14 @@
 import axios from 'axios';
 import { GET_PRODUCTS_CATEGORY } from '../constants';
 import { GET_CATEGORIES } from '../constants';
+import { ADD_CATEGORY } from '../constants';
+
+export const addCategory = category => {
+  return {
+    type: ADD_CATEGORY,
+    category,
+  };
+};
 
 export const getProductsCategory = products => {
   return {
@@ -32,3 +40,12 @@ export const fetchCategories = () => dispatch =>
       console.log(categories);
       dispatch(getCategories(categories));
     });
+
+export const fetchAddCategory = category => dispatch => {
+  axios
+    .post('/api/categories', category)
+    .then(res => res.data)
+    .then(newCategory => {
+      dispatch(addCategory([newCategory.name]));
+    });
+};

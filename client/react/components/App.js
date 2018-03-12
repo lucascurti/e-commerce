@@ -7,6 +7,7 @@ import { fetchProduct } from '../action-creator/product';
 import {
   fetchProductsCategory,
   fetchCategories,
+  fetchAddCategory,
 } from '../action-creator/categories';
 import { fetchAddProduct } from '../action-creator/addProduct';
 import store from '../store';
@@ -18,6 +19,7 @@ import ProductsContainer from '../containers/ProductsContainer';
 import ProductContainer from '../containers/ProductContainer';
 import AddProduct from './AddProduct';
 import AddProductContainer from '../containers/AddProductContainer';
+import AddCategoryContainer from '../containers/AddCategoryContainer';
 
 const onCartEnter = function() {
   store.dispatch(fetchCart());
@@ -34,6 +36,11 @@ const onCategoryEnter = function(props) {
   store.dispatch(fetchProductsCategory(props.match.params.id));
   store.dispatch(fetchCategories());
 };
+
+// const onAddCategoryEnter = function(props) {
+//   store.dispatch(fetchCategories());
+//   store.dispatch(fetchAddCategory());
+// };
 
 export default class App extends Component {
   render() {
@@ -64,6 +71,12 @@ export default class App extends Component {
               path="/products/:id"
               component={ProductContainer}
               onEnter={onProductEnter}
+            />
+            <RouteHook
+              exact
+              path="/category/add"
+              component={AddCategoryContainer}
+              //onEnter={onAddCategoryEnter}
             />
             <RouteHook
               exact
