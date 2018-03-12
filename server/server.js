@@ -5,6 +5,7 @@ const app = express();
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const productsRoutes = require('./api/productsRoutes');
 const session = require('express-session');
 const usersRoutes = require('./api/usersRoutes');
@@ -69,11 +70,37 @@ passport.use(
     function(accessToken, refreshToken, profile, done) {
       const user = profile._json;
       User.findOrCreate({
-        where: { facebookId: user.id },
+        where: { email: user.email },
         defaults: {
           firstName: user.first_name,
           lastName: user.last_name,
           email: user.email,
+        },
+      })
+        .then(res => res[0])
+        .then(user => done(null, user))
+        .catch(err => done(err));
+    },
+  ),
+);
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID:
+        '570892773181-f9ml0fkv6rig4g1a5u2tq37fv8uiju2k.apps.googleusercontent.com',
+      clientSecret: 'lDYZWjhmQ8Ywj80rrdeUjtDv',
+      callbackURL: 'http://localhost:4000/auth/google/callback',
+    },
+    function(accessToken, refreshToken, profile, done) {
+      console.log(profile._json);
+      const user = profile._json;
+      User.findOrCreate({
+        where: { email: user.emails[0].value },
+        defaults: {
+          firstName: user.name.givenName,
+          lastName: user.name.familyName,
+          email: user.emails[0].value,
         },
       })
         .then(res => res[0])
@@ -118,13 +145,30 @@ app.get(
     failureRedirect: '/login',
   }),
 );
+app.get(
+  '/auth/google',
+  passport.authenticate('google', {
+    scope: [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email',
+    ],
+  }),
+);
+
+app.get(
+  '/auth/google/callback',
+  passport.authenticate('google', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+  }),
+);
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../public/index.html'));
 });
 
 db
-  .sync({ force: false })
+  .sync({ force: true })
   .then(function() {
     app.listen(4000, function() {
       console.log('Server is listening on port 4000!');
