@@ -4,6 +4,7 @@ import userReducer from './user-reducer';
 import productsreducer from './products-reducer';
 import productReducer from './product-reducer';
 import categoriesReducer from './categories-reducer';
+import categoryReducer from './category-reducer';
 import { userProfilereducer } from './user-reducer';
 
 export default combineReducers({
@@ -12,4 +13,5 @@ export default combineReducers({
   products: productsreducer,
   product: productReducer,
   categories: categoriesReducer,
+  category: categoryReducer,
 });
