@@ -1,5 +1,6 @@
 export const hideModal = () => {
-  document.getElementsByTagName('body')[0].classList.remove('modal-open');
-  document.getElementsByClassName('modal-backdrop')[0].classList.remove('show');
-  document.getElementsByClassName('modal-backdrop')[0].classList.add('hide');
+  const body = document.getElementsByTagName('body')[0];
+  const modalBackdrop = document.getElementsByClassName('modal-backdrop')[0];
+  body.classList.remove('modal-open');
+  body.removeChild(modalBackdrop);
 };
