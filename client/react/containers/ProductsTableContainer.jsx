@@ -8,8 +8,9 @@ class ProductsTableContainer extends React.Component {
   }
 }
 
+const mapDispatchToProps = dispatch => ({});
 const mapStateToProps = (state, Props) => ({
   products: state.products,
 });
 
-export default connect(mapStateToProps)(ProductsTable);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsTable);

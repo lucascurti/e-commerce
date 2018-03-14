@@ -8,20 +8,16 @@ import {
   fetchProductsCategory,
   fetchCategories,
 } from '../action-creator/categories';
-import { fetchAddProduct } from '../action-creator/addProduct';
 import store from '../store';
 import './App.css';
 import Product from './Product';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import HeaderContainer from '../containers/HeaderContainer';
 import ProductsContainer from '../containers/ProductsContainer';
-
 import UserProfile from '../containers/UserProfileContainer';
 import { fetchUser } from '../action-creator/userProfile';
-
 import RegisterContainer from '../containers/RegisterContainer';
 import LoginContainer from '../containers/LoginContainer';
-
 import ProductContainer from '../containers/ProductContainer';
 import AddProduct from './AddProduct';
 import AddProductContainer from '../containers/AddProductContainer';
@@ -77,11 +73,12 @@ export default class App extends Component {
               exact
               path="/product/edit/:id"
               component={EditProductContainer}
-              onEnter={onCartEnter}
+              onEnter={onProductEnter}
             />
             <RouteHook
               path="/products/list"
               component={ProductsTableContainer}
+              onEnter={onProductsEnter}
             />
             <RouteHook
               exact

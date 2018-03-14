@@ -1,6 +1,8 @@
 import React from 'react';
 import EditProduct from '../components/EditProduct';
 import { connect } from 'react-redux';
+import { editProduct, updateProduct } from '../action-creator/product';
+import { Redirect } from 'react-router-dom';
 
 class EditProductContainer extends React.Component {
   constructor(props) {
@@ -11,6 +13,7 @@ class EditProductContainer extends React.Component {
       stock: 0,
       price: 0,
       image: '//www.google.com',
+      redirect: false,
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -18,13 +21,9 @@ class EditProductContainer extends React.Component {
   }
   submitProduct = e => {
     e.preventDefault();
-    this.props.editProduct(this.state, this.props.match.id);
+    this.props.submitForm(this.state, this.props.match.params.id);
     this.setState({
-      name: '',
-      description: '',
-      stock: 0,
-      price: 0,
-      image: '//www.google.com',
+      redirect: true,
     });
   };
   handleChange = e => {
@@ -34,6 +33,10 @@ class EditProductContainer extends React.Component {
   };
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/products/list" />;
+    }
+
     return (
       <EditProduct
         submitForm={this.submitProduct}
@@ -48,11 +51,11 @@ class EditProductContainer extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  product: state.product.selectedProduct,
+  product: state.product,
 });
 
 const mapDispatchToProps = dispatch => ({
-  editProduct: prod => dispatch(fetchEditProduct(prod)),
+  submitForm: (prod, id) => dispatch(updateProduct(prod, id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

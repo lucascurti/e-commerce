@@ -19,14 +19,14 @@ export default props => {
           <tbody>
             {console.log(props)}
             {props.products.map(product => (
-              <tr>
-                <th scope="row">1</th>
+              <tr key={product.id}>
+                <th scope="row">{product.id}</th>
                 <td>{product.name}</td>
                 <td>{product.description}</td>
                 <td>{product.stock}</td>
                 <td>{product.price}</td>
                 <td>
-                  <Link to={`/products/edit/${product.id}`}>EDIT</Link>
+                  <Link to={`/product/edit/${product.id}`}>EDIT</Link>
                 </td>
               </tr>
             ))}
