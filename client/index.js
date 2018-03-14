@@ -8,6 +8,7 @@ import '../public/js/bootstrap.min.js';
 import { checkUserSession } from './react/action-creator/user';
 // import './styles/index.css';
 import App from './react/components/App';
+import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 const onAppEnter = () => {
   store.dispatch(checkUserSession());

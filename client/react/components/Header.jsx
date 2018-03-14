@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Typeahead } from 'react-bootstrap-typeahead';
+// var Typeahead = require('react-bootstrap-typeahead');
 import './Header.css';
 
-export default ({ user, logoutUser }) => (
+export default ({ user, products, logoutUser }) => (
   <nav className="navbar navbar-expand-md navbar-dark bg-dark">
     <Link className="navbar-brand" to="/">
       E-Commerce
@@ -53,7 +55,7 @@ export default ({ user, logoutUser }) => (
           </li>
         )}
       </ul>
-      <form className="form-inline my-2 my-lg-0">
+      {/* <form className="form-inline my-2 my-lg-0">
         <input
           className="form-control mr-sm-2"
           type="text"
@@ -66,7 +68,33 @@ export default ({ user, logoutUser }) => (
         >
           Search
         </button>
-      </form>
+      </form> */}
+      <Typeahead
+        className="w-100 mx-3"
+        onChange={console.log('changed')}
+        labelKey="name"
+        options={products}
+        paginate={true}
+        minLength={2}
+        maxResults={3}
+        placeholder="Search..."
+        renderMenuItemChildren={(option, props) => (
+          <div>
+            <div>
+              <img
+                alt={option.name}
+                style={{ height: '36px', marginRight: '10px', width: '36px' }}
+                src={option.image}
+              />
+              <span>
+                {option.name}
+                {/* (rating: <span>{option.rating}</span>) */}
+              </span>
+            </div>
+          </div>
+        )}
+      />
+
       <a className="" href="#">
         <span className="oi oi-cart mx-3" title="cart" aria-hidden="true" />
       </a>
