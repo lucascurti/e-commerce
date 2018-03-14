@@ -16,7 +16,7 @@ router.get('/:id', (req, res) => {
     },
     include: [{ model: Products }],
   }).then(category => {
-    res.send(category.products);
+    res.send(category);
   });
 });
 router.post('/', (req, res) => {
@@ -27,6 +27,23 @@ router.post('/', (req, res) => {
     .then(newCategory => {
       res.send(newCategory);
     })
+    .catch(err => res.send(err.message));
+});
+
+router.put('/:id', (req, res) => {
+  const id = req.params.id;
+
+  Categories.update(req.body, {
+    where: {
+      id: id,
+    },
+    returning: true,
+  })
+    .then(response => {
+      const category = response[1][0];
+      return category;
+    })
+    .then(category => res.send(category))
     .catch(err => res.send(err.message));
 });
 
