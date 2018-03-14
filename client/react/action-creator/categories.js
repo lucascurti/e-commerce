@@ -1,6 +1,18 @@
 import axios from 'axios';
 import { GET_PRODUCTS_CATEGORY } from '../constants';
-import { GET_CATEGORIES } from '../constants';
+import {
+  GET_CATEGORIES,
+  ADD_CATEGORY,
+  EDIT_CATEGORY,
+  GET_CATEGORY,
+} from '../constants';
+
+export const addCategory = category => {
+  return {
+    type: ADD_CATEGORY,
+    category,
+  };
+};
 
 export const getProductsCategory = products => {
   return {
@@ -16,13 +28,27 @@ export const getCategories = categories => {
   };
 };
 
-// export const fetchProductsCategory = id => dispatch =>
-//   axios
-//     .get(`/api/categories/${id}`)
-//     .then(res => res.data)
-//     .then(products => {
-//       dispatch(getProductsCategory(products));
-//     });
+export const getCategory = category => {
+  return {
+    type: GET_CATEGORY,
+    category,
+  };
+};
+
+export const editCategory = category => {
+  return {
+    type: EDIT_CATEGORY,
+    category,
+  };
+};
+
+export const fetchProductsCategory = id => dispatch =>
+  axios
+    .get(`/api/categories/${id}`)
+    .then(res => res.data)
+    .then(products => {
+      dispatch(getProductsCategory(products));
+    });
 
 export const fetchCategories = () => dispatch =>
   axios
@@ -31,3 +57,32 @@ export const fetchCategories = () => dispatch =>
     .then(categories => {
       dispatch(getCategories(categories));
     });
+
+export const fetchAddCategory = category => dispatch => {
+  axios
+    .post('/api/categories', category)
+    .then(res => res.data)
+    .then(newCategory => {
+      dispatch(addCategory([newCategory.name]));
+    });
+};
+
+export const updateCategory = (id, category) => dispatch => {
+  console.log('CATEGORY', category);
+  axios
+    .put(`/api/categories/${id}`, category)
+    .then(res => res.data)
+    .then(category => {
+      dispatch(editCategory(category));
+    })
+    .catch(err => console.log(err));
+};
+
+export const fetchCategory = id => dispatch => {
+  axios
+    .get(`/api/categories/${id}`)
+    .then(res => res.data)
+    .then(category => {
+      dispatch(getCategory(category));
+    });
+};

@@ -7,6 +7,8 @@ import { fetchProduct } from '../action-creator/product';
 import {
   fetchProductsCategory,
   fetchCategories,
+  fetchAddCategory,
+  fetchCategory,
 } from '../action-creator/categories';
 import store from '../store';
 import './App.css';
@@ -24,6 +26,8 @@ import AddProductContainer from '../containers/AddProductContainer';
 import EditProduct from './EditProduct';
 import EditProductContainer from '../containers/EditProductContainer';
 import ProductsTableContainer from '../containers/ProductsTableContainer';
+import AddCategoryContainer from '../containers/AddCategoryContainer';
+import EditCategoryContainer from '../containers/EditCategoryContainer';
 
 const onCartEnter = function() {
   store.dispatch(fetchCart());
@@ -42,6 +46,15 @@ const onProductEnter = function(props) {
   store.dispatch(fetchProducts());
   store.dispatch(fetchCategories());
   store.dispatch(fetchProduct(props.match.params.id));
+};
+
+const onCategoryEnter = function(props) {
+  store.dispatch(fetchProductsCategory(props.match.params.id));
+  store.dispatch(fetchCategories());
+};
+
+const onEditCategoryEnter = function(props) {
+  store.dispatch(fetchCategory(props.match.params.id));
 };
 
 export default class App extends Component {
@@ -94,8 +107,20 @@ export default class App extends Component {
             />
             <RouteHook
               exact
+              path="/admin/categories/add"
+              component={AddCategoryContainer}
+            />
+            <RouteHook
+              exact
+              path="/admin/categories/edit/:id"
+              component={EditCategoryContainer}
+              onEnter={onEditCategoryEnter}
+            />
+            <RouteHook
+              exact
               path="/category/:id"
               component={ProductsContainer}
+              onEnter={onCategoryEnter}
             />
             <Redirect from="/" to="/products" />
           </Switch>
