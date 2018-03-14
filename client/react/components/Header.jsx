@@ -4,9 +4,9 @@ import './Header.css';
 
 export default ({ user, logoutUser }) => (
   <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-    <a className="navbar-brand" href="#">
+    <Link className="navbar-brand" to="/">
       E-Commerce
-    </a>
+    </Link>
     <button
       className="navbar-toggler"
       type="button"
@@ -22,15 +22,36 @@ export default ({ user, logoutUser }) => (
     <div className="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul className="navbar-nav mr-auto">
         <li className="nav-item active">
-          <a className="nav-link" href="#">
-            Home <span className="sr-only">(current)</span>
-          </a>
+          <Link className="nav-link" to="/">
+            Home
+          </Link>
         </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">
-            Link
-          </a>
-        </li>
+        {user.rol === 'admin' && (
+          <li className="nav-item dropdown">
+            <a
+              className="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Admin
+            </a>
+            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a className="dropdown-item" href="#">
+                Products
+              </a>
+              <a className="dropdown-item" href="#">
+                Categories
+              </a>
+              <Link className="dropdown-item" to="/admin/users">
+                Users
+              </Link>
+            </div>
+          </li>
+        )}
       </ul>
       <form className="form-inline my-2 my-lg-0">
         <input

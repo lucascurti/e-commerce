@@ -18,11 +18,14 @@ import HeaderContainer from '../containers/HeaderContainer';
 import ProductsContainer from '../containers/ProductsContainer';
 import UserProfile from '../containers/UserProfileContainer';
 import { fetchUser } from '../action-creator/userProfile';
+import { fetchUsers } from '../action-creator/users';
+
 import RegisterContainer from '../containers/RegisterContainer';
 import LoginContainer from '../containers/LoginContainer';
 import ProductContainer from '../containers/ProductContainer';
 import AddProduct from './AddProduct';
 import AddProductContainer from '../containers/AddProductContainer';
+import UsersContainer from '../containers/UsersContainer';
 import EditProduct from './EditProduct';
 import EditProductContainer from '../containers/EditProductContainer';
 import ProductsTableContainer from '../containers/ProductsTableContainer';
@@ -43,9 +46,11 @@ const onProductsEnter = function() {
 };
 
 const onProductEnter = function(props) {
-  store.dispatch(fetchProducts());
-  store.dispatch(fetchCategories());
   store.dispatch(fetchProduct(props.match.params.id));
+};
+
+const onUsersEnter = function() {
+  store.dispatch(fetchUsers());
 };
 
 const onCategoryEnter = function(props) {
@@ -121,6 +126,12 @@ export default class App extends Component {
               path="/category/:id"
               component={ProductsContainer}
               onEnter={onCategoryEnter}
+            />
+            <RouteHook
+              exact
+              path="/admin/users"
+              component={UsersContainer}
+              onEnter={onUsersEnter}
             />
             <Redirect from="/" to="/products" />
           </Switch>
