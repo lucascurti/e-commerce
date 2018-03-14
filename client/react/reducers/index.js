@@ -6,6 +6,7 @@ import productReducer from './product-reducer';
 import categoriesReducer from './categories-reducer';
 import categoryReducer from './category-reducer';
 import { userProfilereducer } from './user-reducer';
+import addProductReducer from './addProduct-reducer';
 
 export default combineReducers({
   cart: cartReducer,
