@@ -4,17 +4,21 @@ const Users = require('../db/models/users');
 const Products = require('../db/models/products');
 const Reviews = require('../db/models/reviews');
 
-router.get('/', (req, res) => {
-  Reviews.findAll().then(reviews => {
+router.get('/:id', (req, res) => {
+  Reviews.findAll({
+    where: {
+      productId: req.params.id,
+    },
+  }).then(reviews => {
     res.send(reviews);
   });
 });
 
-router.post('/', (req, res) => {
+router.post('/:id', (req, res) => {
   const title = req.body.title;
   const description = req.body.description;
   const star = req.body.star;
-  const productId = req.body.productId;
+  const productId = req.params.id;
   const userId = req.body.userId;
   Reviews.create({
     title,

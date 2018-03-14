@@ -10,23 +10,24 @@ import {
   fetchAddCategory,
   fetchCategory,
 } from '../action-creator/categories';
-import { fetchAddProduct } from '../action-creator/addProduct';
 import store from '../store';
 import './App.css';
 import Product from './Product';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import HeaderContainer from '../containers/HeaderContainer';
 import ProductsContainer from '../containers/ProductsContainer';
-
 import UserProfile from '../containers/UserProfileContainer';
 import { fetchUser } from '../action-creator/userProfile';
-
 import RegisterContainer from '../containers/RegisterContainer';
 import LoginContainer from '../containers/LoginContainer';
-
 import ProductContainer from '../containers/ProductContainer';
 import AddProduct from './AddProduct';
 import AddProductContainer from '../containers/AddProductContainer';
+import CategoriesContainer from '../containers/CategoriesContainer';
+import EditProduct from './EditProduct';
+import EditProductContainer from '../containers/EditProductContainer';
+import AddReviewContainer from '../containers/AddReviewContainer';
+import ProductsTableContainer from '../containers/ProductsTableContainer';
 import AddCategoryContainer from '../containers/AddCategoryContainer';
 import EditCategoryContainer from '../containers/EditCategoryContainer';
 
@@ -58,6 +59,10 @@ const onEditCategoryEnter = function(props) {
   store.dispatch(fetchCategory(props.match.params.id));
 };
 
+const onCategoriesEnter = function() {
+  store.dispatch(fetchCategories());
+};
+
 export default class App extends Component {
   render() {
     return (
@@ -85,6 +90,17 @@ export default class App extends Component {
             />
             <RouteHook
               exact
+              path="/product/edit/:id"
+              component={EditProductContainer}
+              onEnter={onProductEnter}
+            />
+            <RouteHook
+              path="/products/list"
+              component={ProductsTableContainer}
+              onEnter={onProductsEnter}
+            />
+            <RouteHook
+              exact
               path="/cart"
               component={CartContainer}
               onEnter={onCartEnter}
@@ -97,8 +113,19 @@ export default class App extends Component {
             />
             <RouteHook
               exact
+              path="/products/:id/addreview"
+              component={AddReviewContainer}
+            />
+            <RouteHook
+              exact
               path="/admin/categories/add"
               component={AddCategoryContainer}
+            />
+            <RouteHook
+              exact
+              path="/admin/categories"
+              component={CategoriesContainer}
+              onEnter={onCategoriesEnter}
             />
             <RouteHook
               exact
