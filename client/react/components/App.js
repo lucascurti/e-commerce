@@ -18,6 +18,7 @@ import ProductsContainer from '../containers/ProductsContainer';
 
 import UserProfile from '../containers/UserProfileContainer';
 import { fetchUser } from '../action-creator/userProfile';
+import { fetchUsers } from '../action-creator/users';
 
 import RegisterContainer from '../containers/RegisterContainer';
 import LoginContainer from '../containers/LoginContainer';
@@ -25,6 +26,12 @@ import LoginContainer from '../containers/LoginContainer';
 import ProductContainer from '../containers/ProductContainer';
 import AddProduct from './AddProduct';
 import AddProductContainer from '../containers/AddProductContainer';
+import UsersContainer from '../containers/UsersContainer';
+import EditProduct from './EditProduct';
+import EditProductContainer from '../containers/EditProductContainer';
+import ProductsTableContainer from '../containers/ProductsTableContainer';
+import AddCategoryContainer from '../containers/AddCategoryContainer';
+import EditCategoryContainer from '../containers/EditCategoryContainer';
 
 const onCartEnter = function() {
   const userid = store.getState().user.id;
@@ -43,9 +50,20 @@ const onProductsEnter = function() {
 };
 
 const onProductEnter = function(props) {
-  store.dispatch(fetchProducts());
-  store.dispatch(fetchCategories());
   store.dispatch(fetchProduct(props.match.params.id));
+};
+
+const onUsersEnter = function() {
+  store.dispatch(fetchUsers());
+};
+
+const onCategoryEnter = function(props) {
+  store.dispatch(fetchProductsCategory(props.match.params.id));
+  store.dispatch(fetchCategories());
+};
+
+const onEditCategoryEnter = function(props) {
+  store.dispatch(fetchCategory(props.match.params.id));
 };
 
 export default class App extends Component {
@@ -89,6 +107,12 @@ export default class App extends Component {
               exact
               path="/category/:id"
               component={ProductsContainer}
+            />
+            <RouteHook
+              exact
+              path="/admin/users"
+              component={UsersContainer}
+              onEnter={onUsersEnter}
             />
             <Redirect from="/" to="/products" />
           </Switch>

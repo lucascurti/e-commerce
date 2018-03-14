@@ -4,11 +4,23 @@ const Users = require('../db/models/users');
 const passport = require('passport');
 
 isAuthenticated = (req, res, next) => {
+  console.log(req.isAuthenticated());
   if (req.user) return next();
   else
     return res.json({
       loggedin: false,
+      isAdmin: false,
       message: 'User not authenticated',
+    });
+};
+isAdmin = (req, res, next) => {
+  console.log(req.isAuthenticated());
+  if (req.user.rol === 'admin') return next();
+  else
+    return res.json({
+      loggedin: false,
+      isAdmin: false,
+      message: 'User is not admin',
     });
 };
 
@@ -18,6 +30,10 @@ router.get('/checkauth', isAuthenticated, function(req, res) {
     message: 'User is authenticated',
     user: req.user,
   });
+});
+
+router.get('/', function(req, res) {
+  Users.findAll().then(users => res.json(users));
 });
 
 router.get('/logout', function(req, res) {
@@ -69,11 +85,8 @@ router.post('/login', (req, res, next) => {
 
 router.put('/:id', (req, res) => {
   const id = req.params.id;
-  const update = req.body.update;
   Users.findById(id)
-    .then(user => {
-      return user.updateAttributes(update);
-    })
+    .then(user => user.update(req.body))
     .then(updatedUser => {
       res.json(updatedUser);
     });
