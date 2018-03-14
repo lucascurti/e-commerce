@@ -43,7 +43,7 @@ export default ({ user, onMakeAdmin }) => (
             className="btn btn-primary"
             onClick={e => onMakeAdmin(user.id)}
           >
-            Delete
+            Give admin rights
           </button>
         </div>
       </div>

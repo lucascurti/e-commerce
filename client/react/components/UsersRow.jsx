@@ -21,7 +21,7 @@ export default ({ user, onDelete, onMakeAdmin }) => (
       <ModalUserDelete user={user} onDelete={onDelete} />
 
       {user.rol !== 'admin' ? (
-        <div>
+        <span>
           <button
             type="button"
             className="btn btn-secondary btn-sm"
@@ -31,7 +31,7 @@ export default ({ user, onDelete, onMakeAdmin }) => (
             Give admin privileges
           </button>
           <ModalMakeAdmin user={user} onMakeAdmin={onMakeAdmin} />
-        </div>
+        </span>
       ) : (
         <span />
       )}
