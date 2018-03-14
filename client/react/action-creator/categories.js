@@ -47,6 +47,7 @@ export const fetchProductsCategory = id => dispatch =>
     .get(`/api/categories/${id}`)
     .then(res => res.data)
     .then(products => {
+      console.log(products);
       dispatch(getProductsCategory(products));
     });
 
@@ -68,7 +69,6 @@ export const fetchAddCategory = category => dispatch => {
 };
 
 export const updateCategory = (id, category) => dispatch => {
-  console.log('CATEGORY', category);
   axios
     .put(`/api/categories/${id}`, category)
     .then(res => res.data)

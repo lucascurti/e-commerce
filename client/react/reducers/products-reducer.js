@@ -9,7 +9,7 @@ export default (state = initialState, action) => {
   }
   switch (action.type) {
     case GET_PRODUCTS_CATEGORY:
-      return action.products;
+      return action.products.products;
     default:
       return state;
   }
