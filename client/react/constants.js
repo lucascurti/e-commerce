@@ -14,3 +14,4 @@ export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const ADD_CATEGORY = 'GET_CATEGORY';
 export const EDIT_CATEGORY = 'EDIT_CATEGORY';
 export const GET_CATEGORY = 'GET_CATEGORY';
+export const DEL_PRODUCT = 'DEL_PRODUCT';

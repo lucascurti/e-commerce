@@ -14,10 +14,10 @@ export default props => {
               <th>Quantify</th>
               <th>Price</th>
               <th>Edit</th>
+              <th>Delet</th>
             </tr>
           </thead>
           <tbody>
-            {console.log(props)}
             {props.products.map(product => (
               <tr key={product.id}>
                 <th scope="row">{product.id}</th>
@@ -26,7 +26,17 @@ export default props => {
                 <td>{product.stock}</td>
                 <td>{product.price}</td>
                 <td>
-                  <Link to={`/product/edit/${product.id}`}>EDIT</Link>
+                  <button className="btn btn-secondary btn-sm">
+                    <Link
+                      to={`/product/edit/${product.id}`}
+                      id="editProduct-color"
+                    >
+                      Edit
+                    </Link>
+                  </button>
+                </td>
+                <td>
+                  <button className="btn btn-secondary btn-sm">Delete</button>
                 </td>
               </tr>
             ))}
