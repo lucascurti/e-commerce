@@ -3,6 +3,7 @@ import store from '../store';
 import Users from '../components/Users';
 import { connect } from 'react-redux';
 import { deleteUser } from '../action-creator/users';
+import { hideModal } from '../utils';
 
 const mapStateToProps = state => {
   return { user: state.user, users: state.users };
@@ -10,7 +11,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = function(dispatch, ownProps) {
   return {
-    onDelete: userId => {
+    onDelete: (userId, e) => {
+      hideModal();
       dispatch(deleteUser(userId));
     },
   };

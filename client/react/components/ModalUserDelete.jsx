@@ -41,7 +41,7 @@ export default ({ user, onDelete }) => (
           <button
             type="button"
             className="btn btn-danger"
-            onClick={() => onDelete(user.id)}
+            onClick={e => onDelete(user.id, e)}
           >
             Delete
           </button>

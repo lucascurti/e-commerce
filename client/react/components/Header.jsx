@@ -4,9 +4,9 @@ import './Header.css';
 
 export default ({ user, logoutUser }) => (
   <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-    <a className="navbar-brand" href="#">
+    <Link className="navbar-brand" to="/">
       E-Commerce
-    </a>
+    </Link>
     <button
       className="navbar-toggler"
       type="button"
@@ -22,9 +22,9 @@ export default ({ user, logoutUser }) => (
     <div className="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul className="navbar-nav mr-auto">
         <li className="nav-item active">
-          <a className="nav-link" href="#">
-            Home <span className="sr-only">(current)</span>
-          </a>
+          <Link className="nav-link" to="/">
+            Home
+          </Link>
         </li>
         {user.rol === 'admin' && (
           <li className="nav-item dropdown">
