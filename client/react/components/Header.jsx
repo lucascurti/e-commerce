@@ -99,9 +99,6 @@ export default ({ user, products, logoutUser }) => (
           </div>
         )}
       />
-
-      <a className="" href="#">
-      </form>
       <Link to="/cart">
         <span className="oi oi-cart mx-3" title="cart" aria-hidden="true" />
       </Link>
