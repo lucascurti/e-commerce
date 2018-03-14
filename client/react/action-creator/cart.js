@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { GET_CART, CHANGE_AMOUNT, PRODUCT_TO_CART } from '../constants';
 import store from '../store';
+import CircularJson from 'circular-json';
 
 export const getCart = cart => ({
   type: GET_CART,
@@ -31,43 +32,50 @@ export const addProductToCart = function(product, userId, index) {
           dispatch(postProductToOrder(product));
         });
     } else {
-      const localCart = localStorage.getItem('cart');
+      const localCartString = localStorage.getItem('cart');
+      const localCart = JSON.parse(localCartString);
+      console.log(localCart);
       var orderDetail = 'orderDetail';
       product[orderDetail] = product;
       product[orderDetail].amount = 1;
-
       var cache = [];
       if (localCart) {
-        localStorage.setItem('cart', [
-          localCart,
-          JSON.stringify(product, function(key, value) {
-            if (typeof value === 'object' && value !== null) {
-              if (cache.indexOf(value) !== -1) {
-                // Circular reference found, discard key
-                return;
-              }
-              // Store value in our collection
-              cache.push(value);
-            }
-            return value;
-          }),
-        ]);
+        localStorage.setItem(
+          'cart',
+          CircularJson.stringify([...localCart, product]),
+        );
+        // localStorage.setItem('cart', [
+        //   ...localCart,
+        //   JSON.stringify(product, function(key, value) {
+        //     if (typeof value === 'object' && value !== null) {
+        //       if (cache.indexOf(value) !== -1) {
+        //         // Circular reference found, discard key
+        //         return;
+        //       }
+        //       // Store value in our collection
+        //       cache.push(value);
+        //     }
+        //     return value;
+        //   }),
+        // ]);
         cache = null;
       } else {
-        localStorage.setItem('cart', [
-          product,
-          JSON.stringify(product, function(key, value) {
-            if (typeof value === 'object' && value !== null) {
-              if (cache.indexOf(value) !== -1) {
-                // Circular reference found, discard key
-                return;
-              }
-              // Store value in our collection
-              cache.push(value);
-            }
-            return value;
-          }),
-        ]);
+        localStorage.setItem('cart', CircularJson.stringify([product]));
+
+        // localStorage.setItem('cart', [
+        //   product,
+        //   JSON.stringify(product, function(key, value) {
+        //     if (typeof value === 'object' && value !== null) {
+        //       if (cache.indexOf(value) !== -1) {
+        //         // Circular reference found, discard key
+        //         return;
+        //       }
+        //       // Store value in our collection
+        //       cache.push(value);
+        //     }
+        //     return value;
+        //   }),
+        // ]);
         cache = null;
       }
       dispatch(postProductToOrder(product));
@@ -85,7 +93,10 @@ export const fetchCart = function(userId) {
         .then(orderUncreated => dispatch(getCart(orderUncreated)));
     } else {
       var cart = store.getState().cart;
-      dispatch(getCart(cart));
+      var localCart = localStorage.getItem('cart');
+      var carrito = JSON.parse(localCart);
+      var carrrrrr = { products: carrito };
+      dispatch(getCart(carrrrrr));
     }
   };
 };
