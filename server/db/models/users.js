@@ -35,7 +35,7 @@ var User = db.define('user', {
   },
   password: {
     type: Sequelize.STRING,
-    allowNull: true,
+    allowNull: false,
     set(value) {
       const rSalt = User.randomSalt();
       this.setDataValue('salt', rSalt);

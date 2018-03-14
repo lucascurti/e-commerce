@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './UserForms.css';
 
 export default ({ onChange, state, onSubmit }) => {
@@ -33,30 +32,12 @@ export default ({ onChange, state, onSubmit }) => {
         />
         <p className="text-danger mt-3">{state.error}</p>
         <button
-          className="btn btn-lg btn-primary btn-block mb-3"
+          className="btn btn-lg btn-primary btn-block"
           type="submit"
           disabled={!state.validForm}
         >
           Login
         </button>
-        <div className="text-left social-buttons">
-          <div className="float-left">
-            <a
-              href="/auth/facebook"
-              className="btn btn-sm btn-social btn-facebook mt-5"
-            >
-              <i className="fa fa-facebook" />Sign in with Facebook
-            </a>
-          </div>
-          <div className="float-right">
-            <a
-              href="/auth/google"
-              className="btn btn-sm btn-social btn-google mt-5"
-            >
-              <i className="fa fa-google" />Sign in with Google
-            </a>
-          </div>
-        </div>
       </form>
     </div>
   );

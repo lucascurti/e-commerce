@@ -51,6 +51,7 @@ class RegisterContainer extends Component {
       .post('/api/users', data)
       .then(response => response.data)
       .then(user => {
+        console.log(user);
         this.props.history.push('/login');
       });
   }

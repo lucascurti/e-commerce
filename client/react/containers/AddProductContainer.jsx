@@ -1,7 +1,7 @@
 import React from 'react';
-import AddProduct from '../components/Product';
+import AddProduct from '../components/AddProduct';
 import { connect } from 'react-redux';
-import { fetchAddProduct } from '../action-creator/product';
+import { fetchAddProduct } from '../action-creator/addProduct';
 
 class AddProductContainer extends React.Component {
   constructor(props) {

@@ -46,24 +46,18 @@ router.put('/:id', (req, res) => {
   const updatedProduct = req.body;
   delete updatedProduct.categories;
 
-  Products.update(
-    {
-      name: req.body.name,
-      description: req.body.description,
-      stock: req.body.stock,
-      price: req.body.price,
+  Products.update(updatedProduct, {
+    where: {
+      id: id,
     },
-    {
-      where: {
-        id: id,
-      },
-      returning: true,
-    },
-  )
+    returning: true,
+  })
     .then(response => {
       const product = response[1][0];
-      res.json(product);
+      return product;
     })
+    .then(product => product.setCategories(categories))
+    .then(response => res.sendStatus(200))
     .catch(err => res.send(err.message));
 });
 router.delete('/:id', (req, res) => {
