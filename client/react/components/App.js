@@ -10,18 +10,21 @@ import {
   fetchAddCategory,
   fetchCategory,
 } from '../action-creator/categories';
+import { fetchAddProduct } from '../action-creator/addProduct';
 import store from '../store';
 import './App.css';
 import Product from './Product';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import HeaderContainer from '../containers/HeaderContainer';
 import ProductsContainer from '../containers/ProductsContainer';
+
 import UserProfile from '../containers/UserProfileContainer';
 import { fetchUser } from '../action-creator/userProfile';
 import { fetchUsers } from '../action-creator/users';
 
 import RegisterContainer from '../containers/RegisterContainer';
 import LoginContainer from '../containers/LoginContainer';
+
 import ProductContainer from '../containers/ProductContainer';
 import AddProduct from './AddProduct';
 import AddProductContainer from '../containers/AddProductContainer';
@@ -33,7 +36,8 @@ import AddCategoryContainer from '../containers/AddCategoryContainer';
 import EditCategoryContainer from '../containers/EditCategoryContainer';
 
 const onCartEnter = function() {
-  store.dispatch(fetchCart());
+  const userid = store.getState().user.id;
+  store.dispatch(fetchCart(userid));
 };
 
 const onUserProfileEnter = function() {
@@ -43,6 +47,8 @@ const onUserProfileEnter = function() {
 const onProductsEnter = function() {
   store.dispatch(fetchProducts());
   store.dispatch(fetchCategories());
+  const userid = store.getState().user.id;
+  store.dispatch(fetchCart(userid));
 };
 
 const onProductEnter = function(props) {

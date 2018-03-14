@@ -6,7 +6,7 @@ import './Header.css';
 
 export default ({ user, products, logoutUser }) => (
   <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-    <Link className="navbar-brand" to="/">
+    <Link to="/products" className="navbar-brand">
       E-Commerce
     </Link>
     <button
@@ -24,9 +24,14 @@ export default ({ user, products, logoutUser }) => (
     <div className="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul className="navbar-nav mr-auto">
         <li className="nav-item active">
-          <Link className="nav-link" to="/">
-            Home
+          <Link to="/products" className="nav-link">
+            Home <span className="sr-only">(current)</span>
           </Link>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="#">
+            Link
+          </a>
         </li>
         {user.rol === 'admin' && (
           <li className="nav-item dropdown">
@@ -96,8 +101,10 @@ export default ({ user, products, logoutUser }) => (
       />
 
       <a className="" href="#">
+      </form>
+      <Link to="/cart">
         <span className="oi oi-cart mx-3" title="cart" aria-hidden="true" />
-      </a>
+      </Link>
       {user.id ? (
         <div className="mx-3">
           <ul className="navbar-nav mr-auto">

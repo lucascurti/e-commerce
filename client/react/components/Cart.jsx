@@ -2,7 +2,6 @@ import React from 'react';
 import './Cart.css';
 
 export default ({ cart, changeAmount, amount }) => {
-  console.log(cart);
   if (cart.products.length) {
     return (
       <div className="container">
