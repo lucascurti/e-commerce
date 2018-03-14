@@ -1,7 +1,6 @@
 export const GET_CART = 'GET_CART';
 export const CHANGE_AMOUNT = 'CHANGE_AMOUNT';
 
-
 export const GET_USER = 'GET_USER';
 
 export const LOGIN_USER = 'LOGIN_USER';
@@ -11,3 +10,5 @@ export const GET_PRODUCT = 'GET_PRODUCT';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const GET_PRODUCTS_CATEGORY = 'GET_PRODUCTS_CATEGORY';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const GET_USERS = 'GET_USERS';
+export const DELETE_USER = 'DELETE_USER';

@@ -8,7 +8,8 @@ h3 {
   margin: 0 auto;
 }
 
-span {
+/* Lo comenté porque flota todos los span de toda la app (Lucas) */
+/* span {
   float: right;
   margin-right: 10px;
-}
+} */

@@ -7,3 +7,7 @@ body {
 .oi {
   font-size: 30px;
 }
+
+.action-buttons button {
+  margin-right: 6px;
+}

@@ -26,11 +26,32 @@ export default ({ user, logoutUser }) => (
             Home <span className="sr-only">(current)</span>
           </a>
         </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">
-            Link
-          </a>
-        </li>
+        {user.rol === 'admin' && (
+          <li className="nav-item dropdown">
+            <a
+              className="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Admin
+            </a>
+            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a className="dropdown-item" href="#">
+                Products
+              </a>
+              <a className="dropdown-item" href="#">
+                Categories
+              </a>
+              <Link className="dropdown-item" to="/admin/users">
+                Users
+              </Link>
+            </div>
+          </li>
+        )}
       </ul>
       <form className="form-inline my-2 my-lg-0">
         <input
