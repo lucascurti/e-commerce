@@ -12,3 +12,4 @@ export const GET_PRODUCTS_CATEGORY = 'GET_PRODUCTS_CATEGORY';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_USERS = 'GET_USERS';
 export const DELETE_USER = 'DELETE_USER';
+export const UPDATE_USER = 'UPDATE_USER';

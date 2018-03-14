@@ -2,7 +2,7 @@ import React from 'react';
 import store from '../store';
 import Users from '../components/Users';
 import { connect } from 'react-redux';
-import { deleteUser } from '../action-creator/users';
+import { deleteUser, makeAdmin } from '../action-creator/users';
 import { hideModal } from '../utils';
 
 const mapStateToProps = state => {
@@ -14,6 +14,10 @@ const mapDispatchToProps = function(dispatch, ownProps) {
     onDelete: (userId, e) => {
       hideModal();
       dispatch(deleteUser(userId));
+    },
+    onMakeAdmin: userId => {
+      hideModal();
+      dispatch(makeAdmin(userId));
     },
   };
 };

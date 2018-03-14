@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_USERS, DELETE_USER } from '../constants';
+import { GET_USERS, DELETE_USER, UPDATE_USER } from '../constants';
 
 export function getUsers(users) {
   return {
@@ -11,6 +11,12 @@ export function deleteUserAction(userId) {
   return {
     type: DELETE_USER,
     userId,
+  };
+}
+export function updateUserAction(user) {
+  return {
+    type: UPDATE_USER,
+    user,
   };
 }
 
@@ -25,3 +31,9 @@ export const deleteUser = id => dispatch =>
     .delete(`/api/users/${id}`)
     .then(res => res.data)
     .then(user => dispatch(deleteUserAction(id)));
+
+export const makeAdmin = id => dispatch =>
+  axios
+    .put(`/api/users/${id}`, { rol: 'admin' })
+    .then(res => res.data)
+    .then(user => dispatch(updateUserAction(user)));

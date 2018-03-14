@@ -85,11 +85,8 @@ router.post('/login', (req, res, next) => {
 
 router.put('/:id', (req, res) => {
   const id = req.params.id;
-  const update = req.body.update;
   Users.findById(id)
-    .then(user => {
-      return user.updateAttributes(update);
-    })
+    .then(user => user.update(req.body))
     .then(updatedUser => {
       res.json(updatedUser);
     });

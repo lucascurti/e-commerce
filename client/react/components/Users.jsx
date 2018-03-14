@@ -2,7 +2,7 @@ import React from 'react';
 import NotAuthorized from './NotAuthorized';
 import UsersRow from './UsersRow';
 
-export default ({ users, user, onDelete }) => (
+export default ({ users, user, onDelete, onMakeAdmin }) => (
   <div>
     {user.rol !== 'admin' ? (
       <NotAuthorized />
@@ -23,7 +23,12 @@ export default ({ users, user, onDelete }) => (
             </thead>
             <tbody>
               {users.map(user => (
-                <UsersRow user={user} key={user.id} onDelete={onDelete} />
+                <UsersRow
+                  user={user}
+                  key={user.id}
+                  onDelete={onDelete}
+                  onMakeAdmin={onMakeAdmin}
+                />
               ))}
             </tbody>
           </table>
