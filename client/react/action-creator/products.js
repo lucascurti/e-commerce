@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_PRODUCTS } from '../constants';
+import { GET_PRODUCTS, DEL_PRODUCT } from '../constants';
 
 export function getProducts(products) {
   return {
