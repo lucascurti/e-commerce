@@ -19,6 +19,47 @@ export const postProductToOrder = product => ({
   product,
 });
 
+export const changeAmountInDB = function(
+  value,
+  index,
+  orderId,
+  userId,
+  product,
+) {
+  return function(dispatch) {
+    if (userId) {
+      axios
+        .put('api/orders', { productId: product.id, orderId, value })
+        .then(res => res.data)
+        .then(() => {
+          dispatch(changeAmount(value, index));
+        });
+    } else {
+      const localCartString = localStorage.getItem('cart');
+      let localCart = JSON.parse(localCartString);
+      console.log(localCart);
+      var orderDetail = 'orderDetail';
+      product[orderDetail] = product;
+      product[orderDetail].amount = 1;
+      if (localCart) {
+        var flag = true;
+        for (var a in localCart) {
+          if (localCart[a].id == product.id) {
+            localCart[a].amount = value;
+            flag = false;
+          }
+        }
+        if (flag) {
+          localCart = [...localCart, product];
+        }
+
+        localStorage.setItem('cart', CircularJson.stringify(localCart));
+        dispatch(changeAmount(value, index));
+      }
+    }
+  };
+};
+
 export const addProductToCart = function(product, userId, index) {
   return function(dispatch) {
     if (userId) {
@@ -33,50 +74,26 @@ export const addProductToCart = function(product, userId, index) {
         });
     } else {
       const localCartString = localStorage.getItem('cart');
-      const localCart = JSON.parse(localCartString);
+      let localCart = JSON.parse(localCartString);
       console.log(localCart);
       var orderDetail = 'orderDetail';
       product[orderDetail] = product;
       product[orderDetail].amount = 1;
-      var cache = [];
       if (localCart) {
-        localStorage.setItem(
-          'cart',
-          CircularJson.stringify([...localCart, product]),
-        );
-        // localStorage.setItem('cart', [
-        //   ...localCart,
-        //   JSON.stringify(product, function(key, value) {
-        //     if (typeof value === 'object' && value !== null) {
-        //       if (cache.indexOf(value) !== -1) {
-        //         // Circular reference found, discard key
-        //         return;
-        //       }
-        //       // Store value in our collection
-        //       cache.push(value);
-        //     }
-        //     return value;
-        //   }),
-        // ]);
-        cache = null;
+        var flag = true;
+        for (var a in localCart) {
+          if (localCart[a].id == product.id) {
+            localCart[a].amount += 1;
+            flag = false;
+          }
+        }
+        if (flag) {
+          localCart = [...localCart, product];
+        }
+
+        localStorage.setItem('cart', CircularJson.stringify(localCart));
       } else {
         localStorage.setItem('cart', CircularJson.stringify([product]));
-
-        // localStorage.setItem('cart', [
-        //   product,
-        //   JSON.stringify(product, function(key, value) {
-        //     if (typeof value === 'object' && value !== null) {
-        //       if (cache.indexOf(value) !== -1) {
-        //         // Circular reference found, discard key
-        //         return;
-        //       }
-        //       // Store value in our collection
-        //       cache.push(value);
-        //     }
-        //     return value;
-        //   }),
-        // ]);
-        cache = null;
       }
       dispatch(postProductToOrder(product));
     }
@@ -95,7 +112,11 @@ export const fetchCart = function(userId) {
       var cart = store.getState().cart;
       var localCart = localStorage.getItem('cart');
       var carrito = JSON.parse(localCart);
-      var carrrrrr = { products: carrito };
+      if (!carrito) {
+        var carrrrrr = { products: [] };
+      } else {
+        var carrrrrr = { products: carrito };
+      }
       dispatch(getCart(carrrrrr));
     }
   };

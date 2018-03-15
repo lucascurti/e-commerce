@@ -51,14 +51,34 @@ router.post('/', (req, res) => {
       //si existe una orden uncreated y con el id del user
       // le agrega al order detail de esa orden el id el producto
       Product.findById(req.body.productId).then(product => {
-        OrderDetail.create({
-          price: product.price,
-          amount: 1,
-          productId: product.id,
-          orderId: order.id,
-        }).then(orderDetail => res.json(orderDetail));
+        OrderDetail.findOne({
+          where: { productId: product.id, orderId: order.id },
+        }).then(orderdetail => {
+          if (!orderdetail) {
+            OrderDetail.create({
+              price: product.price,
+              productId: product.id,
+              orderId: order.id,
+            }).then(orderDetail => res.json(orderDetail));
+          } else {
+            orderdetail.update({ amount: Number(orderdetail.amount) + 1 });
+          }
+        });
       });
     }
+  });
+});
+
+router.put('/', (req, res) => {
+  OrderDetail.findOne({
+    where: {
+      orderId: req.body.orderId,
+      productId: req.body.productId,
+    },
+  }).then(orderdetail => {
+    orderdetail
+      .update({ amount: Number(req.body.value) })
+      .then(orderdetail => res.json(orderdetail));
   });
 });
 
