@@ -32,7 +32,6 @@ router.post('/', (req, res) => {
     //si no se cumple la condicion del where crea una nueva orden
     if (!order) {
       Order.create({
-        date: moment().format('DD/MM/YYYY'),
         status: 'Uncreated',
         address: 'adress',
         userId: req.body.userId,
