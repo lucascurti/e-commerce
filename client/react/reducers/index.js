@@ -8,6 +8,7 @@ import categoriesReducer from './categories-reducer';
 import categoryReducer from './category-reducer';
 import reviewReducer from './addReview-reducer';
 import reviewsReducer from './getReviews-reducer';
+import productsSearchReducer from './productsSearch-reducer';
 import { userProfilereducer } from './user-reducer';
 
 export default combineReducers({
@@ -15,6 +16,7 @@ export default combineReducers({
   user: userReducer,
   users: usersReducer,
   products: productsreducer,
+  productsSearch: productsSearchReducer,
   product: productReducer,
   categories: categoriesReducer,
   category: categoryReducer,

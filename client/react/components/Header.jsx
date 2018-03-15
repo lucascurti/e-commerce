@@ -10,7 +10,13 @@ class Header extends Component {
     this.state = {};
   }
   render() {
-    const { user, products, logoutUser, goToProduct, history } = this.props;
+    const {
+      user,
+      productsSearch,
+      logoutUser,
+      goToProduct,
+      history,
+    } = this.props;
     return (
       <nav className="navbar navbar-expand-md navbar-dark bg-dark">
         <Link to="/products" className="navbar-brand">
@@ -72,7 +78,7 @@ class Header extends Component {
               }
             }}
             labelKey="name"
-            options={products}
+            options={productsSearch}
             paginate={true}
             minLength={2}
             maxResults={3}

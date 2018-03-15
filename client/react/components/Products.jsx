@@ -3,9 +3,20 @@ import { Link } from 'react-router-dom';
 import SingleProduct from './SingleProduct';
 import SidebarCategories from './SidebarCategories';
 
-export default ({ products, categories, addProductToCart, user }) => (
+export default ({
+  products,
+  categories,
+  addProductToCart,
+  user,
+  match,
+  history,
+}) => (
   <div className="row">
-    <SidebarCategories categories={categories} />
+    <SidebarCategories
+      categories={categories}
+      match={match}
+      history={history}
+    />
     <main className="col-md-9 col-lg-10 pt-3 px-4 mx-auto justify-content-center">
       <div className="card-group align-self-center">
         {products.map(product => (

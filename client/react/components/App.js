@@ -85,7 +85,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <HeaderContainer />
-        <main role="main" className="container-fluid mt-3">
+        <main role="main" className="container-fluid">
           <Switch>
             <RouteHook exact path="/register" component={RegisterContainer} />
             <RouteHook exact path="/login" component={LoginContainer} />
