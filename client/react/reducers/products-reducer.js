@@ -3,6 +3,7 @@ import {
   GET_PRODUCTS_CATEGORY,
   ADD_PRODUCT,
   EDIT_PRODUCT,
+  DEL_PRODUCT,
 } from '../constants';
 
 const initialState = [];
@@ -22,6 +23,8 @@ export default (state = initialState, action) => {
       const newState = state.slice();
       newState[index] = action.product;
       return newState;
+    case DEL_PRODUCT:
+      return state.filter(product => product.id !== action.id);
     default:
       return state;
   }
