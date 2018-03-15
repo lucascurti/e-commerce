@@ -1,7 +1,7 @@
 import React from 'react';
 import './Cart.css';
 
-export default ({ cart, changeAmount, amount }) => {
+export default ({ cart, changeAmount, amount, user }) => {
   if (cart.products.length) {
     return (
       <div className="container">
@@ -49,7 +49,15 @@ export default ({ cart, changeAmount, amount }) => {
                         ? product.orderDetail.amount
                         : product.amount
                     }
-                    onChange={e => changeAmount(Number(e.target.value), index)}
+                    onChange={e =>
+                      changeAmount(
+                        Number(e.target.value),
+                        index,
+                        cart.id,
+                        user.id,
+                        product,
+                      )
+                    }
                     id="amount"
                   />
                 </td>

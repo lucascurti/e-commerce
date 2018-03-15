@@ -69,4 +69,17 @@ router.post('/', (req, res) => {
   });
 });
 
+router.put('/', (req, res) => {
+  OrderDetail.findOne({
+    where: {
+      orderId: req.body.orderId,
+      productId: req.body.productId,
+    },
+  }).then(orderdetail => {
+    orderdetail
+      .update({ amount: Number(req.body.value) })
+      .then(orderdetail => res.json(orderdetail));
+  });
+});
+
 module.exports = router;
