@@ -1,7 +1,7 @@
 import React from 'react';
 import AddProduct from '../components/AddProduct';
 import { connect } from 'react-redux';
-import { fetchAddProduct } from '../action-creator/addProduct';
+import { fetchAddProduct } from '../action-creator/product';
 
 class AddProductContainer extends React.Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class AddProductContainer extends React.Component {
 
   handleChange = e => {
     this.setState({
-      [e.target.name]: e.target.value.toLowerCase(),
+      [e.target.name]: e.target.value,
     });
   };
 

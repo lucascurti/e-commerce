@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default ({ categories }) => (
   <nav className="col-md-2 d-none d-md-block bg-light sidebar">
@@ -7,9 +8,9 @@ export default ({ categories }) => (
       <ul className="nav flex-column">
         {categories.map(category => (
           <li className="nav-item" key={category.id}>
-            <a className="nav-link active" href="#">
+            <Link className="nav-link active" to={`/category/${category.id}`}>
               {category.name}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

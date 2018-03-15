@@ -1,22 +1,17 @@
-const Categories = require('./models/categories');
-const Products = require('./models/products');
+const Categories = require('./models').Category;
+const Products = require('./models').Product;
+const Users = require('./models').User;
 
-// Categories.bulkCreate([
-//   { name: 'ropa' },
-//   { name: 'accesorios' },
-//   { name: 'zapatillas' },
-//   { name: 'electrodomesticos' },
-// ])
-//   .then(() => {
-//     return Categories.findAll();
-//   })
-//   .then(categories => {
-//     console.log(categories);
-//   });
+Categories.bulkCreate([
+  { name: 'ropa' },
+  { name: 'zapatillas' },
+  { name: 'cocinas' },
+  { name: 'tecnologia' },
+  { name: 'pantalones' },
+]);
 
-Products.bulkCreate([
+const products = [
   {
-    id: 100,
     name: 'Zapatillas de Running Floatride Run',
     description:
       'Zapatillas para correr por la vida como si fueses una persona deportista cuando en realidad no lo sos y solo lo haces por obligación',
@@ -25,9 +20,9 @@ Products.bulkCreate([
     stock: 200,
     image:
       'https://www.reebok.com.ar/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw3fa628dd/zoom/BS8120_01.jpg?sw=230&sfrm=jpg',
+    categories: [2],
   },
   {
-    id: 101,
     name: 'Zapatillas de Crossfit',
     description:
       'Zapatillas para correr por la vida como si fueses una persona deportista cuando en realidad no lo sos y solo lo haces por obligación',
@@ -36,9 +31,9 @@ Products.bulkCreate([
     stock: 200,
     image:
       'https://www.reebok.com.ar/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dwfc263f3f/zoom/BS8405_01.jpg?sw=230&sfrm=jpg',
+    categories: [1, 2],
   },
   {
-    id: 102,
     name: 'Zapatillas de Paseo',
     description:
       'Zapatillas para correr por la vida como si fueses una persona deportista cuando en realidad no lo sos y solo lo haces por obligación',
@@ -47,9 +42,9 @@ Products.bulkCreate([
     stock: 200,
     image:
       'https://www.reebok.com.ar/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw5433b2ee/zoom/BS8589_01.jpg?sw=230&sfrm=jpg',
+    categories: [2, 3],
   },
   {
-    id: 103,
     name: 'Zapatillas de Gimnasia',
     description:
       'Zapatillas para correr por la vida como si fueses una persona deportista cuando en realidad no lo sos y solo lo haces por obligación',
@@ -58,9 +53,9 @@ Products.bulkCreate([
     stock: 200,
     image:
       'https://www.reebok.com.ar/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dwddcdbdf4/zoom/BS8459_01.jpg?sw=230&sfrm=jpg',
+    categories: [1],
   },
   {
-    id: 104,
     name: 'Zapatillas de Running Mountain',
     description:
       'Zapatillas para correr por la vida como si fueses una persona deportista cuando en realidad no lo sos y solo lo haces por obligación',
@@ -71,7 +66,6 @@ Products.bulkCreate([
       'https://www.reebok.com.ar/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dwd8d93a39/zoom/BS5553_01.jpg?sw=230&sfrm=jpg',
   },
   {
-    id: 105,
     name: 'Zapatillas de Trecking',
     description:
       'Zapatillas para correr por la vida como si fueses una persona deportista cuando en realidad no lo sos y solo lo haces por obligación',
@@ -80,9 +74,9 @@ Products.bulkCreate([
     stock: 200,
     image:
       'https://www.reebok.com.ar/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw9e66d83c/zoom/BS8451_01.jpg?sw=230&sfrm=jpg',
+    categories: [2],
   },
   {
-    id: 106,
     name: 'Zapatillas de caminata lunar',
     description:
       'Zapatillas para correr por la vida como si fueses una persona deportista cuando en realidad no lo sos y solo lo haces por obligación',
@@ -91,9 +85,9 @@ Products.bulkCreate([
     stock: 200,
     image:
       'https://www.reebok.com.ar/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dwd37dbc7f/zoom/BS6978_01.jpg?sw=230&sfrm=jpg',
+    categories: [5],
   },
   {
-    id: 107,
     name: 'Zapatillas de entrecasa',
     description:
       'Zapatillas para correr por la vida como si fueses una persona deportista cuando en realidad no lo sos y solo lo haces por obligación',
@@ -102,11 +96,40 @@ Products.bulkCreate([
     stock: 200,
     image:
       'https://www.reebok.com.ar/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dwadc22a6c/zoom/CM8787_01.jpg?sw=230&sfrm=jpg',
+    categories: [4, 1],
   },
-])
-  .then(() => {
-    return Categories.findAll();
+];
+
+Products.bulkCreate(products)
+  .then(() => Products.findAll())
+  .then(dbproducts => {
+    dbproducts.forEach((prod, i) => {
+      prod.addCategories(products[i].categories);
+    });
   })
-  .then(categories => {
-    console.log(categories);
-  });
+  .catch(err => console.log(err));
+
+Users.bulkCreate([
+  {
+    password: null,
+    firstName: 'Lucas',
+    id: 1,
+    rol: 'admin',
+    email: 'lucas.curti@gmail.com',
+    updatedAt: '2018-03-13 12:06:17.49-03',
+    createdAt: '2018-03-13 12:06:17.49-03',
+    salt: null,
+    lastName: 'Curti',
+  },
+  {
+    password: '65c8529f0d0671f794c15993e22d2cca4e0477fd',
+    firstName: 'Pepe',
+    id: 2,
+    rol: 'user',
+    email: 'p@p.com',
+    updatedAt: '2018-03-13 12:33:05.176-03',
+    createdAt: '2018-03-13 12:33:05.176-03',
+    salt: 'd8dd5390443ac910fa90eba9a49a273a550c20d8',
+    lastName: 'Gomez',
+  },
+]);

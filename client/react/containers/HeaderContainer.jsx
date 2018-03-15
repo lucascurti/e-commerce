@@ -1,18 +1,27 @@
 import React from 'react';
 import store from '../store';
 import Header from '../components/Header';
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
+import { logoutUser } from '../action-creator/user';
 
-export default class HeaderContainer extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
+const mapStateToProps = function(state, ownProps) {
+  return {
+    user: state.user,
+    products: state.products,
+  };
+};
 
-  componentDidMount() {}
+const mapDispatchToProps = function(dispatch, ownProps) {
+  return {
+    logoutUser: () => {
+      dispatch(logoutUser());
+    },
+  };
+};
 
-  componentWillUnmount() {}
+const HeaderContainer = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Header),
+);
 
-  render() {
-    return <Header />;
-  }
-}
+export default HeaderContainer;

@@ -2,8 +2,7 @@ import React from 'react';
 import './Cart.css';
 
 export default ({ cart, changeAmount, amount }) => {
-  console.log(cart);
-  if (cart.product.length) {
+  if (cart.products.length) {
     return (
       <div className="container">
         <table id="cart" className="table table-hover table-condensed">
