@@ -10,6 +10,7 @@ class ProductContainers extends React.Component {
 
 const mapStateToProps = (state, ownProps) => ({
   product: state.product,
+  reviews: state.reviews,
 });
 
 export default connect(mapStateToProps)(Product);
