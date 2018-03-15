@@ -1,4 +1,4 @@
-import { GET_CATEGORIES } from '../constants';
+import { GET_CATEGORIES, DELETE_CATEGORY } from '../constants';
 import { ADD_CATEGORY } from '../constants';
 import { EDIT_CATEGORY } from '../constants';
 
@@ -12,6 +12,11 @@ export default (state = initialState, action) => {
       return state.slice().concat(action.category);
     case EDIT_CATEGORY:
       return state.slice().concat(action.category);
+    case DELETE_CATEGORY:
+      function remove(elem) {
+        return elem.id != action.id;
+      }
+      return state.filter(remove);
     default:
       return state;
   }

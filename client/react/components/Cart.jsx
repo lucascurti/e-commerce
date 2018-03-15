@@ -1,8 +1,7 @@
 import React from 'react';
 import './Cart.css';
 
-export default ({ cart, changeAmount, amount }) => {
-  console.log(cart);
+export default ({ cart, changeAmount, amount, user }) => {
   if (cart.products.length) {
     return (
       <div className="container">
@@ -36,18 +35,36 @@ export default ({ cart, changeAmount, amount }) => {
                     </div>
                   </div>
                 </td>
-                <td data-th="Price">{product.orderDetail.price}</td>
+                <td data-th="Price">
+                  {product.orderDetail.price
+                    ? product.orderDetail.price
+                    : product.price}
+                </td>
                 <td data-th="Quantity">
                   <input
                     type="number"
                     className="form-control text-center"
-                    value={product.orderDetail.amount}
-                    onChange={e => changeAmount(Number(e.target.value), index)}
+                    value={
+                      product.orderDetail.amount
+                        ? product.orderDetail.amount
+                        : product.amount
+                    }
+                    onChange={e =>
+                      changeAmount(
+                        Number(e.target.value),
+                        index,
+                        cart.id,
+                        user.id,
+                        product,
+                      )
+                    }
                     id="amount"
                   />
                 </td>
                 <td data-th="Subtotal" className="text-center">
-                  {product.orderDetail.price * product.orderDetail.amount}
+                  {product.orderDetail.price
+                    ? product.orderDetail.price * product.orderDetail.amount
+                    : product.price * product.amount}
                 </td>
                 <td className="actions" data-th="">
                   <button className="btn btn-info btn-sm">

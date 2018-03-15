@@ -11,6 +11,7 @@ export default props => {
             <th scope="col">#</th>
             <th scope="col">User</th>
             <th scope="col">Orders</th>
+            <th scope="col">Order Detail</th>
           </tr>
         </thead>
         <tbody>

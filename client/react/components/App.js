@@ -10,12 +10,15 @@ import {
   fetchAddCategory,
   fetchCategory,
 } from '../action-creator/categories';
+import { fetchReviews } from '../action-creator/review';
+import { fetchAddProduct } from '../action-creator/addProduct';
 import store from '../store';
 import './App.css';
 import Product from './Product';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import HeaderContainer from '../containers/HeaderContainer';
 import ProductsContainer from '../containers/ProductsContainer';
+
 import UserProfile from '../containers/UserProfileContainer';
 import { fetchUser } from '../action-creator/userProfile';
 import { fetchUsers } from '../action-creator/users';
@@ -23,19 +26,23 @@ import { showUsersOrders } from '../action-creator/users';
 
 import RegisterContainer from '../containers/RegisterContainer';
 import LoginContainer from '../containers/LoginContainer';
+
 import ProductContainer from '../containers/ProductContainer';
 import AddProduct from './AddProduct';
 import AddProductContainer from '../containers/AddProductContainer';
+import CategoriesContainer from '../containers/CategoriesContainer';
 import UsersContainer from '../containers/UsersContainer';
 import EditProduct from './EditProduct';
 import EditProductContainer from '../containers/EditProductContainer';
+import AddReviewContainer from '../containers/AddReviewContainer';
 import ProductsTableContainer from '../containers/ProductsTableContainer';
 import AddCategoryContainer from '../containers/AddCategoryContainer';
 import EditCategoryContainer from '../containers/EditCategoryContainer';
 import UsersOrdersTableContainer from '../containers/UsersOrdersTableContainer';
 
 const onCartEnter = function() {
-  store.dispatch(fetchCart());
+  const userid = store.getState().user.id;
+  store.dispatch(fetchCart(userid));
 };
 
 const onUserProfileEnter = function() {
@@ -45,10 +52,13 @@ const onUserProfileEnter = function() {
 const onProductsEnter = function() {
   store.dispatch(fetchProducts());
   store.dispatch(fetchCategories());
+  const userid = store.getState().user.id;
+  store.dispatch(fetchCart(userid));
 };
 
 const onProductEnter = function(props) {
   store.dispatch(fetchProduct(props.match.params.id));
+  store.dispatch(fetchReviews(props.match.params.id));
 };
 
 const onUsersEnter = function() {
@@ -66,6 +76,8 @@ const onEditCategoryEnter = function(props) {
 
 const onUsersOrdersEnter = function() {
   store.dispatch(showUsersOrders());
+const onCategoriesEnter = function() {
+  store.dispatch(fetchCategories());
 };
 
 export default class App extends Component {
@@ -121,11 +133,23 @@ export default class App extends Component {
               path="/products/:id"
               component={ProductContainer}
               onEnter={onProductEnter}
+              onChange={onProductEnter}
+            />
+            <RouteHook
+              exact
+              path="/products/:id/addreview"
+              component={AddReviewContainer}
             />
             <RouteHook
               exact
               path="/admin/categories/add"
               component={AddCategoryContainer}
+            />
+            <RouteHook
+              exact
+              path="/admin/categories"
+              component={CategoriesContainer}
+              onEnter={onCategoriesEnter}
             />
             <RouteHook
               exact
