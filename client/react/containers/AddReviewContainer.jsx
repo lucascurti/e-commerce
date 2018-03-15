@@ -11,10 +11,13 @@ class AddReviewContainer extends React.Component {
       description: '',
       star: 0,
       userId: props.userId,
+      productId: props.productId,
     };
+    console.log('state', this.state);
   }
   submitReview = e => {
     e.preventDefault();
+    console.log('id', this.props.productId);
     this.props.setReview(this.props.productId, this.state);
     this.setState({
       title: '',
@@ -44,11 +47,11 @@ class AddReviewContainer extends React.Component {
 
 const mapStateToProps = (state, ownProps) => ({
   userId: 1, // state.user.id
-  productId: ownProps.match.params.id,
+  productId: Number(ownProps.match.params.id),
 });
 
 const mapDispatchToProps = dispatch => ({
-  setReview: review => dispatch(setReview(review)),
+  setReview: (productId, review) => dispatch(setReview(productId, review)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddReviewContainer);
