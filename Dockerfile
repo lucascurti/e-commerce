@@ -6,6 +6,5 @@ COPY package.json package.json
 RUN npm install
 ADD webpack.config.js webpack.config.js
 ADD config.json config.json
-ENV PORT=$PORT
 CMD ["npm", "start"]
 
