@@ -1,8 +1,8 @@
 export const GET_CART = 'GET_CART';
 export const CHANGE_AMOUNT = 'CHANGE_AMOUNT';
-
+export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 export const GET_USER = 'GET_USER';
-
+export const ADD_REVIEW = 'ADD_REVIEW';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
@@ -18,3 +18,4 @@ export const ADD_CATEGORY = 'GET_CATEGORY';
 export const EDIT_CATEGORY = 'EDIT_CATEGORY';
 export const GET_CATEGORY = 'GET_CATEGORY';
 export const PRODUCT_TO_CART = 'PRODUCT_TO_CART';
+export const DEL_PRODUCT = 'DEL_PRODUCT';
