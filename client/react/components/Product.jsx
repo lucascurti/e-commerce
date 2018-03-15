@@ -2,9 +2,11 @@ import React from 'react';
 import ReactStars from 'react-stars';
 
 import './Product.css';
+import GetReviews from './GetReviews';
 
-export default ({ product }) => {
+export default ({ product, reviews }) => {
   if (product) {
+    console.log(reviews);
     return (
       <div className="container product-container mt-3">
         <div className="row">
@@ -64,6 +66,18 @@ export default ({ product }) => {
           <div className="col-sm-12">
             <p>{product.description}</p>
           </div>
+        </div>
+        <div>
+          {reviews.map(review => (
+            <div>
+              <GetReviews
+                key={product.id}
+                title={review.title}
+                description={review.description}
+                star={review.star}
+              />
+            </div>
+          ))}
         </div>
       </div>
     );
