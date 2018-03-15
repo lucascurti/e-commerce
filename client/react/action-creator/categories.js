@@ -5,6 +5,7 @@ import {
   ADD_CATEGORY,
   EDIT_CATEGORY,
   GET_CATEGORY,
+  DELETE_CATEGORY,
 } from '../constants';
 
 export const addCategory = category => {
@@ -18,6 +19,13 @@ export const getProductsCategory = products => {
   return {
     type: GET_PRODUCTS_CATEGORY,
     products,
+  };
+};
+
+export const deleteCategory = id => {
+  return {
+    type: DELETE_CATEGORY,
+    id,
   };
 };
 
@@ -47,6 +55,7 @@ export const fetchProductsCategory = id => dispatch =>
     .get(`/api/categories/${id}`)
     .then(res => res.data)
     .then(products => {
+      console.log(products);
       dispatch(getProductsCategory(products));
     });
 
@@ -68,7 +77,6 @@ export const fetchAddCategory = category => dispatch => {
 };
 
 export const updateCategory = (id, category) => dispatch => {
-  console.log('CATEGORY', category);
   axios
     .put(`/api/categories/${id}`, category)
     .then(res => res.data)
@@ -85,4 +93,13 @@ export const fetchCategory = id => dispatch => {
     .then(category => {
       dispatch(getCategory(category));
     });
+};
+
+export const removeCategory = id => dispatch => {
+  axios
+    .delete(`/api/categories/${id}`)
+    .then(res => {
+      dispatch(deleteCategory(id));
+    })
+    .catch(err => console.log(err));
 };

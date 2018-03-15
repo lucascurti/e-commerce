@@ -1,5 +1,6 @@
 const Categories = require('./models').Category;
 const Products = require('./models').Product;
+const Users = require('./models').User;
 
 Categories.bulkCreate([
   { name: 'ropa' },
@@ -107,3 +108,28 @@ Products.bulkCreate(products)
     });
   })
   .catch(err => console.log(err));
+
+Users.bulkCreate([
+  {
+    password: null,
+    firstName: 'Lucas',
+    id: 1,
+    rol: 'admin',
+    email: 'lucas.curti@gmail.com',
+    updatedAt: '2018-03-13 12:06:17.49-03',
+    createdAt: '2018-03-13 12:06:17.49-03',
+    salt: null,
+    lastName: 'Curti',
+  },
+  {
+    password: '65c8529f0d0671f794c15993e22d2cca4e0477fd',
+    firstName: 'Pepe',
+    id: 2,
+    rol: 'user',
+    email: 'p@p.com',
+    updatedAt: '2018-03-13 12:33:05.176-03',
+    createdAt: '2018-03-13 12:33:05.176-03',
+    salt: 'd8dd5390443ac910fa90eba9a49a273a550c20d8',
+    lastName: 'Gomez',
+  },
+]);

@@ -10,6 +10,7 @@ import {
   fetchAddCategory,
   fetchCategory,
 } from '../action-creator/categories';
+import { fetchReviews } from '../action-creator/review';
 import { fetchAddProduct } from '../action-creator/addProduct';
 import store from '../store';
 import './App.css';
@@ -28,9 +29,11 @@ import LoginContainer from '../containers/LoginContainer';
 import ProductContainer from '../containers/ProductContainer';
 import AddProduct from './AddProduct';
 import AddProductContainer from '../containers/AddProductContainer';
+import CategoriesContainer from '../containers/CategoriesContainer';
 import UsersContainer from '../containers/UsersContainer';
 import EditProduct from './EditProduct';
 import EditProductContainer from '../containers/EditProductContainer';
+import AddReviewContainer from '../containers/AddReviewContainer';
 import ProductsTableContainer from '../containers/ProductsTableContainer';
 import AddCategoryContainer from '../containers/AddCategoryContainer';
 import EditCategoryContainer from '../containers/EditCategoryContainer';
@@ -53,6 +56,7 @@ const onProductsEnter = function() {
 
 const onProductEnter = function(props) {
   store.dispatch(fetchProduct(props.match.params.id));
+  store.dispatch(fetchReviews(props.match.params.id));
 };
 
 const onUsersEnter = function() {
@@ -70,6 +74,10 @@ const onAddProductEnter = function(props) {
 
 const onEditCategoryEnter = function(props) {
   store.dispatch(fetchCategory(props.match.params.id));
+};
+
+const onCategoriesEnter = function() {
+  store.dispatch(fetchCategories());
 };
 
 export default class App extends Component {
@@ -125,8 +133,19 @@ export default class App extends Component {
             />
             <RouteHook
               exact
+              path="/products/:id/addreview"
+              component={AddReviewContainer}
+            />
+            <RouteHook
+              exact
               path="/admin/categories/add"
               component={AddCategoryContainer}
+            />
+            <RouteHook
+              exact
+              path="/admin/categories"
+              component={CategoriesContainer}
+              onEnter={onCategoriesEnter}
             />
             <RouteHook
               exact

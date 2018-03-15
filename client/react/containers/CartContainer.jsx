@@ -1,7 +1,7 @@
 import React from 'react';
 import store from '../store';
 import { connect } from 'react-redux';
-import { changeAmount } from '../action-creator/cart';
+import { changeAmountInDB } from '../action-creator/cart';
 import Cart from '../components/Cart';
 
 function mapStateToProps(state, ownProps) {
@@ -13,8 +13,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    changeAmount: function(e, index) {
-      dispatch(changeAmount(e, index));
+    changeAmount: function(e, index, orderId, userId, product) {
+      dispatch(changeAmountInDB(e, index, orderId, userId, product));
     },
   };
 }
