@@ -15,17 +15,15 @@ export default ({ product }) => {
             <div className="row">
               <div className="col-sm-12">
                 <h1>{product.name}</h1>
-                <p>
-                  <div className="rating-wrap align-middle">
-                    <ReactStars
-                      count={5}
-                      value={product.rating}
-                      edit={false}
-                      size={20}
-                    />
-                  </div>{' '}
-                  <small>(13 reviews)</small>
-                </p>
+                <div className="rating-wrap align-middle">
+                  <ReactStars
+                    count={5}
+                    value={product.rating}
+                    edit={false}
+                    size={20}
+                  />
+                </div>{' '}
+                <small>(13 reviews)</small>
               </div>
             </div>
             <div className="row ">

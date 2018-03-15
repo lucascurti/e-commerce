@@ -26,9 +26,7 @@ export default ({ product, addProductToCart, user }) => (
       <Link to={`/products/${product.id}`}>
         <h5 className="card-title">{product.name}</h5>
       </Link>
-      <p>
-        <ReactStars count={5} value={product.rating} edit={false} size={15} />
-      </p>
+      <ReactStars count={5} value={product.rating} edit={false} size={15} />
       <p className="card-text">{product.description}</p>
       <p className="card-text">
         <span className="float-left">

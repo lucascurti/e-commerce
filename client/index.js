@@ -6,12 +6,14 @@ import store from './react/store';
 import { Provider } from 'react-redux';
 import '../public/js/bootstrap.min.js';
 import { checkUserSession } from './react/action-creator/user';
+import { fetchProducts } from './react/action-creator/products';
 // import './styles/index.css';
 import App from './react/components/App';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 const onAppEnter = () => {
   store.dispatch(checkUserSession());
+  store.dispatch(fetchProducts());
 };
 
 ReactDOM.render(

@@ -115,6 +115,7 @@ export default class App extends Component {
               path="/products/:id"
               component={ProductContainer}
               onEnter={onProductEnter}
+              onChange={onProductEnter}
             />
             <RouteHook
               exact
