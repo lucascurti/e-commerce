@@ -17,11 +17,8 @@
     "express-session": "^1.15.6",
     "fs-misc": "^2.0.0",
     "jquery": "^3.3.1",
-<<<<<<< HEAD
     "nodemon": "^1.17.2",
-=======
     "moment": "^2.21.0",
->>>>>>> 94ef10d7dda8ebe283d9ad77f98725b79be1c19b
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth": "^1.0.0",
