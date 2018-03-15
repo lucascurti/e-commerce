@@ -5,7 +5,7 @@ import UserProfile from '../components/UserProfile';
 
 function mapStateToProps(state, ownProps) {
   return {
-    user: state.userProfile,
+    user: state.user,
   };
 }
 
