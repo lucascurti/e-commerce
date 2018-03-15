@@ -14,7 +14,7 @@ export default props => {
             onChange={props.handleChange}
             className="form-control"
             id="formGroupExampleInput"
-            placeholder="Category Name"
+            placeholder={props.category}
           />
         </div>
         <button type="submit" className="btn btn-secondary btn-lg">

@@ -12,11 +12,16 @@
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
+    "circular-json": "^0.5.1",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "fs-misc": "^2.0.0",
     "jquery": "^3.3.1",
+<<<<<<< HEAD
     "nodemon": "^1.17.2",
+=======
+    "moment": "^2.21.0",
+>>>>>>> 94ef10d7dda8ebe283d9ad77f98725b79be1c19b
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth": "^1.0.0",
@@ -25,11 +30,13 @@
     "pg": "^7.4.1",
     "popper.js": "^1.12.9",
     "react": "^16.2.0",
+    "react-bootstrap-typeahead": "^2.5.1",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
     "react-route-hook": "^1.1.1",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
+    "react-stars": "^2.2.5",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",

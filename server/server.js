@@ -11,8 +11,11 @@ const session = require('express-session');
 const usersRoutes = require('./api/usersRoutes');
 const ordersRoutes = require('./api/ordersRoutes');
 const categoriesRoutes = require('./api/categoriesRoutes');
+const reviewsRoutes = require('./api/reviewsRoutes');
 const db = require('./db/database');
 const User = require('./db/models/users');
+
+// require('./db/seed.js');
 
 app.use(express.static(path.join(__dirname, '/../public')));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -130,6 +133,7 @@ app.use('/api/products', productsRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/orders', ordersRoutes);
 app.use('/api/categories', categoriesRoutes);
+app.use('/api/reviews', reviewsRoutes);
 
 app.get(
   '/auth/facebook',

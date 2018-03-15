@@ -12,8 +12,6 @@ class EditCategoryContainer extends React.Component {
   }
   submitCategory = e => {
     e.preventDefault();
-    console.log('MATCH', this.props.match);
-    console.log('STATE', this.state);
     this.props.editCategory(this.props.match.params.id, this.state);
     this.setState({
       name: '',
@@ -32,12 +30,15 @@ class EditCategoryContainer extends React.Component {
         name={this.state.name}
         handleChange={this.handleChange}
         type="Edit"
+        category={this.props.category.name}
       />
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  category: state.category,
+});
 
 const mapDispatchToProps = dispatch => ({
   editCategory: (id, category) => {
