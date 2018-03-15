@@ -107,7 +107,14 @@ export const fetchCart = function(userId) {
       axios
         .get(`/api/orders/Uncreated/${userId}`)
         .then(res => res.data)
-        .then(orderUncreated => dispatch(getCart(orderUncreated)));
+        .then(orderUncreated => {
+          if (!orderUncreated) {
+            var carro = { products: [] };
+            dispatch(getCart(carro));
+          } else {
+            dispatch(getCart(orderUncreated));
+          }
+        });
     } else {
       var cart = store.getState().cart;
       var localCart = localStorage.getItem('cart');
