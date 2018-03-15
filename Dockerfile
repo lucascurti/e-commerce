@@ -6,6 +6,6 @@ COPY package.json package.json
 RUN npm install
 ADD webpack.config.js webpack.config.js
 ADD config.json config.json
-RUN gunicorn --bind 0.0.0.0:$PORT wsgi
+ENV PORT=$PORT
 CMD ["npm", "start"]
 
