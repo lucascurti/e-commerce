@@ -28,9 +28,11 @@ import LoginContainer from '../containers/LoginContainer';
 import ProductContainer from '../containers/ProductContainer';
 import AddProduct from './AddProduct';
 import AddProductContainer from '../containers/AddProductContainer';
+import CategoriesContainer from '../containers/CategoriesContainer';
 import UsersContainer from '../containers/UsersContainer';
 import EditProduct from './EditProduct';
 import EditProductContainer from '../containers/EditProductContainer';
+import AddReviewContainer from '../containers/AddReviewContainer';
 import ProductsTableContainer from '../containers/ProductsTableContainer';
 import AddCategoryContainer from '../containers/AddCategoryContainer';
 import EditCategoryContainer from '../containers/EditCategoryContainer';
@@ -66,6 +68,10 @@ const onCategoryEnter = function(props) {
 
 const onEditCategoryEnter = function(props) {
   store.dispatch(fetchCategory(props.match.params.id));
+};
+
+const onCategoriesEnter = function() {
+  store.dispatch(fetchCategories());
 };
 
 export default class App extends Component {
@@ -119,8 +125,19 @@ export default class App extends Component {
             />
             <RouteHook
               exact
+              path="/products/:id/addreview"
+              component={AddReviewContainer}
+            />
+            <RouteHook
+              exact
               path="/admin/categories/add"
               component={AddCategoryContainer}
+            />
+            <RouteHook
+              exact
+              path="/admin/categories"
+              component={CategoriesContainer}
+              onEnter={onCategoriesEnter}
             />
             <RouteHook
               exact
