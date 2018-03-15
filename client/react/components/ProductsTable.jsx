@@ -10,7 +10,12 @@ export default ({ user, products, onDelete }) => (
       <NotAuthorized />
     ) : (
       <div className="container mt-3">
-        <h1>Products</h1>
+        <h1 className="mb-3">
+          Products{' '}
+          <Link to={`/admin/products/add`}>
+            <button className="btn btn-secondary btn-sm">Add Product</button>
+          </Link>
+        </h1>
         <table className="table table-striped">
           <thead>
             <tr>
@@ -35,7 +40,7 @@ export default ({ user, products, onDelete }) => (
                 <td>{product.stock}</td>
                 <td>{`$ ${product.price}`}</td>
                 <td>
-                  <Link to={`/product/edit/${product.id}`}>
+                  <Link to={`/admin/products/edit/${product.id}`}>
                     <button className="btn btn-secondary btn-sm">Edit</button>
                   </Link>{' '}
                   <button
