@@ -35,11 +35,6 @@ class Header extends Component {
                 Home <span className="sr-only">(current)</span>
               </Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Link
-              </a>
-            </li>
             {user.rol === 'admin' && (
               <li className="nav-item dropdown">
                 <a

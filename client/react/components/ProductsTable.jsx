@@ -2,10 +2,13 @@ import React from 'react';
 import './ProductsTable.css';
 import { Link } from 'react-router-dom';
 import ModalProductDelete from './ModalProductDelete';
+import NotAuthorized from './NotAuthorized';
 
-export default props => {
-  if (props) {
-    return (
+export default ({ user, products, onDelete }) => (
+  <div>
+    {user.rol !== 'admin' ? (
+      <NotAuthorized />
+    ) : (
       <div className="container mt-3">
         <h1>Products</h1>
         <table className="table table-striped">
@@ -21,7 +24,7 @@ export default props => {
             </tr>
           </thead>
           <tbody>
-            {props.products.map(product => (
+            {products.map(product => (
               <tr key={product.id}>
                 <td>{product.id}</td>
                 <td>
@@ -42,18 +45,13 @@ export default props => {
                   >
                     Delete
                   </button>
-                  <ModalProductDelete
-                    onDelete={props.onDelete}
-                    product={product}
-                  />
+                  <ModalProductDelete onDelete={onDelete} product={product} />
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-    );
-  } else {
-    return <div />;
-  }
-};
+    )}
+  </div>
+);
