@@ -54,9 +54,9 @@ class Header extends Component {
                   Admin
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a className="dropdown-item" href="#">
+                  <Link className="dropdown-item" to="/admin/products/">
                     Products
-                  </a>
+                  </Link>
                   <a className="dropdown-item" href="#">
                     Categories
                   </a>
@@ -110,7 +110,7 @@ class Header extends Component {
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
                   <span className="navbar-text mr-3">
-                    ¡Bienvenido {user.firstName}!
+                    Welcome {user.firstName}!
                   </span>
                 </li>
                 <li className="nav-item">
