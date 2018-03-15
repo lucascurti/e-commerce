@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Users = require('../db/models/users');
+const Orders = require('../db/models/orders');
 const passport = require('passport');
 
 isAuthenticated = (req, res, next) => {
@@ -39,6 +40,17 @@ router.get('/', function(req, res) {
 router.get('/logout', function(req, res) {
   req.logout();
   res.json({ message: 'Logged out!' });
+});
+
+router.get('/orders', (req, res) => {
+  Users.findAll({
+    include: [
+      {
+        model: Orders,
+        as: 'orders',
+      },
+    ],
+  }).then(usersOrders => res.json(usersOrders));
 });
 
 router.get('/:id', (req, res) => {

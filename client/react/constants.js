@@ -18,3 +18,4 @@ export const ADD_CATEGORY = 'GET_CATEGORY';
 export const EDIT_CATEGORY = 'EDIT_CATEGORY';
 export const GET_CATEGORY = 'GET_CATEGORY';
 export const DEL_PRODUCT = 'DEL_PRODUCT';
+export const GET_USERS_ORDERS = 'GET_USERS_ORDERS';

@@ -1,4 +1,9 @@
-import { GET_USERS, DELETE_USER, UPDATE_USER } from '../constants';
+import {
+  GET_USERS,
+  DELETE_USER,
+  UPDATE_USER,
+  GET_USERS_ORDERS,
+} from '../constants';
 
 const initialState = [];
 
@@ -14,6 +19,8 @@ export default (state = initialState, action) => {
       const index = newUsers2.findIndex(user => user.id === action.user.id);
       newUsers2[index] = action.user;
       return newUsers2;
+    case GET_USERS_ORDERS:
+      return action.users.slice();
     default:
       return state;
   }

@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { GET_USERS, DELETE_USER, UPDATE_USER } from '../constants';
+import {
+  GET_USERS,
+  DELETE_USER,
+  UPDATE_USER,
+  GET_USERS_ORDERS,
+} from '../constants';
 
 export function getUsers(users) {
   return {
@@ -17,6 +22,13 @@ export function updateUserAction(user) {
   return {
     type: UPDATE_USER,
     user,
+  };
+}
+//quiero traer las ordenes de los usuarios
+export function getUserOrder(users) {
+  return {
+    type: GET_USERS_ORDERS,
+    users,
   };
 }
 
@@ -37,3 +49,12 @@ export const makeAdmin = id => dispatch =>
     .put(`/api/users/${id}`, { rol: 'admin' })
     .then(res => res.data)
     .then(user => dispatch(updateUserAction(user)));
+
+export const showUsersOrders = () => dispatch =>
+  axios
+    .get(`/api/users/orders`)
+    .then(res => res.data)
+    .then(userOrders => {
+      console.log('USER ORDERS', userOrders);
+      dispatch(getUserOrder(userOrders));
+    });

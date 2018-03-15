@@ -19,6 +19,7 @@ import ProductsContainer from '../containers/ProductsContainer';
 import UserProfile from '../containers/UserProfileContainer';
 import { fetchUser } from '../action-creator/userProfile';
 import { fetchUsers } from '../action-creator/users';
+import { showUsersOrders } from '../action-creator/users';
 
 import RegisterContainer from '../containers/RegisterContainer';
 import LoginContainer from '../containers/LoginContainer';
@@ -31,6 +32,7 @@ import EditProductContainer from '../containers/EditProductContainer';
 import ProductsTableContainer from '../containers/ProductsTableContainer';
 import AddCategoryContainer from '../containers/AddCategoryContainer';
 import EditCategoryContainer from '../containers/EditCategoryContainer';
+import UsersOrdersTableContainer from '../containers/UsersOrdersTableContainer';
 
 const onCartEnter = function() {
   store.dispatch(fetchCart());
@@ -62,6 +64,10 @@ const onEditCategoryEnter = function(props) {
   store.dispatch(fetchCategory(props.match.params.id));
 };
 
+const onUsersOrdersEnter = function() {
+  store.dispatch(showUsersOrders());
+};
+
 export default class App extends Component {
   render() {
     return (
@@ -72,9 +78,15 @@ export default class App extends Component {
             <RouteHook exact path="/register" component={RegisterContainer} />
             <RouteHook exact path="/login" component={LoginContainer} />
             <RouteHook
+              exact
               path="/users"
               component={UserProfile}
               onEnter={onUserProfileEnter}
+            />
+            <RouteHook
+              path="/users/orders"
+              component={UsersOrdersTableContainer}
+              onEnter={onUsersOrdersEnter}
             />
             <RouteHook
               exact
