@@ -13,7 +13,7 @@ export default (state = initialState, action) => {
     case GET_PRODUCTS:
       return action.products;
     case GET_PRODUCTS_CATEGORY:
-      return action.products;
+      return action.products.products;
     case ADD_PRODUCT:
       return state.concat(action.product);
     case EDIT_PRODUCT:

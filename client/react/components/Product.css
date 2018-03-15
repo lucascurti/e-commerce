@@ -1,14 +1,15 @@
-.product-foodText {
-  margin-top: 160px;
+.product-container {
+  max-width: 800px;
 }
 
-.product-margin {
-  width: 40%;
+.product-container .price {
+  font-weight: bolder;
 }
-.product-img {
-  display: block;
-  margin: auto;
+
+.product-container h1 {
+  font-weight: 900;
 }
-.product-container {
-  margin-top: 10%;
+
+.product-container .img-fluid {
+  height: 100%;
 }
