@@ -69,30 +69,35 @@ export default ({
               <div className="row">
                 <div className="col-sm-6">
                   <div className="form-group">
-                    <label htmlFor="formGroupExampleInput2">Stock</label>
+                    <label htmlFor="stock">Stock</label>
                     <input
                       name="stock"
                       value={stock}
                       type="number"
                       onChange={handleChange}
                       className="form-control"
-                      id="formGroupExampleInput2"
+                      id="stock"
                       placeholder="Stock"
                     />
                   </div>
                 </div>
                 <div className="col-sm-6">
                   <div className="form-group">
-                    <label htmlFor="formGroupExampleInput2">Price</label>
-                    <input
-                      name="price"
-                      value={price}
-                      type="number"
-                      onChange={handleChange}
-                      className="form-control"
-                      id="formGroupExampleInput2"
-                      placeholder="Price"
-                    />
+                    <label htmlFor="price">Price</label>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                      </div>
+                      <input
+                        name="price"
+                        value={price}
+                        type="number"
+                        onChange={handleChange}
+                        className="form-control"
+                        id="price"
+                        placeholder="Price"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

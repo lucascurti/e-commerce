@@ -15,6 +15,14 @@ export default ({ product }) => {
             <div className="row">
               <div className="col-sm-12">
                 <h1>{product.name}</h1>
+                <p className="categories-badge">
+                  {product.categories &&
+                    product.categories.map(category => (
+                      <span key={category.id} className="badge badge-secondary">
+                        {category.name}
+                      </span>
+                    ))}
+                </p>
                 <div className="rating-wrap align-middle">
                   <ReactStars
                     count={5}

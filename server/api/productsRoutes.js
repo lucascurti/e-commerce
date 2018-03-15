@@ -4,13 +4,17 @@ const Products = require('../db/models/products');
 const Categories = require('../db/models/categories');
 
 router.get('/', (req, res) => {
-  Products.findAll().then(products => {
+  Products.findAll({
+    include: [{ model: Categories }],
+  }).then(products => {
     res.send(products);
   });
 });
 router.get('/:id', (req, res) => {
   const id = req.params.id;
-  Products.findById(id).then(product => {
+  Products.findById(id, {
+    include: [{ model: Categories }],
+  }).then(product => {
     res.json(product);
   });
 });

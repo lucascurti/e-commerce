@@ -35,7 +35,9 @@ export default ({ user, products, onDelete }) => (
                 <td>
                   <img src={product.image} className="" height="35" />
                 </td>
-                <td>{product.name}</td>
+                <td>
+                  <Link to={`/products/${product.id}`}>{product.name}</Link>
+                </td>
                 <td>{`${product.description.slice(0, 25)}...`}</td>
                 <td>{product.stock}</td>
                 <td>{`$ ${product.price}`}</td>
