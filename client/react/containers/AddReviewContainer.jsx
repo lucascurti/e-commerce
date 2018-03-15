@@ -1,5 +1,5 @@
 import React from 'react';
-//import AddReview from '../components/AddReview';
+import AddReview from '../components/AddReview';
 import { connect } from 'react-redux';
 import { setReview } from '../action-creator/review';
 
@@ -10,13 +10,14 @@ class AddReviewContainer extends React.Component {
       title: '',
       description: '',
       star: 0,
+      userId: props.userId,
     };
   }
   submitReview = e => {
     e.preventDefault();
-    this.props.addReview(this.state);
+    this.props.setReview(this.props.productId, this.state);
     this.setState({
-      name: '',
+      title: '',
       description: '',
       star: 0,
     });
@@ -24,7 +25,7 @@ class AddReviewContainer extends React.Component {
 
   handleChange = e => {
     this.setState({
-      [e.target.name]: e.target.value.toLowerCase(),
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -32,7 +33,7 @@ class AddReviewContainer extends React.Component {
     return (
       <AddReview
         submitForm={this.submitReview}
-        title={this.state.name}
+        title={this.state.title}
         description={this.state.description}
         star={this.state.star}
         handleChange={this.handleChange}
@@ -41,7 +42,10 @@ class AddReviewContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state, ownProps) => ({
+  userId: 1, // state.user.id
+  productId: ownProps.match.params.id,
+});
 
 const mapDispatchToProps = dispatch => ({
   setReview: review => dispatch(setReview(review)),
