@@ -35,18 +35,28 @@ export default ({ cart, changeAmount, amount }) => {
                     </div>
                   </div>
                 </td>
-                <td data-th="Price">{product.orderDetail.price}</td>
+                <td data-th="Price">
+                  {product.orderDetail.price
+                    ? product.orderDetail.price
+                    : product.price}
+                </td>
                 <td data-th="Quantity">
                   <input
                     type="number"
                     className="form-control text-center"
-                    value={product.orderDetail.amount}
+                    value={
+                      product.orderDetail.amount
+                        ? product.orderDetail.amount
+                        : product.amount
+                    }
                     onChange={e => changeAmount(Number(e.target.value), index)}
                     id="amount"
                   />
                 </td>
                 <td data-th="Subtotal" className="text-center">
-                  {product.orderDetail.price * product.orderDetail.amount}
+                  {product.orderDetail.price
+                    ? product.orderDetail.price * product.orderDetail.amount
+                    : product.price * product.amount}
                 </td>
                 <td className="actions" data-th="">
                   <button className="btn btn-info btn-sm">
