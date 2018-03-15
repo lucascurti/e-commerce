@@ -58,7 +58,7 @@ export const addProductToCart = function(product, userId, index) {
         //     return value;
         //   }),
         // ]);
-        cache = null;
+        // cache = null;
       } else {
         localStorage.setItem('cart', CircularJson.stringify([product]));
 
@@ -95,7 +95,11 @@ export const fetchCart = function(userId) {
       var cart = store.getState().cart;
       var localCart = localStorage.getItem('cart');
       var carrito = JSON.parse(localCart);
-      var carrrrrr = { products: carrito };
+      if (!carrito) {
+        var carrrrrr = { products: [] };
+      } else {
+        var carrrrrr = { products: carrito };
+      }
       dispatch(getCart(carrrrrr));
     }
   };
