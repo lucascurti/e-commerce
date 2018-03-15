@@ -15,6 +15,8 @@ const reviewsRoutes = require('./api/reviewsRoutes');
 const db = require('./db/database');
 const User = require('./db/models/users');
 
+// require('./db/seed.js');
+
 app.use(express.static(path.join(__dirname, '/../public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

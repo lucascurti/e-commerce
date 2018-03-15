@@ -10,20 +10,26 @@ import {
   fetchAddCategory,
   fetchCategory,
 } from '../action-creator/categories';
+import { fetchAddProduct } from '../action-creator/addProduct';
 import store from '../store';
 import './App.css';
 import Product from './Product';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import HeaderContainer from '../containers/HeaderContainer';
 import ProductsContainer from '../containers/ProductsContainer';
+
 import UserProfile from '../containers/UserProfileContainer';
 import { fetchUser } from '../action-creator/userProfile';
+import { fetchUsers } from '../action-creator/users';
+
 import RegisterContainer from '../containers/RegisterContainer';
 import LoginContainer from '../containers/LoginContainer';
+
 import ProductContainer from '../containers/ProductContainer';
 import AddProduct from './AddProduct';
 import AddProductContainer from '../containers/AddProductContainer';
 import CategoriesContainer from '../containers/CategoriesContainer';
+import UsersContainer from '../containers/UsersContainer';
 import EditProduct from './EditProduct';
 import EditProductContainer from '../containers/EditProductContainer';
 import AddReviewContainer from '../containers/AddReviewContainer';
@@ -32,7 +38,8 @@ import AddCategoryContainer from '../containers/AddCategoryContainer';
 import EditCategoryContainer from '../containers/EditCategoryContainer';
 
 const onCartEnter = function() {
-  store.dispatch(fetchCart());
+  const userid = store.getState().user.id;
+  store.dispatch(fetchCart(userid));
 };
 
 const onUserProfileEnter = function() {
@@ -42,12 +49,16 @@ const onUserProfileEnter = function() {
 const onProductsEnter = function() {
   store.dispatch(fetchProducts());
   store.dispatch(fetchCategories());
+  const userid = store.getState().user.id;
+  store.dispatch(fetchCart(userid));
 };
 
 const onProductEnter = function(props) {
-  store.dispatch(fetchProducts());
-  store.dispatch(fetchCategories());
   store.dispatch(fetchProduct(props.match.params.id));
+};
+
+const onUsersEnter = function() {
+  store.dispatch(fetchUsers());
 };
 
 const onCategoryEnter = function(props) {
@@ -110,6 +121,7 @@ export default class App extends Component {
               path="/products/:id"
               component={ProductContainer}
               onEnter={onProductEnter}
+              onChange={onProductEnter}
             />
             <RouteHook
               exact
@@ -138,6 +150,12 @@ export default class App extends Component {
               path="/category/:id"
               component={ProductsContainer}
               onEnter={onCategoryEnter}
+            />
+            <RouteHook
+              exact
+              path="/admin/users"
+              component={UsersContainer}
+              onEnter={onUsersEnter}
             />
             <Redirect from="/" to="/products" />
           </Switch>

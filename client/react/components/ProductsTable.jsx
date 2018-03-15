@@ -1,6 +1,8 @@
 import React from 'react';
 import './ProductsTable.css';
 import { Link } from 'react-router-dom';
+import ModalProductDelete from './ModalProductDelete';
+
 export default props => {
   if (props) {
     return (
@@ -14,10 +16,10 @@ export default props => {
               <th>Quantify</th>
               <th>Price</th>
               <th>Edit</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
-            {console.log(props)}
             {props.products.map(product => (
               <tr key={product.id}>
                 <th scope="row">{product.id}</th>
@@ -26,7 +28,27 @@ export default props => {
                 <td>{product.stock}</td>
                 <td>{product.price}</td>
                 <td>
-                  <Link to={`/product/edit/${product.id}`}>EDIT</Link>
+                  <button className="btn btn-secondary btn-sm">
+                    <Link
+                      to={`/product/edit/${product.id}`}
+                      id="editProduct-color"
+                    >
+                      Edit
+                    </Link>
+                  </button>
+                </td>
+                <td>
+                  <button
+                    data-toggle="modal"
+                    data-target={`#modalDelete${product.id}`}
+                    className="btn btn-secondary btn-sm"
+                  >
+                    Delete
+                  </button>
+                  <ModalProductDelete
+                    onDelete={props.onDelete}
+                    product={product}
+                  />
                 </td>
               </tr>
             ))}
