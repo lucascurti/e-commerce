@@ -28,6 +28,7 @@ export const fetchAddProduct = product => dispatch => {
     .post(`/api/products`, product)
     .then(res => res.data)
     .then(newProduct => {
+      console.log('new', newProduct);
       dispatch(addProduct(newProduct));
     });
 };

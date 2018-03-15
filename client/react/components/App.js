@@ -68,6 +68,10 @@ const onCategoryEnter = function(props) {
   store.dispatch(fetchCategories());
 };
 
+const onAddProductEnter = function(props) {
+  store.dispatch(fetchCategories());
+};
+
 const onEditCategoryEnter = function(props) {
   store.dispatch(fetchCategory(props.match.params.id));
 };
@@ -98,22 +102,6 @@ export default class App extends Component {
             />
             <RouteHook
               exact
-              path="/products/add"
-              component={AddProductContainer}
-            />
-            <RouteHook
-              exact
-              path="/product/edit/:id"
-              component={EditProductContainer}
-              onEnter={onProductEnter}
-            />
-            <RouteHook
-              path="/products/list"
-              component={ProductsTableContainer}
-              onEnter={onProductsEnter}
-            />
-            <RouteHook
-              exact
               path="/cart"
               component={CartContainer}
               onEnter={onCartEnter}
@@ -124,6 +112,24 @@ export default class App extends Component {
               component={ProductContainer}
               onEnter={onProductEnter}
               onChange={onProductEnter}
+            />
+            <RouteHook
+              exact
+              path="/admin/products/"
+              component={ProductsTableContainer}
+              onEnter={onProductsEnter}
+            />
+            <RouteHook
+              exact
+              path="/admin/products/add"
+              component={AddProductContainer}
+              onEnter={onAddProductEnter}
+            />
+            <RouteHook
+              exact
+              path="/admin/products/edit/:id"
+              component={EditProductContainer}
+              onEnter={onProductEnter}
             />
             <RouteHook
               exact

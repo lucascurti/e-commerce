@@ -9,27 +9,48 @@ class AddProductContainer extends React.Component {
     this.state = {
       name: '',
       description: '',
-      stock: 0,
-      price: 0,
-      image: '//www.google.com',
+      stock: '',
+      price: '',
+      image: '',
+      categories: [],
     };
+    this.getFile = this.getFile.bind(this);
   }
+
+  getFile(file) {
+    this.setState({ image: file });
+  }
+
   submitProduct = e => {
     e.preventDefault();
     this.props.addProduct(this.state);
     this.setState({
       name: '',
       description: '',
-      stock: 0,
-      price: 0,
-      image: '//www.google.com',
+      stock: '',
+      price: '',
+      image: '',
+      categories: [],
     });
   };
 
   handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.name === 'categories') {
+      var options = e.target.options;
+      var value = [];
+      for (var i = 0, l = options.length; i < l; i++) {
+        if (options[i].selected) {
+          value.push(options[i].value);
+        }
+      }
+      this.setState({
+        [e.target.name]: value,
+      });
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   render() {
@@ -42,12 +63,18 @@ class AddProductContainer extends React.Component {
         price={this.state.price}
         image={this.state.image}
         handleChange={this.handleChange}
+        user={this.props.user}
+        getFile={this.getFile}
+        categories={this.props.categories}
       />
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state, ownProps) => ({
+  user: state.user,
+  categories: state.categories,
+});
 
 const mapDispatchToProps = dispatch => ({
   addProduct: prod => dispatch(fetchAddProduct(prod)),
