@@ -11,6 +11,7 @@ import {
   fetchCategory,
 } from '../action-creator/categories';
 import { fetchReviews } from '../action-creator/review';
+import { fetchRating } from '../action-creator/rating';
 import { fetchAddProduct } from '../action-creator/addProduct';
 import store from '../store';
 import './App.css';
@@ -35,8 +36,6 @@ import EditProduct from './EditProduct';
 import EditProductContainer from '../containers/EditProductContainer';
 import AddReviewContainer from '../containers/AddReviewContainer';
 import ProductsTableContainer from '../containers/ProductsTableContainer';
-import AddCategoryContainer from '../containers/AddCategoryContainer';
-import EditCategoryContainer from '../containers/EditCategoryContainer';
 import FinishCart from '../components/FinishCart';
 
 const onCartEnter = function() {
@@ -62,6 +61,7 @@ const onProductsEnter = function(props) {
 const onProductEnter = function(props) {
   store.dispatch(fetchProduct(props.match.params.id));
   store.dispatch(fetchReviews(props.match.params.id));
+  store.dispatch(fetchRating(props.match.params.id));
 };
 
 const onUsersEnter = function() {

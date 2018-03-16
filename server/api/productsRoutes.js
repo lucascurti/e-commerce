@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Products = require('../db/models/products');
 const Categories = require('../db/models/categories');
+const Reviews = require('../db/models/reviews');
+const db = require('../db/database');
 
 router.get('/', (req, res) => {
   console.log('query', req.query);
@@ -22,8 +24,11 @@ router.get('/', (req, res) => {
 });
 router.get('/:id', (req, res) => {
   const id = req.params.id;
-  Products.findById(id, {
-    include: [{ model: Categories }],
+  Products.findOne({
+    where: {
+      id: id,
+    },
+    include: [{ model: Reviews, as: 'reviews' }],
   }).then(product => {
     res.json(product);
   });

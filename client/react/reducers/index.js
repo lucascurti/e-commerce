@@ -10,6 +10,7 @@ import reviewReducer from './addReview-reducer';
 import reviewsReducer from './getReviews-reducer';
 import productsSearchReducer from './productsSearch-reducer';
 import { userProfilereducer } from './user-reducer';
+import ratingReducer from './rating-reducer';
 
 export default combineReducers({
   cart: cartReducer,
@@ -22,4 +23,5 @@ export default combineReducers({
   category: categoryReducer,
   review: reviewReducer,
   reviews: reviewsReducer,
+  rating: ratingReducer,
 });
