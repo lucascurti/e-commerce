@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default props => {
-  console.log(props);
   if (props) {
     return (
       <table className="table table-striped">
@@ -17,7 +16,7 @@ export default props => {
         </thead>
         <tbody>
           {props.orders.map(order => (
-            <tr key={index}>
+            <tr key={order.id}>
               <th scope="row">ordern</th>
               <td>{order.id}</td>
               <td>{order.date}</td>

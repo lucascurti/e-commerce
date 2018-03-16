@@ -45,11 +45,10 @@ export const makeAdmin = id => dispatch =>
     .then(res => res.data)
     .then(user => dispatch(updateUserAction(user)));
 
-export const showUsersOrders = () => dispatch =>
+export const showUsersOrders = id => dispatch =>
   axios
     .get(`/api/orders/${id}/users`)
-    .then(res => console.log('RES DATA', res.data))
+    .then(res => res.data)
     .then(orders => {
-      console.log('ORDERS DEL BACK', orders);
       dispatch(getUserOrder(orders));
     });

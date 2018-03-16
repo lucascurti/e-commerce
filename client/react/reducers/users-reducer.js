@@ -14,8 +14,6 @@ export default (state = initialState, action) => {
       const index = newUsers2.findIndex(user => user.id === action.user.id);
       newUsers2[index] = action.user;
       return newUsers2;
-    case GET_ORDER:
-      return action.order.slice();
     default:
       return state;
   }

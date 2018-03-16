@@ -9,6 +9,7 @@ import categoryReducer from './category-reducer';
 import reviewReducer from './addReview-reducer';
 import reviewsReducer from './getReviews-reducer';
 import { userProfilereducer } from './user-reducer';
+import ordersReducer from './orders-reducer';
 
 export default combineReducers({
   cart: cartReducer,
@@ -20,4 +21,5 @@ export default combineReducers({
   category: categoryReducer,
   review: reviewReducer,
   reviews: reviewsReducer,
+  orders: ordersReducer,
 });

@@ -82,14 +82,11 @@ router.put('/', (req, res) => {
 });
 
 router.get('/:id/users', (req, res) => {
-  Orders.findAll({
+  Order.findAll({
     where: {
       userId: req.params.id,
     },
   }).then(orders => {
-    console.log(orders);
-    console.log('pepe');
-    console.log(orders.data);
     res.json(orders);
   });
 });

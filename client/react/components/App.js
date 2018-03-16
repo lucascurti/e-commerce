@@ -21,8 +21,7 @@ import ProductsContainer from '../containers/ProductsContainer';
 
 import UserProfile from '../containers/UserProfileContainer';
 import { fetchUser } from '../action-creator/userProfile';
-import { fetchUsers } from '../action-creator/users';
-import { showUsersOrders } from '../action-creator/users';
+import { fetchUsers, showUsersOrders } from '../action-creator/users';
 
 import RegisterContainer from '../containers/RegisterContainer';
 import LoginContainer from '../containers/LoginContainer';
@@ -78,8 +77,8 @@ const onEditCategoryEnter = function(props) {
   store.dispatch(fetchCategory(props.match.params.id));
 };
 
-const onUsersOrdersEnter = function() {
-  store.dispatch(showUsersOrders());
+const onUsersOrdersEnter = function(props) {
+  store.dispatch(showUsersOrders(props.match.params.id));
 };
 
 const onCategoriesEnter = function() {
