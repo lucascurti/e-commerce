@@ -1,6 +1,7 @@
 import React from 'react';
 import Product from '../components/Product';
 import { connect } from 'react-redux';
+import { addProductToCart } from '../action-creator/cart';
 
 class ProductContainers extends React.Component {
   render() {
@@ -12,6 +13,14 @@ const mapStateToProps = (state, ownProps) => ({
   product: state.product,
   reviews: state.reviews,
   rating: state.rating,
+  user: state.user,
 });
 
-export default connect(mapStateToProps)(Product);
+function mapDispatchToProps(dispatch) {
+  return {
+    addProductToCart: (productId, userId) =>
+      dispatch(addProductToCart(productId, userId)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product);
