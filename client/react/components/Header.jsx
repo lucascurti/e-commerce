@@ -10,7 +10,13 @@ class Header extends Component {
     this.state = {};
   }
   render() {
-    const { user, products, logoutUser, goToProduct, history } = this.props;
+    const {
+      user,
+      productsSearch,
+      logoutUser,
+      goToProduct,
+      history,
+    } = this.props;
     return (
       <nav className="navbar navbar-expand-md navbar-dark bg-dark">
         <Link to="/products" className="navbar-brand">
@@ -35,11 +41,6 @@ class Header extends Component {
                 Home <span className="sr-only">(current)</span>
               </Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Link
-              </a>
-            </li>
             {user.rol === 'admin' && (
               <li className="nav-item dropdown">
                 <a
@@ -54,12 +55,12 @@ class Header extends Component {
                   Admin
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a className="dropdown-item" href="#">
+                  <Link className="dropdown-item" to="/admin/products/">
                     Products
-                  </a>
-                  <a className="dropdown-item" href="#">
+                  </Link>
+                  <Link className="dropdown-item" to="/admin/categories/">
                     Categories
-                  </a>
+                  </Link>
                   <Link className="dropdown-item" to="/admin/users">
                     Users
                   </Link>
@@ -77,7 +78,7 @@ class Header extends Component {
               }
             }}
             labelKey="name"
-            options={products}
+            options={productsSearch}
             paginate={true}
             minLength={2}
             maxResults={3}
@@ -110,7 +111,7 @@ class Header extends Component {
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
                   <span className="navbar-text mr-3">
-                    ¡Bienvenido {user.firstName}!
+                    Welcome {user.firstName}!
                   </span>
                 </li>
                 <li className="nav-item">

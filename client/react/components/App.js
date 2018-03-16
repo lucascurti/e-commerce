@@ -48,8 +48,12 @@ const onUserProfileEnter = function() {
   store.dispatch(fetchUser());
 };
 
-const onProductsEnter = function() {
-  store.dispatch(fetchProducts());
+const onProductsEnter = function(props) {
+  const search = props.location.search;
+  const queryParams = new URLSearchParams(search);
+  const selectedCategory = queryParams.get('category');
+
+  store.dispatch(fetchProducts(selectedCategory));
   store.dispatch(fetchCategories());
   const userid = store.getState().user.id;
   store.dispatch(fetchCart(userid));
@@ -69,6 +73,10 @@ const onCategoryEnter = function(props) {
   store.dispatch(fetchCategories());
 };
 
+const onAddProductEnter = function(props) {
+  store.dispatch(fetchCategories());
+};
+
 const onEditCategoryEnter = function(props) {
   store.dispatch(fetchCategory(props.match.params.id));
 };
@@ -82,7 +90,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <HeaderContainer />
-        <main role="main" className="container-fluid mt-3">
+        <main role="main" className="container-fluid">
           <Switch>
             <RouteHook exact path="/register" component={RegisterContainer} />
             <RouteHook exact path="/login" component={LoginContainer} />
@@ -96,22 +104,7 @@ export default class App extends Component {
               path="/products"
               component={ProductsContainer}
               onEnter={onProductsEnter}
-            />
-            <RouteHook
-              exact
-              path="/products/add"
-              component={AddProductContainer}
-            />
-            <RouteHook
-              exact
-              path="/product/edit/:id"
-              component={EditProductContainer}
-              onEnter={onProductEnter}
-            />
-            <RouteHook
-              path="/products/list"
-              component={ProductsTableContainer}
-              onEnter={onProductsEnter}
+              onChange={onProductsEnter}
             />
             <RouteHook
               exact
@@ -128,13 +121,26 @@ export default class App extends Component {
             />
             <RouteHook
               exact
-              path="/products/:id/addreview"
-              component={AddReviewContainer}
+              path="/admin/products/"
+              component={ProductsTableContainer}
+              onEnter={onProductsEnter}
             />
             <RouteHook
               exact
-              path="/admin/categories/add"
-              component={AddCategoryContainer}
+              path="/admin/products/add"
+              component={AddProductContainer}
+              onEnter={onAddProductEnter}
+            />
+            <RouteHook
+              exact
+              path="/admin/products/edit/:id"
+              component={EditProductContainer}
+              onEnter={onProductEnter}
+            />
+            <RouteHook
+              exact
+              path="/products/:id/addreview"
+              component={AddReviewContainer}
             />
             <RouteHook
               exact
@@ -144,15 +150,10 @@ export default class App extends Component {
             />
             <RouteHook
               exact
-              path="/admin/categories/edit/:id"
-              component={EditCategoryContainer}
-              onEnter={onEditCategoryEnter}
-            />
-            <RouteHook
-              exact
               path="/category/:id"
               component={ProductsContainer}
               onEnter={onCategoryEnter}
+              onChange={onCategoryEnter}
             />
             <RouteHook
               exact

@@ -6,20 +6,25 @@ import store from './react/store';
 import { Provider } from 'react-redux';
 import '../public/js/bootstrap.min.js';
 import { checkUserSession } from './react/action-creator/user';
-import { fetchProducts } from './react/action-creator/products';
+import { fetchSearchProducts } from './react/action-creator/products';
 // import './styles/index.css';
 import App from './react/components/App';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 const onAppEnter = () => {
   store.dispatch(checkUserSession());
-  store.dispatch(fetchProducts());
+  store.dispatch(fetchSearchProducts());
 };
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <RouteHook path="/" component={App} onEnter={onAppEnter} />
+      <RouteHook
+        path="/"
+        component={App}
+        onEnter={onAppEnter}
+        onChange={onAppEnter}
+      />
     </BrowserRouter>
   </Provider>,
   document.getElementById('root'),
