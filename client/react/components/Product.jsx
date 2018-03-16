@@ -4,7 +4,7 @@ import ReactStars from 'react-stars';
 import './Product.css';
 import GetReviews from './GetReviews';
 
-export default ({ product, reviews, rating }) => {
+export default ({ product, reviews, rating, user, addProductToCart }) => {
   if (product) {
     return (
       <div className="container product-container mt-3">
@@ -56,7 +56,11 @@ export default ({ product, reviews, rating }) => {
                 </form>
               </div>
               <div className="col-sm-10">
-                <button type="button" className="btn btn-secondary">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => addProductToCart(product, user.id)}
+                >
                   Comprar
                 </button>
               </div>
