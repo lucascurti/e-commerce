@@ -20,6 +20,7 @@ const mapDispatchToProps = dispatch => {
 };
 const mapStateToProps = (state, Props) => ({
   products: state.products,
+  user: state.user,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsTable);
