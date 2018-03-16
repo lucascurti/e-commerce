@@ -7,9 +7,11 @@ const db = require('../db/database');
 
 router.get('/', (req, res) => {
   console.log('query', req.query);
+  console.log('query', req.query.category);
   const category = req.query.category;
   let find;
-  if (category) {
+
+  if (category !== undefined) {
     find = {
       include: [{ model: Categories, where: { id: category } }],
     };

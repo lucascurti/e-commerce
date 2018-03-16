@@ -18,16 +18,23 @@ export default ({
       selectedCategory={selectedCategory}
     />
     <main className="col-md-9 col-lg-10 pt-3 px-4 mx-auto justify-content-center">
-      <div className="card-group align-self-center">
-        {products.map(product => (
-          <SingleProduct
-            key={product.id}
-            product={product}
-            addProductToCart={addProductToCart}
-            user={user}
-          />
-        ))}
-      </div>
+      {!products.length ? (
+        <div className="text-center mt-5">
+          <h2 className="text-center">No products to show for this category</h2>
+          <p className="huge-icon">😢</p>
+        </div>
+      ) : (
+        <div className="card-group align-self-center">
+          {products.map(product => (
+            <SingleProduct
+              key={product.id}
+              product={product}
+              addProductToCart={addProductToCart}
+              user={user}
+            />
+          ))}
+        </div>
+      )}
     </main>
   </div>
 );
