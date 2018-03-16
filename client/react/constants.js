@@ -19,5 +19,5 @@ export const EDIT_CATEGORY = 'EDIT_CATEGORY';
 export const GET_CATEGORY = 'GET_CATEGORY';
 export const PRODUCT_TO_CART = 'PRODUCT_TO_CART';
 export const DEL_PRODUCT = 'DEL_PRODUCT';
-export const GET_USERS_ORDERS = 'GET_USERS_ORDERS';
+export const GET_ORDER = 'GET_ORDER';
 export const GET_REVIEWS = 'GET_REVIEWS';

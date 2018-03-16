@@ -1,10 +1,5 @@
 import axios from 'axios';
-import {
-  GET_USERS,
-  DELETE_USER,
-  UPDATE_USER,
-  GET_USERS_ORDERS,
-} from '../constants';
+import { GET_USERS, DELETE_USER, UPDATE_USER, GET_ORDER } from '../constants';
 
 export function getUsers(users) {
   return {
@@ -25,10 +20,10 @@ export function updateUserAction(user) {
   };
 }
 //quiero traer las ordenes de los usuarios
-export function getUserOrder(users) {
+export function getUserOrder(orders) {
   return {
-    type: GET_USERS_ORDERS,
-    users,
+    type: GET_ORDER,
+    orders,
   };
 }
 
@@ -52,9 +47,9 @@ export const makeAdmin = id => dispatch =>
 
 export const showUsersOrders = () => dispatch =>
   axios
-    .get(`/api/users/orders`)
-    .then(res => res.data)
-    .then(userOrders => {
-      console.log('USER ORDERS', userOrders);
-      dispatch(getUserOrder(userOrders));
+    .get(`/api/orders/${id}/users`)
+    .then(res => console.log('RES DATA', res.data))
+    .then(orders => {
+      console.log('ORDERS DEL BACK', orders);
+      dispatch(getUserOrder(orders));
     });

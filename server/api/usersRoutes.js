@@ -42,17 +42,6 @@ router.get('/logout', function(req, res) {
   res.json({ message: 'Logged out!' });
 });
 
-router.get('/orders', (req, res) => {
-  Users.findAll({
-    include: [
-      {
-        model: Orders,
-        as: 'orders',
-      },
-    ],
-  }).then(usersOrders => res.json(usersOrders));
-});
-
 router.get('/:id', (req, res) => {
   const id = req.params.id;
   Users.findById(id).then(user => res.json(user));

@@ -76,6 +76,8 @@ const onEditCategoryEnter = function(props) {
 
 const onUsersOrdersEnter = function() {
   store.dispatch(showUsersOrders());
+};
+
 const onCategoriesEnter = function() {
   store.dispatch(fetchCategories());
 };
@@ -96,7 +98,7 @@ export default class App extends Component {
               onEnter={onUserProfileEnter}
             />
             <RouteHook
-              path="/users/orders"
+              path="/orders/:id/users"
               component={UsersOrdersTableContainer}
               onEnter={onUsersOrdersEnter}
             />

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 class UsersOrdersTableContainer extends React.Component {
   render() {
-    return <UsersOrdersTable users={this.props.users} />;
+    return <UsersOrdersTable />;
   }
 }
 // const mapDispatchToProps = dispatch => {
@@ -16,7 +16,7 @@ class UsersOrdersTableContainer extends React.Component {
 // };
 
 const mapStateToProps = (state, Props) => ({
-  users: state.users,
+  orders: state.orders,
 });
 // pasar  mapDispatchToProps en el connect
 export default connect(mapStateToProps)(UsersOrdersTable);
