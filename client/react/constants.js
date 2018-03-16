@@ -23,3 +23,4 @@ export const GET_ORDER = 'GET_ORDER';
 export const GET_REVIEWS = 'GET_REVIEWS';
 export const GET_RATING = 'GET_RATING';
 export const GET_SEARCH_PRODUCTS = 'GET_SEARCH_PRODUCTS';
+export const ORDER_DETAILS = 'ORDER_DETAILS';

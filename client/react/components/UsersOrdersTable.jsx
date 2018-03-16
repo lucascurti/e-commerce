@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default props => {
-  if (props) {
+  if (props.orders) {
     return (
       <table className="table table-striped">
         <thead>
@@ -31,6 +31,6 @@ export default props => {
       </table>
     );
   } else {
-    <div />;
+    return <div />;
   }
 };
