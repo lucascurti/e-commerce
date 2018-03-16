@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default ({ category, handleChange, onEdit, name }) => (
+export default ({ onAdd, handleChange, name, submitCategory }) => (
   <div
     className="modal fade"
-    id={`modalEditCategory${category.id}`}
+    id="modalAddCategory"
     tabIndex="-1"
     role="dialog"
     aria-labelledby="exampleModalLabel"
@@ -13,7 +13,7 @@ export default ({ category, handleChange, onEdit, name }) => (
       <div className="modal-content">
         <div className="modal-header">
           <h5 className="modal-title" id="exampleModalLabel">
-            Edit Category
+            Add Category
           </h5>
           <button
             type="button"
@@ -51,7 +51,7 @@ export default ({ category, handleChange, onEdit, name }) => (
             className="btn btn-primary"
             data-dismiss="modal"
             aria-label="Close"
-            onClick={e => onEdit(category.id, e)}
+            onClick={e => submitCategory(e)}
           >
             OK
           </button>

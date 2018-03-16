@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import NotAuthorized from './NotAuthorized';
 import ModalCategoryDelete from './ModalCategoryDelete';
 import ModalCategoryEdit from './ModalCategoryEdit';
+import ModalCategoryAdd from './ModalCategoryAdd';
 
 export default ({
   categories,
@@ -14,13 +15,30 @@ export default ({
   name,
   handleChange,
   updateState,
+  submitCategory,
 }) => (
   <div>
     {user.rol !== 'admin' ? (
       <NotAuthorized />
     ) : (
       <div className="container my-3">
-        <h2>Categories</h2>
+        <h2>
+          Categories{' '}
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm mr-2"
+            data-toggle="modal"
+            data-target={`#modalAddCategory`}
+          >
+            Add
+          </button>
+        </h2>
+
+        <ModalCategoryAdd
+          submitCategory={submitCategory}
+          handleChange={handleChange}
+          name={name}
+        />
 
         <table className="table table-striped">
           <thead>
@@ -55,7 +73,6 @@ export default ({
                     onEdit={editCategory}
                     name={name}
                     handleChange={handleChange}
-                    updateState={updateState}
                   />
                   <button
                     type="button"

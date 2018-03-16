@@ -14,6 +14,14 @@ class CategoriesContainer extends React.Component {
     };
   }
 
+  submitCategory = e => {
+    e.preventDefault();
+    this.props.addCategory(this.state);
+    this.setState({
+      name: '',
+    });
+  };
+
   editCategory = (id, e) => {
     e.preventDefault();
     this.props.editCategory(id, this.state);
@@ -51,6 +59,7 @@ class CategoriesContainer extends React.Component {
         handleChange={this.handleChange}
         name={this.state.name}
         updateState={this.updateState}
+        submitCategory={this.submitCategory}
       />
     );
   }
