@@ -28,7 +28,7 @@ class EditProductContainer extends React.Component {
   };
   handleChange = e => {
     this.setState({
-      [e.target.name]: e.target.value.toLowerCase(),
+      [e.target.name]: e.target.value,
     });
   };
 
