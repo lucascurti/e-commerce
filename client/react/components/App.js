@@ -35,6 +35,9 @@ import EditProduct from './EditProduct';
 import EditProductContainer from '../containers/EditProductContainer';
 import AddReviewContainer from '../containers/AddReviewContainer';
 import ProductsTableContainer from '../containers/ProductsTableContainer';
+import AddCategoryContainer from '../containers/AddCategoryContainer';
+import EditCategoryContainer from '../containers/EditCategoryContainer';
+import FinishCart from '../components/FinishCart';
 
 const onCartEnter = function() {
   const userid = store.getState().user.id;
@@ -158,6 +161,7 @@ export default class App extends Component {
               component={UsersContainer}
               onEnter={onUsersEnter}
             />
+            <RouteHook exact path="/cart/end" component={FinishCart} />
             <Redirect from="/" to="/products" />
           </Switch>
         </main>
