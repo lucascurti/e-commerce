@@ -1,7 +1,14 @@
 import React from 'react';
 import './Cart.css';
 
-export default ({ cart, changeAmount, amount, user }) => {
+export default ({
+  cart,
+  changeAmount,
+  amount,
+  user,
+  changeStatus,
+  history,
+}) => {
   if (cart.products.length) {
     return (
       <div className="container">
@@ -89,9 +96,12 @@ export default ({ cart, changeAmount, amount, user }) => {
                 <strong>Total: 19</strong>
               </td>
               <td>
-                <a href="#" className="btn btn-success btn-block">
+                <button
+                  onClick={() => changeStatus(cart.id)}
+                  className="btn btn-success btn-block"
+                >
                   Checkout <i className="fa fa-angle-right" />
-                </a>
+                </button>
               </td>
             </tr>
           </tfoot>

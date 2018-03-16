@@ -1,4 +1,4 @@
-import { GET_USERS, DELETE_USER, UPDATE_USER } from '../constants';
+import { GET_USERS, DELETE_USER, UPDATE_USER, GET_ORDER } from '../constants';
 
 const initialState = [];
 

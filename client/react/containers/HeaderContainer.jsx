@@ -8,7 +8,7 @@ import { logoutUser } from '../action-creator/user';
 const mapStateToProps = function(state, ownProps) {
   return {
     user: state.user,
-    products: state.products,
+    productsSearch: state.productsSearch,
   };
 };
 

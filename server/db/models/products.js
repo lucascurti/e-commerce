@@ -30,12 +30,13 @@ var Product = db.define('product', {
     type: Sequelize.INTEGER,
   },
   image: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
+    type: Sequelize.TEXT,
+    allowNull: true,
   },
 });
+
+Product.prototype.getRating = function() {
+  return;
+};
 
 module.exports = Product;

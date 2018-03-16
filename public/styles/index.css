@@ -24,3 +24,12 @@ body {
   display: inline-block !important;
   float: none !important;
 }
+
+.sidebar-sticky h5 {
+  margin: 10px 0;
+  font-weight: 400;
+}
+
+.sidebar-sticky button {
+  cursor: pointer;
+}

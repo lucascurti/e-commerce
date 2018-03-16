@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default ({ product, onDelete }) => (
+export default ({ category, handleChange, onEdit, name }) => (
   <div
     className="modal fade"
-    id={`modalDelete${product.id}`}
+    id={`modalEditCategory${category.id}`}
     tabIndex="-1"
     role="dialog"
     aria-labelledby="exampleModalLabel"
@@ -13,7 +13,7 @@ export default ({ product, onDelete }) => (
       <div className="modal-content">
         <div className="modal-header">
           <h5 className="modal-title" id="exampleModalLabel">
-            Delete {product.name}
+            Edit Category
           </h5>
           <button
             type="button"
@@ -25,7 +25,18 @@ export default ({ product, onDelete }) => (
           </button>
         </div>
         <div className="modal-body">
-          Product <strong>{product.name}</strong> will be deleted. Are you sure?
+          <div className="form-group">
+            <label htmlFor="formGroupExampleInput">Category</label>
+            <input
+              name="name"
+              value={name}
+              type="text"
+              onChange={handleChange}
+              className="form-control"
+              id="formGroupExampleInput"
+              placeholder="Category Name"
+            />
+          </div>
         </div>
         <div className="modal-footer">
           <button
@@ -37,10 +48,12 @@ export default ({ product, onDelete }) => (
           </button>
           <button
             type="button"
-            className="btn btn-danger"
-            onClick={e => onDelete(product.id)}
+            className="btn btn-primary"
+            data-dismiss="modal"
+            aria-label="Close"
+            onClick={e => onEdit(category.id, e)}
           >
-            Delete
+            OK
           </button>
         </div>
       </div>

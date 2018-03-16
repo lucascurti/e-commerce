@@ -11,6 +11,7 @@ import {
   fetchCategory,
 } from '../action-creator/categories';
 import { fetchReviews } from '../action-creator/review';
+import { fetchRating } from '../action-creator/rating';
 import { fetchAddProduct } from '../action-creator/addProduct';
 import store from '../store';
 import './App.css';
@@ -21,7 +22,7 @@ import ProductsContainer from '../containers/ProductsContainer';
 
 import UserProfile from '../containers/UserProfileContainer';
 import { fetchUser } from '../action-creator/userProfile';
-import { fetchUsers } from '../action-creator/users';
+import { fetchUsers, showUsersOrders } from '../action-creator/users';
 
 import RegisterContainer from '../containers/RegisterContainer';
 import LoginContainer from '../containers/LoginContainer';
@@ -35,8 +36,8 @@ import EditProduct from './EditProduct';
 import EditProductContainer from '../containers/EditProductContainer';
 import AddReviewContainer from '../containers/AddReviewContainer';
 import ProductsTableContainer from '../containers/ProductsTableContainer';
-import AddCategoryContainer from '../containers/AddCategoryContainer';
-import EditCategoryContainer from '../containers/EditCategoryContainer';
+import UsersOrdersTableContainer from '../containers/UsersOrdersTableContainer';
+import FinishCart from '../components/FinishCart';
 
 const onCartEnter = function() {
   const userid = store.getState().user.id;
@@ -47,16 +48,22 @@ const onUserProfileEnter = function() {
   store.dispatch(fetchUser());
 };
 
-const onProductsEnter = function() {
-  store.dispatch(fetchProducts());
+const onProductsEnter = function(props) {
+  const search = props.location.search;
+  const queryParams = new URLSearchParams(search);
+  const selectedCategory = queryParams.get('category');
+
+  store.dispatch(fetchProducts(selectedCategory));
   store.dispatch(fetchCategories());
   const userid = store.getState().user.id;
   store.dispatch(fetchCart(userid));
 };
 
 const onProductEnter = function(props) {
+  store.dispatch(fetchCategories());
   store.dispatch(fetchProduct(props.match.params.id));
   store.dispatch(fetchReviews(props.match.params.id));
+  store.dispatch(fetchRating(props.match.params.id));
 };
 
 const onUsersEnter = function() {
@@ -68,8 +75,20 @@ const onCategoryEnter = function(props) {
   store.dispatch(fetchCategories());
 };
 
+const onAddProductEnter = function(props) {
+  store.dispatch(fetchCategories());
+};
+
+const onEditProductEnter = function(props) {
+  store.dispatch(fetchCategories());
+};
+
 const onEditCategoryEnter = function(props) {
   store.dispatch(fetchCategory(props.match.params.id));
+};
+
+const onUsersOrdersEnter = function(props) {
+  store.dispatch(showUsersOrders(props.match.params.id));
 };
 
 const onCategoriesEnter = function() {
@@ -81,36 +100,27 @@ export default class App extends Component {
     return (
       <div className="App">
         <HeaderContainer />
-        <main role="main" className="container-fluid mt-3">
+        <main role="main" className="container-fluid">
           <Switch>
             <RouteHook exact path="/register" component={RegisterContainer} />
             <RouteHook exact path="/login" component={LoginContainer} />
             <RouteHook
+              exact
               path="/users"
               component={UserProfile}
               onEnter={onUserProfileEnter}
+            />
+            <RouteHook
+              path="/orders/:id/users"
+              component={UsersOrdersTableContainer}
+              onEnter={onUsersOrdersEnter}
             />
             <RouteHook
               exact
               path="/products"
               component={ProductsContainer}
               onEnter={onProductsEnter}
-            />
-            <RouteHook
-              exact
-              path="/products/add"
-              component={AddProductContainer}
-            />
-            <RouteHook
-              exact
-              path="/product/edit/:id"
-              component={EditProductContainer}
-              onEnter={onProductEnter}
-            />
-            <RouteHook
-              path="/products/list"
-              component={ProductsTableContainer}
-              onEnter={onProductsEnter}
+              onChange={onProductsEnter}
             />
             <RouteHook
               exact
@@ -127,13 +137,26 @@ export default class App extends Component {
             />
             <RouteHook
               exact
-              path="/products/:id/addreview"
-              component={AddReviewContainer}
+              path="/admin/products/"
+              component={ProductsTableContainer}
+              onEnter={onProductsEnter}
             />
             <RouteHook
               exact
-              path="/admin/categories/add"
-              component={AddCategoryContainer}
+              path="/admin/products/add"
+              component={AddProductContainer}
+              onEnter={onAddProductEnter}
+            />
+            <RouteHook
+              exact
+              path="/admin/products/edit/:id"
+              component={EditProductContainer}
+              onEnter={onProductEnter}
+            />
+            <RouteHook
+              exact
+              path="/products/:id/addreview"
+              component={AddReviewContainer}
             />
             <RouteHook
               exact
@@ -143,15 +166,10 @@ export default class App extends Component {
             />
             <RouteHook
               exact
-              path="/admin/categories/edit/:id"
-              component={EditCategoryContainer}
-              onEnter={onEditCategoryEnter}
-            />
-            <RouteHook
-              exact
               path="/category/:id"
               component={ProductsContainer}
               onEnter={onCategoryEnter}
+              onChange={onCategoryEnter}
             />
             <RouteHook
               exact
@@ -159,6 +177,7 @@ export default class App extends Component {
               component={UsersContainer}
               onEnter={onUsersEnter}
             />
+            <RouteHook exact path="/cart/end" component={FinishCart} />
             <Redirect from="/" to="/products" />
           </Switch>
         </main>

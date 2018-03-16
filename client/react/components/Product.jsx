@@ -4,9 +4,8 @@ import ReactStars from 'react-stars';
 import './Product.css';
 import GetReviews from './GetReviews';
 
-export default ({ product, reviews }) => {
+export default ({ product, reviews, rating, user, addProductToCart }) => {
   if (product) {
-    console.log(reviews);
     return (
       <div className="container product-container mt-3">
         <div className="row">
@@ -17,15 +16,18 @@ export default ({ product, reviews }) => {
             <div className="row">
               <div className="col-sm-12">
                 <h1>{product.name}</h1>
+                <p className="categories-badge">
+                  {product.categories &&
+                    product.categories.map(category => (
+                      <span key={category.id} className="badge badge-secondary">
+                        {category.name}
+                      </span>
+                    ))}
+                </p>
                 <div className="rating-wrap align-middle">
-                  <ReactStars
-                    count={5}
-                    value={product.rating}
-                    edit={false}
-                    size={20}
-                  />
+                  <ReactStars count={5} value={rating} edit={false} size={20} />
                 </div>{' '}
-                <small>(13 reviews)</small>
+                <small>{reviews.length} reviews</small>
               </div>
             </div>
             <div className="row ">
@@ -54,7 +56,11 @@ export default ({ product, reviews }) => {
                 </form>
               </div>
               <div className="col-sm-10">
-                <button type="button" className="btn btn-secondary">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => addProductToCart(product, user.id)}
+                >
                   Comprar
                 </button>
               </div>
@@ -69,7 +75,7 @@ export default ({ product, reviews }) => {
         </div>
         <div>
           {reviews.map(review => (
-            <div>
+            <div key={review.id}>
               <GetReviews
                 key={product.id}
                 title={review.title}

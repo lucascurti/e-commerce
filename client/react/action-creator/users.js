@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_USERS, DELETE_USER, UPDATE_USER } from '../constants';
+import { GET_USERS, DELETE_USER, UPDATE_USER, GET_ORDER } from '../constants';
 
 export function getUsers(users) {
   return {
@@ -17,6 +17,13 @@ export function updateUserAction(user) {
   return {
     type: UPDATE_USER,
     user,
+  };
+}
+//quiero traer las ordenes de los usuarios
+export function getUserOrder(orders) {
+  return {
+    type: GET_ORDER,
+    orders,
   };
 }
 
@@ -37,3 +44,11 @@ export const makeAdmin = id => dispatch =>
     .put(`/api/users/${id}`, { rol: 'admin' })
     .then(res => res.data)
     .then(user => dispatch(updateUserAction(user)));
+
+export const showUsersOrders = id => dispatch =>
+  axios
+    .get(`/api/orders/${id}/users`)
+    .then(res => res.data)
+    .then(orders => {
+      dispatch(getUserOrder(orders));
+    });

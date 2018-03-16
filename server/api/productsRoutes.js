@@ -2,42 +2,55 @@ const express = require('express');
 const router = express.Router();
 const Products = require('../db/models/products');
 const Categories = require('../db/models/categories');
+const Reviews = require('../db/models/reviews');
+const db = require('../db/database');
 
 router.get('/', (req, res) => {
-  Products.findAll().then(products => {
+  console.log('query', req.query);
+  console.log('query', req.query.category);
+  const category = req.query.category;
+  let find;
+
+  if (category !== undefined) {
+    find = {
+      include: [{ model: Categories, where: { id: category } }],
+    };
+  } else {
+    find = {
+      include: [{ model: Categories }],
+    };
+  }
+  Products.findAll(find).then(products => {
     res.send(products);
   });
 });
 router.get('/:id', (req, res) => {
   const id = req.params.id;
-  Products.findById(id).then(product => {
+  Products.findOne({
+    where: {
+      id: id,
+    },
+    include: [{ model: Reviews, as: 'reviews' }],
+  }).then(product => {
     res.json(product);
   });
 });
 router.post('/', (req, res) => {
-  const name = req.body.name;
-  const description = req.body.description;
-  const price = req.body.price;
-  const stock = req.body.stock;
-  const image = req.body.image;
-  const rating = req.body.rating;
-  const categories = req.body.categories;
-  Products.create({
-    name: name,
-    description: description,
-    price: price,
-    stock: stock,
-    image: image,
-    rating: rating,
-  })
+  console.log(req.body);
+  let newProductId;
+  Products.create(req.body)
     .then(newProduct => {
-      return categories.map(category => {
+      newProductId = newProduct.id;
+      console.log('newProdId', newProductId);
+      return req.body.categories.map(category => {
         return newProduct.addCategory(category);
       });
     })
     .then(categories => {
-      return Promise.all(categories).then(values => res.send(values));
+      return Promise.all(categories);
     })
+    .then(() => Products.findById(newProductId))
+    .then(newProduct => res.send(newProduct))
     .catch(err => res.status(500).send(err));
 });
 router.put('/:id', (req, res) => {
