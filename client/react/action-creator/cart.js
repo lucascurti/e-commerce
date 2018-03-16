@@ -19,6 +19,14 @@ export const postProductToOrder = product => ({
   product,
 });
 
+export const changeStatus = function(orderId) {
+  return function() {
+    return axios
+      .put('/api/orders/changestatus', { orderId })
+      .then(res => res.data);
+  };
+};
+
 export const changeAmountInDB = function(
   value,
   index,
