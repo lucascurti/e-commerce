@@ -12,6 +12,7 @@ const mapStateToProps = (state, ownProps) => ({
   product: state.product,
   reviews: state.reviews,
   rating: state.rating,
+  history: ownProps.history,
 });
 
 export default connect(mapStateToProps)(Product);
