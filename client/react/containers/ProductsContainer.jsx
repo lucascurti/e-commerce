@@ -43,8 +43,21 @@ function mapStateToProps(state, ownProps) {
   const search = ownProps.location.search;
   const queryParams = new URLSearchParams(search);
   const selectedCategory = queryParams.get('category');
+  const productosConRating = state.products.slice();
+  productosConRating.forEach((prod, i) => {
+    let reviewsCount = prod.reviews.length;
+    if (!reviewsCount) {
+      productosConRating[i].rating = 0;
+    } else {
+      let sum = 0;
+      prod.reviews.forEach(reviews => {
+        sum += reviews.star;
+      });
+      productosConRating[i].rating = sum / reviewsCount;
+    }
+  });
   return {
-    products: state.products,
+    products: productosConRating,
     categories: state.categories,
     user: state.user,
     selectedCategory,

@@ -9,6 +9,7 @@ const mapStateToProps = function(state, ownProps) {
   return {
     user: state.user,
     productsSearch: state.productsSearch,
+    cart: state.cart,
   };
 };
 
