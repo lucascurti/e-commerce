@@ -72,7 +72,7 @@ export const fetchAddCategory = category => dispatch => {
     .post('/api/categories', category)
     .then(res => res.data)
     .then(newCategory => {
-      dispatch(addCategory([newCategory.name]));
+      dispatch(addCategory(newCategory));
     });
 };
 

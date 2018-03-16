@@ -84,9 +84,9 @@ export default ({
                 <div className="col-sm-6">
                   <div className="form-group">
                     <label htmlFor="price">Price</label>
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">$</span>
+                    <div className="input-group mb-3">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">$</span>
                       </div>
                       <input
                         name="price"

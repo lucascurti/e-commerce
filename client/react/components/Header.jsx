@@ -10,7 +10,13 @@ class Header extends Component {
     this.state = {};
   }
   render() {
-    const { user, products, logoutUser, goToProduct, history } = this.props;
+    const {
+      user,
+      productsSearch,
+      logoutUser,
+      goToProduct,
+      history,
+    } = this.props;
     return (
       <nav className="navbar navbar-expand-md navbar-dark bg-dark">
         <Link to="/products" className="navbar-brand">
@@ -52,9 +58,9 @@ class Header extends Component {
                   <Link className="dropdown-item" to="/admin/products/">
                     Products
                   </Link>
-                  <a className="dropdown-item" href="#">
+                  <Link className="dropdown-item" to="/admin/categories/">
                     Categories
-                  </a>
+                  </Link>
                   <Link className="dropdown-item" to="/admin/users">
                     Users
                   </Link>
@@ -72,7 +78,7 @@ class Header extends Component {
               }
             }}
             labelKey="name"
-            options={products}
+            options={productsSearch}
             paginate={true}
             minLength={2}
             maxResults={3}

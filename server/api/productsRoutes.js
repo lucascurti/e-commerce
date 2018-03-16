@@ -2,18 +2,33 @@ const express = require('express');
 const router = express.Router();
 const Products = require('../db/models/products');
 const Categories = require('../db/models/categories');
+const Reviews = require('../db/models/reviews');
+const db = require('../db/database');
 
 router.get('/', (req, res) => {
-  Products.findAll({
-    include: [{ model: Categories }],
-  }).then(products => {
+  console.log('query', req.query);
+  const category = req.query.category;
+  let find;
+  if (category) {
+    find = {
+      include: [{ model: Categories, where: { id: category } }],
+    };
+  } else {
+    find = {
+      include: [{ model: Categories }],
+    };
+  }
+  Products.findAll(find).then(products => {
     res.send(products);
   });
 });
 router.get('/:id', (req, res) => {
   const id = req.params.id;
-  Products.findById(id, {
-    include: [{ model: Categories }],
+  Products.findOne({
+    where: {
+      id: id,
+    },
+    include: [{ model: Reviews, as: 'reviews' }],
   }).then(product => {
     res.json(product);
   });

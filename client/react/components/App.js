@@ -11,6 +11,7 @@ import {
   fetchCategory,
 } from '../action-creator/categories';
 import { fetchReviews } from '../action-creator/review';
+import { fetchRating } from '../action-creator/rating';
 import { fetchAddProduct } from '../action-creator/addProduct';
 import store from '../store';
 import './App.css';
@@ -35,9 +36,8 @@ import EditProduct from './EditProduct';
 import EditProductContainer from '../containers/EditProductContainer';
 import AddReviewContainer from '../containers/AddReviewContainer';
 import ProductsTableContainer from '../containers/ProductsTableContainer';
-import AddCategoryContainer from '../containers/AddCategoryContainer';
-import EditCategoryContainer from '../containers/EditCategoryContainer';
 import UsersOrdersTableContainer from '../containers/UsersOrdersTableContainer';
+import FinishCart from '../components/FinishCart';
 
 const onCartEnter = function() {
   const userid = store.getState().user.id;
@@ -48,8 +48,12 @@ const onUserProfileEnter = function() {
   store.dispatch(fetchUser());
 };
 
-const onProductsEnter = function() {
-  store.dispatch(fetchProducts());
+const onProductsEnter = function(props) {
+  const search = props.location.search;
+  const queryParams = new URLSearchParams(search);
+  const selectedCategory = queryParams.get('category');
+
+  store.dispatch(fetchProducts(selectedCategory));
   store.dispatch(fetchCategories());
   const userid = store.getState().user.id;
   store.dispatch(fetchCart(userid));
@@ -58,6 +62,7 @@ const onProductsEnter = function() {
 const onProductEnter = function(props) {
   store.dispatch(fetchProduct(props.match.params.id));
   store.dispatch(fetchReviews(props.match.params.id));
+  store.dispatch(fetchRating(props.match.params.id));
 };
 
 const onUsersEnter = function() {
@@ -90,7 +95,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <HeaderContainer />
-        <main role="main" className="container-fluid mt-3">
+        <main role="main" className="container-fluid">
           <Switch>
             <RouteHook exact path="/register" component={RegisterContainer} />
             <RouteHook exact path="/login" component={LoginContainer} />
@@ -110,6 +115,7 @@ export default class App extends Component {
               path="/products"
               component={ProductsContainer}
               onEnter={onProductsEnter}
+              onChange={onProductsEnter}
             />
             <RouteHook
               exact
@@ -149,26 +155,16 @@ export default class App extends Component {
             />
             <RouteHook
               exact
-              path="/admin/categories/add"
-              component={AddCategoryContainer}
-            />
-            <RouteHook
-              exact
               path="/admin/categories"
               component={CategoriesContainer}
               onEnter={onCategoriesEnter}
             />
             <RouteHook
               exact
-              path="/admin/categories/edit/:id"
-              component={EditCategoryContainer}
-              onEnter={onEditCategoryEnter}
-            />
-            <RouteHook
-              exact
               path="/category/:id"
               component={ProductsContainer}
               onEnter={onCategoryEnter}
+              onChange={onCategoryEnter}
             />
             <RouteHook
               exact
@@ -176,6 +172,7 @@ export default class App extends Component {
               component={UsersContainer}
               onEnter={onUsersEnter}
             />
+            <RouteHook exact path="/cart/end" component={FinishCart} />
             <Redirect from="/" to="/products" />
           </Switch>
         </main>

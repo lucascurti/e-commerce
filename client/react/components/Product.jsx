@@ -4,9 +4,8 @@ import ReactStars from 'react-stars';
 import './Product.css';
 import GetReviews from './GetReviews';
 
-export default ({ product, reviews }) => {
+export default ({ product, reviews, rating }) => {
   if (product) {
-    console.log(reviews);
     return (
       <div className="container product-container mt-3">
         <div className="row">
@@ -26,14 +25,9 @@ export default ({ product, reviews }) => {
                     ))}
                 </p>
                 <div className="rating-wrap align-middle">
-                  <ReactStars
-                    count={5}
-                    value={product.rating}
-                    edit={false}
-                    size={20}
-                  />
+                  <ReactStars count={5} value={rating} edit={false} size={20} />
                 </div>{' '}
-                <small>(13 reviews)</small>
+                <small>{reviews.length} reviews</small>
               </div>
             </div>
             <div className="row ">
@@ -77,7 +71,7 @@ export default ({ product, reviews }) => {
         </div>
         <div>
           {reviews.map(review => (
-            <div>
+            <div key={review.id}>
               <GetReviews
                 key={product.id}
                 title={review.title}

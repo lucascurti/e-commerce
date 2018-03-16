@@ -91,4 +91,10 @@ router.get('/:id/users', (req, res) => {
   });
 });
 
+router.put('/changestatus', (req, res) => {
+  Order.findById(req.body.orderId).then(order =>
+    order.update({ status: 'Created' }).then(response => response),
+  );
+});
+
 module.exports = router;
