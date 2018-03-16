@@ -58,9 +58,9 @@ class Header extends Component {
                   <Link className="dropdown-item" to="/admin/products/">
                     Products
                   </Link>
-                  <a className="dropdown-item" href="#">
+                  <Link className="dropdown-item" to="/admin/categories/">
                     Categories
-                  </a>
+                  </Link>
                   <Link className="dropdown-item" to="/admin/users">
                     Users
                   </Link>

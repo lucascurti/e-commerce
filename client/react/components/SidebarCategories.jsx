@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default ({ categories, match, history }) => (
+export default ({ categories, selectedCategory, history }) => (
   <nav className="col-md-2 d-none d-md-block sidebar pr-0 mt-3">
     <div className="sidebar-sticky text-left">
       {/* <h5>Categorias</h5> */}
@@ -11,10 +11,10 @@ export default ({ categories, match, history }) => (
             key={category.id}
             type="button"
             onClick={e => {
-              history.push(`/category/${category.id}`);
+              history.push(`/products?category=${category.id}`);
             }}
             className={`list-group-item list-group-item-action list-group-item-secondary ${
-              match.params.id == category.id ? 'active' : ''
+              selectedCategory == category.id ? 'active' : ''
             }`}
           >
             {category.name}

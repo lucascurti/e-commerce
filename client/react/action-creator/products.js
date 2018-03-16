@@ -14,11 +14,13 @@ export function getSearchProducts(products) {
   };
 }
 
-export const fetchProducts = () => dispatch =>
-  axios
-    .get('/api/products')
+export const fetchProducts = category => dispatch => {
+  const url = `/api/products${category ? `?category=${category}` : ''}`;
+  return axios
+    .get(url)
     .then(res => res.data)
     .then(products => dispatch(getProducts(products)));
+};
 
 export const fetchSearchProducts = () => dispatch =>
   axios

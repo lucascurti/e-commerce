@@ -33,7 +33,7 @@ export default ({ product, onDelete }) => (
             className="btn btn-secondary"
             data-dismiss="modal"
           >
-            Cancelar
+            Cancel
           </button>
           <button
             type="button"

@@ -8,14 +8,14 @@ export default ({
   categories,
   addProductToCart,
   user,
-  match,
   history,
+  selectedCategory,
 }) => (
   <div className="row">
     <SidebarCategories
       categories={categories}
-      match={match}
       history={history}
+      selectedCategory={selectedCategory}
     />
     <main className="col-md-9 col-lg-10 pt-3 px-4 mx-auto justify-content-center">
       <div className="card-group align-self-center">

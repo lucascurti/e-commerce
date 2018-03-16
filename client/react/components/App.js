@@ -47,8 +47,12 @@ const onUserProfileEnter = function() {
   store.dispatch(fetchUser());
 };
 
-const onProductsEnter = function() {
-  store.dispatch(fetchProducts());
+const onProductsEnter = function(props) {
+  const search = props.location.search;
+  const queryParams = new URLSearchParams(search);
+  const selectedCategory = queryParams.get('category');
+
+  store.dispatch(fetchProducts(selectedCategory));
   store.dispatch(fetchCategories());
   const userid = store.getState().user.id;
   store.dispatch(fetchCart(userid));
@@ -99,6 +103,7 @@ export default class App extends Component {
               path="/products"
               component={ProductsContainer}
               onEnter={onProductsEnter}
+              onChange={onProductsEnter}
             />
             <RouteHook
               exact
@@ -158,6 +163,7 @@ export default class App extends Component {
               path="/category/:id"
               component={ProductsContainer}
               onEnter={onCategoryEnter}
+              onChange={onCategoryEnter}
             />
             <RouteHook
               exact
