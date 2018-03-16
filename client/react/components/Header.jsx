@@ -16,6 +16,7 @@ class Header extends Component {
       logoutUser,
       goToProduct,
       history,
+      cart,
     } = this.props;
     return (
       <nav className="navbar navbar-expand-md navbar-dark bg-dark">
@@ -104,7 +105,16 @@ class Header extends Component {
             )}
           />
           <Link to="/cart">
-            <span className="oi oi-cart mx-3" title="cart" aria-hidden="true" />
+            <div className="text-nowrap">
+              <span
+                className="oi oi-cart ml-3"
+                title="cart"
+                aria-hidden="true"
+              />
+              <span className="badge badge-success">
+                {cart.products.length}
+              </span>
+            </div>
           </Link>
           {user.id ? (
             <div className="mx-3">

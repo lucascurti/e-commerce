@@ -4,7 +4,14 @@ import ReactStars from 'react-stars';
 import './Product.css';
 import GetReviews from './GetReviews';
 
-export default ({ product, reviews, rating, user, addProductToCart }) => {
+export default ({
+  product,
+  reviews,
+  rating,
+  history,
+  user,
+  addProductToCart,
+}) => {
   if (product) {
     return (
       <div className="container product-container mt-3">
@@ -70,20 +77,32 @@ export default ({ product, reviews, rating, user, addProductToCart }) => {
         <hr />
         <div className="row">
           <div className="col-sm-12">
+            <h2>Descripción</h2>
             <p>{product.description}</p>
           </div>
         </div>
+        <hr />
         <div>
-          {reviews.map(review => (
-            <div key={review.id}>
+          <h2>
+            Reviews
+            <button
+              type="button"
+              className="btn btn-secondary btn-sm ml-2"
+              onClick={() => history.push(`/products/${product.id}/addreview`)}
+            >
+              Add
+            </button>
+          </h2>
+          <div className="card-deck">
+            {reviews.map(review => (
               <GetReviews
-                key={product.id}
+                key={review.id}
                 title={review.title}
                 description={review.description}
                 star={review.star}
               />
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     );

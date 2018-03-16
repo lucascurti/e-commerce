@@ -40,6 +40,7 @@ class AddReviewContainer extends React.Component {
         description={this.state.description}
         star={this.state.star}
         handleChange={this.handleChange}
+        history={this.props.history}
       />
     );
   }
@@ -48,6 +49,7 @@ class AddReviewContainer extends React.Component {
 const mapStateToProps = (state, ownProps) => ({
   userId: 1, // state.user.id
   productId: Number(ownProps.match.params.id),
+  history: ownProps.history,
 });
 
 const mapDispatchToProps = dispatch => ({
