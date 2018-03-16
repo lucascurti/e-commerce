@@ -16,8 +16,13 @@ class ProductsContainer extends Component {
     const search = nextProps.location.search;
     const queryParams = new URLSearchParams(search);
     const selectedCategory = queryParams.get('category');
+    const oldSearch = this.props.location.search;
+    const oldQueryParams = new URLSearchParams(oldSearch);
+    const oldCategory = oldQueryParams.get('category');
 
-    store.dispatch(fetchProducts(selectedCategory));
+    if (oldCategory !== selectedCategory) {
+      store.dispatch(fetchProducts(selectedCategory));
+    }
   }
 
   render() {
