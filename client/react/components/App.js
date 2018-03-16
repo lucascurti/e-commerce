@@ -11,6 +11,7 @@ import {
   fetchCategory,
 } from '../action-creator/categories';
 import { fetchReviews } from '../action-creator/review';
+import { fetchRating } from '../action-creator/rating';
 import { fetchAddProduct } from '../action-creator/addProduct';
 import store from '../store';
 import './App.css';
@@ -57,6 +58,7 @@ const onProductsEnter = function() {
 const onProductEnter = function(props) {
   store.dispatch(fetchProduct(props.match.params.id));
   store.dispatch(fetchReviews(props.match.params.id));
+  store.dispatch(fetchRating(props.match.params.id));
 };
 
 const onUsersEnter = function() {

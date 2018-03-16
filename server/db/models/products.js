@@ -38,4 +38,8 @@ var Product = db.define('product', {
   },
 });
 
+Product.prototype.getRating = function() {
+  return;
+};
+
 module.exports = Product;

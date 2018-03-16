@@ -15,7 +15,6 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/:id', (req, res) => {
-  console.log(req.body);
   const title = req.body.title;
   const description = req.body.description;
   const star = req.body.star;

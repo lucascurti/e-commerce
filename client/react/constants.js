@@ -20,3 +20,4 @@ export const GET_CATEGORY = 'GET_CATEGORY';
 export const PRODUCT_TO_CART = 'PRODUCT_TO_CART';
 export const DEL_PRODUCT = 'DEL_PRODUCT';
 export const GET_REVIEWS = 'GET_REVIEWS';
+export const GET_RATING = 'GET_RATING';
