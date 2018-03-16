@@ -23,7 +23,7 @@ import ProductsContainer from '../containers/ProductsContainer';
 import UserProfile from '../containers/UserProfileContainer';
 import { fetchUser } from '../action-creator/userProfile';
 import { fetchUsers, showUsersOrders } from '../action-creator/users';
-
+import { fetchSearchOrderDetail } from '../action-creator/orderDetails';
 import RegisterContainer from '../containers/RegisterContainer';
 import LoginContainer from '../containers/LoginContainer';
 
@@ -38,6 +38,7 @@ import AddReviewContainer from '../containers/AddReviewContainer';
 import ProductsTableContainer from '../containers/ProductsTableContainer';
 import UsersOrdersTableContainer from '../containers/UsersOrdersTableContainer';
 import FinishCart from '../components/FinishCart';
+import OrderDetailsContainer from '../containers/OrderDetailsContainer';
 
 const onCartEnter = function() {
   const userid = store.getState().user.id;
@@ -90,6 +91,10 @@ const onCategoriesEnter = function() {
   store.dispatch(fetchCategories());
 };
 
+const onOrderDetailsEnter = function(props) {
+  store.dispatch(fetchSearchOrderDetail(props.match.params.id));
+};
+
 export default class App extends Component {
   render() {
     return (
@@ -104,6 +109,11 @@ export default class App extends Component {
               path="/users"
               component={UserProfile}
               onEnter={onUserProfileEnter}
+            />
+            <RouteHook
+              path="/orders/:id/details"
+              component={OrderDetailsContainer}
+              onEnter={onOrderDetailsEnter}
             />
             <RouteHook
               path="/orders/:id/users"
