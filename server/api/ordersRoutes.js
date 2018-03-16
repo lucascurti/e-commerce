@@ -32,7 +32,6 @@ router.post('/', (req, res) => {
     //si no se cumple la condicion del where crea una nueva orden
     if (!order) {
       Order.create({
-        date: moment().format('DD/MM/YYYY'),
         status: 'Uncreated',
         address: 'adress',
         userId: req.body.userId,
@@ -67,6 +66,25 @@ router.post('/', (req, res) => {
       });
     }
   });
+});
+
+router.put('/', (req, res) => {
+  OrderDetail.findOne({
+    where: {
+      orderId: req.body.orderId,
+      productId: req.body.productId,
+    },
+  }).then(orderdetail => {
+    orderdetail
+      .update({ amount: Number(req.body.value) })
+      .then(orderdetail => res.json(orderdetail));
+  });
+});
+
+router.put('/changestatus', (req, res) => {
+  Order.findById(req.body.orderId).then(order =>
+    order.update({ status: 'Created' }).then(response => response),
+  );
 });
 
 module.exports = router;

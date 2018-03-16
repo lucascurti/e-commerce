@@ -6,7 +6,6 @@ import GetReviews from './GetReviews';
 
 export default ({ product, reviews, rating }) => {
   if (product) {
-    console.log(rating);
     return (
       <div className="container product-container mt-3">
         <div className="row">
@@ -17,6 +16,14 @@ export default ({ product, reviews, rating }) => {
             <div className="row">
               <div className="col-sm-12">
                 <h1>{product.name}</h1>
+                <p className="categories-badge">
+                  {product.categories &&
+                    product.categories.map(category => (
+                      <span key={category.id} className="badge badge-secondary">
+                        {category.name}
+                      </span>
+                    ))}
+                </p>
                 <div className="rating-wrap align-middle">
                   <ReactStars count={5} value={rating} edit={false} size={20} />
                 </div>{' '}

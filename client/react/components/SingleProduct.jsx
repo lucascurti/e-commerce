@@ -28,6 +28,15 @@ export default ({ product, addProductToCart, user }) => (
       </Link>
       <ReactStars count={5} value={product.rating} edit={false} size={15} />
       <p className="card-text">{product.description}</p>
+      <p className="categories-badge">
+        {product.categories &&
+          product.categories.map(category => (
+            <span key={category.id} className="badge badge-light">
+              {category.name}
+            </span>
+          ))}
+      </p>
+
       <p className="card-text">
         <span className="float-left">
           <strong>Price: $ {product.price}</strong>

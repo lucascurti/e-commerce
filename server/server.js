@@ -18,8 +18,9 @@ const User = require('./db/models/users');
 //require('./db/seed.js');
 
 app.use(express.static(path.join(__dirname, '/../public')));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
+
 passport.use(
   new LocalStrategy(
     {
@@ -174,7 +175,7 @@ app.get('*', (req, res) => {
 db
   .sync({ force: false })
   .then(function() {
-    app.listen(4000, function() {
+    app.listen(process.env.PORT || 4000, function() {
       console.log('Server is listening on port 4000!');
     });
   })

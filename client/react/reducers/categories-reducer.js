@@ -11,7 +11,12 @@ export default (state = initialState, action) => {
     case ADD_CATEGORY:
       return state.slice().concat(action.category);
     case EDIT_CATEGORY:
-      return state.slice().concat(action.category);
+      const newState = state.slice();
+      const index = newState.findIndex(
+        category => category.id === action.category.id,
+      );
+      newState[index] = action.category;
+      return newState;
     case DELETE_CATEGORY:
       function remove(elem) {
         return elem.id != action.id;

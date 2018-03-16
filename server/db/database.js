@@ -10,3 +10,5 @@ module.exports = new Sequelize(
 // module.exports = new Sequelize('ecommerce', 'lostopos', 'example', {
 //   dialect: 'postgres',
 // })
+
+//

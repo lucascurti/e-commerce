@@ -21,3 +21,4 @@ export const PRODUCT_TO_CART = 'PRODUCT_TO_CART';
 export const DEL_PRODUCT = 'DEL_PRODUCT';
 export const GET_REVIEWS = 'GET_REVIEWS';
 export const GET_RATING = 'GET_RATING';
+export const GET_SEARCH_PRODUCTS = 'GET_SEARCH_PRODUCTS';
