@@ -81,4 +81,20 @@ router.put('/', (req, res) => {
   });
 });
 
+router.get('/:id/users', (req, res) => {
+  Order.findAll({
+    where: {
+      userId: req.params.id,
+    },
+  }).then(orders => {
+    res.json(orders);
+  });
+});
+
+router.put('/changestatus', (req, res) => {
+  Order.findById(req.body.orderId).then(order =>
+    order.update({ status: 'Created' }).then(response => response),
+  );
+});
+
 module.exports = router;
