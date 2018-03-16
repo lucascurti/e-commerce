@@ -10,9 +10,10 @@ class EditProductContainer extends React.Component {
     this.state = {
       name: '',
       description: '',
-      stock: 0,
-      price: 0,
-      image: '//www.google.com',
+      stock: '',
+      price: '',
+      image: '',
+      categories: [],
       redirect: false,
     };
   }
@@ -22,21 +23,27 @@ class EditProductContainer extends React.Component {
   submitProduct = e => {
     e.preventDefault();
     this.props.submitForm(this.state, this.props.match.params.id);
-    this.setState({
-      redirect: true,
-    });
   };
   handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.name === 'categories') {
+      var options = e.target.options;
+      var value = [];
+      for (var i = 0, l = options.length; i < l; i++) {
+        if (options[i].selected) {
+          value.push(options[i].value);
+        }
+      }
+      this.setState({
+        [e.target.name]: value,
+      });
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to="/products/list" />;
-    }
-
     return (
       <EditProduct
         submitForm={this.submitProduct}
@@ -46,16 +53,24 @@ class EditProductContainer extends React.Component {
         price={this.state.price}
         image={this.state.image}
         handleChange={this.handleChange}
+        user={this.props.user}
+        categories={this.state.categories}
+        categoriesList={this.props.categoriesList}
       />
     );
   }
 }
 const mapStateToProps = state => ({
   product: state.product,
+  user: state.user,
+  categoriesList: state.categories,
 });
 
-const mapDispatchToProps = dispatch => ({
-  submitForm: (prod, id) => dispatch(updateProduct(prod, id)),
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  submitForm: (prod, id) => {
+    dispatch(updateProduct(prod, id));
+    ownProps.history.push(`/admin/products`);
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
