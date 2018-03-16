@@ -4,9 +4,19 @@ const Products = require('../db/models/products');
 const Categories = require('../db/models/categories');
 
 router.get('/', (req, res) => {
-  Products.findAll({
-    include: [{ model: Categories }],
-  }).then(products => {
+  console.log('query', req.query);
+  const category = req.query.category;
+  let find;
+  if (category) {
+    find = {
+      include: [{ model: Categories, where: { id: category } }],
+    };
+  } else {
+    find = {
+      include: [{ model: Categories }],
+    };
+  }
+  Products.findAll(find).then(products => {
     res.send(products);
   });
 });

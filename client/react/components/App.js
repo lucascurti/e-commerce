@@ -35,8 +35,6 @@ import EditProduct from './EditProduct';
 import EditProductContainer from '../containers/EditProductContainer';
 import AddReviewContainer from '../containers/AddReviewContainer';
 import ProductsTableContainer from '../containers/ProductsTableContainer';
-import AddCategoryContainer from '../containers/AddCategoryContainer';
-import EditCategoryContainer from '../containers/EditCategoryContainer';
 
 const onCartEnter = function() {
   const userid = store.getState().user.id;
@@ -47,8 +45,12 @@ const onUserProfileEnter = function() {
   store.dispatch(fetchUser());
 };
 
-const onProductsEnter = function() {
-  store.dispatch(fetchProducts());
+const onProductsEnter = function(props) {
+  const search = props.location.search;
+  const queryParams = new URLSearchParams(search);
+  const selectedCategory = queryParams.get('category');
+
+  store.dispatch(fetchProducts(selectedCategory));
   store.dispatch(fetchCategories());
   const userid = store.getState().user.id;
   store.dispatch(fetchCart(userid));
@@ -85,7 +87,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <HeaderContainer />
-        <main role="main" className="container-fluid mt-3">
+        <main role="main" className="container-fluid">
           <Switch>
             <RouteHook exact path="/register" component={RegisterContainer} />
             <RouteHook exact path="/login" component={LoginContainer} />
@@ -99,6 +101,7 @@ export default class App extends Component {
               path="/products"
               component={ProductsContainer}
               onEnter={onProductsEnter}
+              onChange={onProductsEnter}
             />
             <RouteHook
               exact
@@ -138,26 +141,16 @@ export default class App extends Component {
             />
             <RouteHook
               exact
-              path="/admin/categories/add"
-              component={AddCategoryContainer}
-            />
-            <RouteHook
-              exact
               path="/admin/categories"
               component={CategoriesContainer}
               onEnter={onCategoriesEnter}
             />
             <RouteHook
               exact
-              path="/admin/categories/edit/:id"
-              component={EditCategoryContainer}
-              onEnter={onEditCategoryEnter}
-            />
-            <RouteHook
-              exact
               path="/category/:id"
               component={ProductsContainer}
               onEnter={onCategoryEnter}
+              onChange={onCategoryEnter}
             />
             <RouteHook
               exact

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { GET_PRODUCT, ADD_PRODUCT, EDIT_PRODUCT } from '../constants';
-import { getProducts, fetchProducts } from './products';
 
 export const addProduct = product => {
   return {

@@ -6,7 +6,6 @@ import GetReviews from './GetReviews';
 
 export default ({ product, reviews }) => {
   if (product) {
-    console.log(reviews);
     return (
       <div className="container product-container mt-3">
         <div className="row">
