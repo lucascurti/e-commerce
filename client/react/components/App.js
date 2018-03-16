@@ -35,8 +35,6 @@ import EditProduct from './EditProduct';
 import EditProductContainer from '../containers/EditProductContainer';
 import AddReviewContainer from '../containers/AddReviewContainer';
 import ProductsTableContainer from '../containers/ProductsTableContainer';
-import AddCategoryContainer from '../containers/AddCategoryContainer';
-import EditCategoryContainer from '../containers/EditCategoryContainer';
 
 const onCartEnter = function() {
   const userid = store.getState().user.id;
@@ -143,20 +141,9 @@ export default class App extends Component {
             />
             <RouteHook
               exact
-              path="/admin/categories/add"
-              component={AddCategoryContainer}
-            />
-            <RouteHook
-              exact
               path="/admin/categories"
               component={CategoriesContainer}
               onEnter={onCategoriesEnter}
-            />
-            <RouteHook
-              exact
-              path="/admin/categories/edit/:id"
-              component={EditCategoryContainer}
-              onEnter={onEditCategoryEnter}
             />
             <RouteHook
               exact
