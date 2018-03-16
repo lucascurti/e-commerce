@@ -57,6 +57,7 @@ const onProductsEnter = function(props) {
 };
 
 const onProductEnter = function(props) {
+  store.dispatch(fetchCategories());
   store.dispatch(fetchProduct(props.match.params.id));
   store.dispatch(fetchReviews(props.match.params.id));
 };
@@ -71,6 +72,10 @@ const onCategoryEnter = function(props) {
 };
 
 const onAddProductEnter = function(props) {
+  store.dispatch(fetchCategories());
+};
+
+const onEditProductEnter = function(props) {
   store.dispatch(fetchCategories());
 };
 
