@@ -12,7 +12,11 @@ import productsSearchReducer from './productsSearch-reducer';
 import { userProfilereducer } from './user-reducer';
 import ordersReducer from './orders-reducer';
 import ratingReducer from './rating-reducer';
+<<<<<<< HEAD
 import allordersRedurer from './allorders-reducer';
+=======
+import orderReducer from './order-reducer';
+>>>>>>> 66f9d9851b877cb9233ea805fc0756daec707664
 
 export default combineReducers({
   cart: cartReducer,
@@ -27,5 +31,9 @@ export default combineReducers({
   reviews: reviewsReducer,
   orders: ordersReducer,
   rating: ratingReducer,
+<<<<<<< HEAD
   allorders: allordersRedurer,
+=======
+  order: orderReducer,
+>>>>>>> 66f9d9851b877cb9233ea805fc0756daec707664
 });

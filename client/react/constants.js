@@ -23,5 +23,9 @@ export const GET_ORDER = 'GET_ORDER';
 export const GET_REVIEWS = 'GET_REVIEWS';
 export const GET_RATING = 'GET_RATING';
 export const GET_SEARCH_PRODUCTS = 'GET_SEARCH_PRODUCTS';
+<<<<<<< HEAD
 export const ALL_ORDERS = 'ALL_ORDERS';
 export const CHANGE_STATUS = 'CHANGE_STATUS';
+=======
+export const ORDER_DETAILS = 'ORDER_DETAILS';
+>>>>>>> 66f9d9851b877cb9233ea805fc0756daec707664

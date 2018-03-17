@@ -13,11 +13,14 @@ router.get('/', (req, res) => {
 
   if (category !== undefined) {
     find = {
-      include: [{ model: Categories, where: { id: category } }],
+      include: [
+        { model: Reviews, as: 'reviews' },
+        { model: Categories, where: { id: category } },
+      ],
     };
   } else {
     find = {
-      include: [{ model: Categories }],
+      include: [{ model: Reviews, as: 'reviews' }, { model: Categories }],
     };
   }
   Products.findAll(find).then(products => {

@@ -124,4 +124,13 @@ router.get('/', (req, res) => {
   });
 });
 
+router.get('/:id/details', (req, res) =>
+  Order.findOne({
+    where: {
+      id: req.params.id,
+    },
+    include: [{ model: Product }],
+  }).then(order => res.json(order)),
+);
+
 module.exports = router;
