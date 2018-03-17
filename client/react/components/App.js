@@ -98,13 +98,12 @@ const onCategoriesEnter = function() {
   store.dispatch(fetchCategories());
 };
 
-<<<<<<< HEAD
 const onALlOrdersEnter = function() {
   store.dispatch(fetchOrders());
-=======
+};
+
 const onOrderDetailsEnter = function(props) {
   store.dispatch(fetchSearchOrderDetail(props.match.params.id));
->>>>>>> 66f9d9851b877cb9233ea805fc0756daec707664
 };
 
 export default class App extends Component {
