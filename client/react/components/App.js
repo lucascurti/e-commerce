@@ -23,7 +23,7 @@ import ProductsContainer from '../containers/ProductsContainer';
 import UserProfile from '../containers/UserProfileContainer';
 import { fetchUser } from '../action-creator/userProfile';
 import { fetchUsers, showUsersOrders } from '../action-creator/users';
-
+import { fetchOrders } from '../action-creator/cart';
 import RegisterContainer from '../containers/RegisterContainer';
 import LoginContainer from '../containers/LoginContainer';
 
@@ -38,6 +38,7 @@ import AddReviewContainer from '../containers/AddReviewContainer';
 import ProductsTableContainer from '../containers/ProductsTableContainer';
 import UsersOrdersTableContainer from '../containers/UsersOrdersTableContainer';
 import FinishCart from '../components/FinishCart';
+import OrdersContainer from '../containers/OrdersContainer';
 
 const onCartEnter = function() {
   const userid = store.getState().user.id;
@@ -93,6 +94,10 @@ const onUsersOrdersEnter = function(props) {
 
 const onCategoriesEnter = function() {
   store.dispatch(fetchCategories());
+};
+
+const onALlOrdersEnter = function() {
+  store.dispatch(fetchOrders());
 };
 
 export default class App extends Component {
@@ -176,6 +181,12 @@ export default class App extends Component {
               path="/admin/users"
               component={UsersContainer}
               onEnter={onUsersEnter}
+            />
+            <RouteHook
+              exact
+              path="/orders"
+              component={OrdersContainer}
+              onEnter={onALlOrdersEnter}
             />
             <RouteHook exact path="/cart/end" component={FinishCart} />
             <Redirect from="/" to="/products" />

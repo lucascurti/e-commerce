@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { GET_CART, CHANGE_AMOUNT, PRODUCT_TO_CART } from '../constants';
+import {
+  GET_CART,
+  CHANGE_AMOUNT,
+  PRODUCT_TO_CART,
+  ALL_ORDERS,
+} from '../constants';
 import store from '../store';
 import CircularJson from 'circular-json';
 
@@ -14,16 +19,28 @@ export const changeAmount = (value, index) => ({
   index,
 });
 
+export const changeStatusReal = (value, index) => ({
+  type: CHANGE_STATUS,
+  value,
+  index,
+});
+
+export const getALlOrders = allorders => ({
+  type: ALL_ORDERS,
+  allorders,
+});
+
 export const postProductToOrder = product => ({
   type: PRODUCT_TO_CART,
   product,
 });
 
-export const changeStatus = function(orderId) {
-  return function() {
+export const changeStatus = function(orderId, status, index) {
+  return function(dispatch) {
     return axios
-      .put('/api/orders/changestatus', { orderId })
-      .then(res => res.data);
+      .put('/api/orders/changestatus', { orderId, status })
+      .then(res => res.data)
+      .then(orders => dispatch(getALlOrders(orders)));
   };
 };
 
@@ -135,4 +152,11 @@ export const fetchCart = function(userId) {
       dispatch(getCart(carrrrrr));
     }
   };
+};
+
+export const fetchOrders = () => dispatch => {
+  axios
+    .get('/api/orders')
+    .then(res => res.data)
+    .then(orders => dispatch(getALlOrders(orders)));
 };

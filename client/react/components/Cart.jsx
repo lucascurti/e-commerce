@@ -97,7 +97,7 @@ export default ({
               </td>
               <td>
                 <button
-                  onClick={() => changeStatus(cart.id)}
+                  onClick={() => changeStatus(cart.id, 'Created')}
                   className="btn btn-success btn-block"
                 >
                   Checkout <i className="fa fa-angle-right" />

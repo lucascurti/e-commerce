@@ -93,8 +93,35 @@ router.get('/:id/users', (req, res) => {
 
 router.put('/changestatus', (req, res) => {
   Order.findById(req.body.orderId).then(order =>
-    order.update({ status: 'Created' }).then(response => response),
+    order
+      .update({ status: req.body.status })
+      .then(() => {
+        return Order.findAll({
+          include: [
+            {
+              model: User,
+              as: 'user',
+            },
+          ],
+        });
+      })
+      .then(orders => {
+        res.json(orders);
+      }),
   );
+});
+
+router.get('/', (req, res) => {
+  Order.findAll({
+    include: [
+      {
+        model: User,
+        as: 'user',
+      },
+    ],
+  }).then(orders => {
+    res.json(orders);
+  });
 });
 
 module.exports = router;
