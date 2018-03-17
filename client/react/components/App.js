@@ -23,11 +23,8 @@ import ProductsContainer from '../containers/ProductsContainer';
 import UserProfile from '../containers/UserProfileContainer';
 import { fetchUser } from '../action-creator/userProfile';
 import { fetchUsers, showUsersOrders } from '../action-creator/users';
-<<<<<<< HEAD
 import { fetchOrders } from '../action-creator/cart';
-=======
 import { fetchSearchOrderDetail } from '../action-creator/orderDetails';
->>>>>>> 66f9d9851b877cb9233ea805fc0756daec707664
 import RegisterContainer from '../containers/RegisterContainer';
 import LoginContainer from '../containers/LoginContainer';
 
@@ -42,11 +39,8 @@ import AddReviewContainer from '../containers/AddReviewContainer';
 import ProductsTableContainer from '../containers/ProductsTableContainer';
 import UsersOrdersTableContainer from '../containers/UsersOrdersTableContainer';
 import FinishCart from '../components/FinishCart';
-<<<<<<< HEAD
 import OrdersContainer from '../containers/OrdersContainer';
-=======
 import OrderDetailsContainer from '../containers/OrderDetailsContainer';
->>>>>>> 66f9d9851b877cb9233ea805fc0756daec707664
 
 const onCartEnter = function() {
   const userid = store.getState().user.id;
