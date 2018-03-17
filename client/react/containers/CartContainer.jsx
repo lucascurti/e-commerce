@@ -17,8 +17,8 @@ function mapDispatchToProps(dispatch, ownProps) {
     changeAmount: function(e, index, orderId, userId, product) {
       dispatch(changeAmountInDB(e, index, orderId, userId, product));
     },
-    changeStatus: function(orderId) {
-      dispatch(changeStatus(orderId));
+    changeStatus: function(orderId, status) {
+      dispatch(changeStatus(orderId, status));
       ownProps.history.push('/cart/end');
     },
   };
